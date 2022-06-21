@@ -7,7 +7,7 @@ import HomePage from "../components/page/HomePage";
 export default function Router() {
   return (
     <Routes>
-      {false ? (
+      {true ? (
         <>
           <Route path="/" element={<HeaderLayout />}>
             <Route path="home" element={<HomePage />} />
