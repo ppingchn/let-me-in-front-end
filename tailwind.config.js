@@ -17,6 +17,7 @@ module.exports = {
         white: "#FFFFFF",
         gray: "#F3F2EF",
         redNotification: "#DC2626",
+        inputColor: "#EEF3F8",
       },
     },
   },

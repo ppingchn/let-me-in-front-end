@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Chat from "./layout/Chat";
 import Header from "./layout/Header";
 
 export default function HeaderLayout() {
@@ -6,6 +7,7 @@ export default function HeaderLayout() {
     <>
       <Header />
       <Outlet />
+      <Chat />
     </>
   );
 }

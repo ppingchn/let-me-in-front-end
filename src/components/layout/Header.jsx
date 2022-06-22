@@ -7,6 +7,7 @@ import { RiMessage2Fill } from "react-icons/ri";
 import { RiArrowDownSFill } from "react-icons/ri";
 
 export default function Header() {
+  const [active, setActive] = useState("Home");
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
@@ -43,29 +44,54 @@ export default function Header() {
         </div>
         <div className="flex items-center h-full">
           <div
-            className="flex md:hidden flex-col items-center justify-center h-full w-12 sm:w-20 border-b-2 border-b-darkgray cursor-pointer text-darkgray hover:text-black"
+            className={`flex md:hidden flex-col items-center justify-center h-full w-12 sm:w-20 border-b-2 border-b-darkgray cursor-pointer text-darkgray hover:text-black`}
             onClick={() => setToggleSearchMobile(!toggleSearchMobile)}
           >
             <FaSearch className="text-2xl" />
             <span className="hidden sm:flex text-xs">Search</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-full w-12 sm:w-20 border-b-2 border-b-darkgray cursor-pointer text-darkgray hover:text-black">
+          <div
+            className={`flex flex-col items-center justify-center h-full w-12 sm:w-20  ${
+              active === "Home" ? "border-b-2 border-b-darkgray" : ""
+            } cursor-pointer text-darkgray hover:text-black`}
+            onClick={() => setActive("Home")}
+          >
             <FaHome className="text-2xl" />
             <span className="hidden sm:flex text-xs">Home</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray hover:text-black">
+          <div
+            className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray ${
+              active === "MyNetwork" ? "border-b-2 border-b-darkgray" : ""
+            } hover:text-black`}
+            onClick={() => setActive("MyNetwork")}
+          >
             <FaPeopleArrows className="text-2xl" />
             <span className="hidden sm:flex text-xs">My Network</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray hover:text-black">
+          <div
+            className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
+              active === "Jobs" ? "border-b-2 border-b-darkgray" : ""
+            } cursor-pointer text-darkgray hover:text-black`}
+            onClick={() => setActive("Jobs")}
+          >
             <MdWork className="text-2xl" />
             <span className="hidden sm:flex text-xs">Jobs</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-full w-12 sm:w-20  cursor-pointer text-darkgray hover:text-black">
+          <div
+            className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
+              active === "Messaging" ? "border-b-2 border-b-darkgray" : ""
+            } cursor-pointer text-darkgray hover:text-black`}
+            onClick={() => setActive("Messaging")}
+          >
             <RiMessage2Fill className="text-2xl" />
             <span className="hidden sm:flex text-xs">Messaging</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-full w-12 sm:w-20  cursor-pointer text-darkgray hover:text-black">
+          <div
+            className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
+              active === "Notification" ? "border-b-2 border-b-darkgray" : ""
+            } cursor-pointer text-darkgray hover:text-black`}
+            onClick={() => setActive("Notification")}
+          >
             <MdNotifications className="text-2xl" />
             <span className="hidden sm:flex text-xs">Notification</span>
             <div className="relative">
