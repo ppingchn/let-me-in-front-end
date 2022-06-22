@@ -5,17 +5,13 @@ import { useState } from "react";
 import Profile from "../informationForm/Profile";
 import PersonalInformation from "../informationForm/PersonalInformation";
 import WorkExperience from "../informationForm/WorkExperience";
-import Education from "../informationForm/Education";
 
-export default function SignupPage() {
+export default function SignupCompanyPage() {
   //useState
 
   //This Page
-  const [countWork, setCountWork] = useState(1);
-  const [countWorkArray, setCountWorkArray] = useState([0]);
-
-  const [countEducation , setCountEducation] = useState(1)
-  const [countEducationArray , setCountEducationArray] = useState([0])
+  const [count, setCount] = useState(1);
+  const [countArray, setCountArray] = useState([0]);
 
   //Profile
   const [profilePic, setProfilePic] = useState("");
@@ -35,7 +31,7 @@ export default function SignupPage() {
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
     {
-      index: 0,
+     index:0,
       companyName: "",
       position: "",
       startDate: "",
@@ -44,20 +40,11 @@ export default function SignupPage() {
     },
   ]);
 
-  // const [position, setPositon] = useState("");
-  // const [workDescription, setWorkDescription] = useState("");
+  const [position, setPositon] = useState("");
+  const [workDescription, setWorkDescription] = useState("");
 
-  const [educationArray, setEducationArray] = useState([
-    {
-     index:0,
-      degree: "",
-      university: "",
-      field: "",
-      startDateEducation: "",
-      endDateEducation: "",
-    },
-  ]);
-
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   //Address Information
   const [country, setCountry] = useState("");
@@ -66,21 +53,21 @@ export default function SignupPage() {
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
+  // [{key:1 , name ;""},{key:2,...}]
 
   //Additional
   let navigate = useNavigate();
 
-  //Handle Work Experience
   const handleClickIncrease = (e) => {
     e.preventDefault();
-    setCountWork(countWork + 1);
-    setCountWorkArray([...countWorkArray, countWork]);
+    setCount(count + 1);
+    setCountArray([...countArray, count]);
 
-    // console.log(countWork)
+    // console.log(count)
 
     let clone = [...companyArray];
     const newCloneArray = {
-      index: countWork,
+      index: count,
       companyName: "",
       position: "",
       startDate: "",
@@ -88,64 +75,25 @@ export default function SignupPage() {
       workDescription: "",
     };
     setCompanyArray([...clone, newCloneArray]);
-    // console.log(countWorkArray);
-    // console.log(companyArray);
-    // console.log("first");
+    // console.log(countArray);
+    console.log(companyArray);
+    console.log("first");
   };
 
-  console.log(companyArray);
+  console.log(companyArray)
 
   const handleClickDecrease = (e) => {
     e.preventDefault();
-    if (countWork > 0) {
-      setCountWork(countWork - 1);
+    if (count > 0) {
+      setCount(count - 1);
     }
-    const cloneEducationCountArray = [...countWorkArray];
-    cloneEducationCountArray.pop();
-    setCountWorkArray(cloneEducationCountArray);
-    // console.log(countWorkArray);
-    // console.log("second");
-  };
-  // console.log(countWorkArray);
-
-  //Handle Education
-  const handleClickIncreaseEducation = (e) => {
-    e.preventDefault();
-    setCountEducation(countEducation + 1);
-    setCountEducationArray([...countEducationArray, countEducation]);
-
-    // console.log(countWork)
-
-    let cloneEducation = [...educationArray];
-    const newCloneEducationArray = {
-      index: countEducation,
-      companyName: "",
-      position: "",
-      startDateEducation: "",
-      endDateEducation: "",
-      workDescription: "",
-    };
-    
-    setEducationArray([...cloneEducation, newCloneEducationArray]);
-    // console.log(countEducationArray);
-    // console.log(companyArray);
-    // console.log("first");
-  };
-
-  console.log(educationArray);
-
-  const handleClickDecreaseEducation = (e) => {
-    e.preventDefault();
-    if (countWork > 0) {
-      setCountEducation(countEducation - 1);
-    }
-    const cloneCountArray = [...countEducationArray];
+    const cloneCountArray = [...countArray];
     cloneCountArray.pop();
-    setCountEducationArray(cloneCountArray);
-    // console.log(countWorkArray);
-    // console.log("second");
+    setCountArray(cloneCountArray);
+    console.log(countArray);
+    console.log("second");
   };
-  // console.log(countWorkArray);
+  // console.log(countArray);
 
   const handleSubmitSignUp = async (e) => {
     try {
@@ -155,24 +103,19 @@ export default function SignupPage() {
       // setLoading(true)
       // //end validate
       // await signUp({
-      //   profilePic,
-      //   coverPhoto,
-      //   firstname,
-      //   lastname,
-      //   gender,
-      //   birthDate,
+      //   firstName,
+      //   lastName,
       //   email,
       //   phoneNumber,
       //   password,
       //   confirmPassword,
-      //   about,
-      //   country,
-      //   stressAddress,
+      //   profilePic,
+      //   addressName,
+      //   address,
       //   city,
-      //   province,
+      //   district,
       //   postalCode,
-      //   companyArray,
-      //   educationArray,
+      //   moreDetails,
       // });
       // console.log(profilePic)
 
@@ -189,7 +132,7 @@ export default function SignupPage() {
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form
-            className="space-y-8 "
+            className="space-y-8 divide-y divide-gray-500"
             onSubmit={handleSubmitSignUp}
           >
             <div className="space-y-8 divide-y divide-gray-500 sm:space-y-5">
@@ -212,11 +155,19 @@ export default function SignupPage() {
                   </h3>
                   <div>
                     {/* plus */}
-                    <button onClick={handleClickIncrease}>
+                    <button
+                      onClick={
+                        // (e) => {
+                        // e.preventDefault();
+                        // setCount(count + 1);
+                        handleClickIncrease
+                        // }
+                      }
+                    >
                       <i className="fa-solid fa-plus"></i>
                     </button>
                     {/* minus */}
-                    {countWork > 1 && (
+                    {count > 1 && (
                       <button onClick={handleClickDecrease}>
                         <i className="ml-2 fa-solid fa-minus" />
                       </button>
@@ -224,52 +175,26 @@ export default function SignupPage() {
                   </div>
                 </div>
 
-                {countWorkArray.map((el, idx) => {
+                {countArray.map((el, idx) => {
                   return (
                     <WorkExperience
                       key={idx}
                       index={idx}
                       companyArray={companyArray}
                       setCompanyArray={setCompanyArray}
-                 
+                      setPositon={setPositon}
+                      // workDescription={workDescription}
+                      setWorkDescription={setWorkDescription}
+                      setStartDate={setStartDate}
+                      startDate={startDate}
+                      setEndDate={setEndDate}
+                      endDate={endDate}
                     />
                   );
                 })}
               </div>
             </div>
 
-            <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-              <div className="flex justify-between text-end">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Education
-                </h3>
-                <div>
-                  {/* plus */}
-                  <button onClick={handleClickIncreaseEducation}>
-                    <i className="fa-solid fa-plus"></i>
-                  </button>
-                  {/* minus */}
-                  {countEducation > 1 && (
-                    <button onClick={handleClickDecreaseEducation}>
-                      <i className="ml-2 fa-solid fa-minus" />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {countEducationArray.map((el, idx) => {
-                return (
-                  <Education
-                    key={idx}
-                    index={idx}
-                    educationArray={educationArray}
-                    setEducationArray={setEducationArray}
-                  />
-                );
-              })}
-            </div>
-            
-            {/* Submit */}
             <div className="pt-5">
               <div className="flex justify-end">
                 <button
