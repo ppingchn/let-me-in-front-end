@@ -11,7 +11,7 @@ export default function Header() {
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
   return (
-    <header className="w-96 sm:w-screen h-14 px-5 z-10">
+    <header className="w-96 sm:w-screen h-14 px-5 z-10 bg-white fixed">
       <div className="flex h-full mx-auto items-center justify-between xl:w-[1128px]">
         <div className="flex items-center gap-0 sm:gap-1 w-full mr-0 md:mr-12">
           <div className="min-w-fit cursor-pointer">
@@ -91,7 +91,7 @@ export default function Header() {
             {/* drop down profile menu */}
 
             {toggleProfileMenu && (
-              <div className="relative right-[216px] top-[18px]">
+              <div className="relative right-[216px] top-[18px] z-10">
                 <div className="absolute w-64 h-fit bg-white rounded-b-lg rounded-tl-lg border-[0.5px] border-gray drop-shadow-md">
                   <div className="flex flex-col w-full border-b-[1px] border-gray p-2 gap-2">
                     <div className="flex items-center gap-1 cursor-pointer">
