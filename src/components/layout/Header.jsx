@@ -21,7 +21,7 @@ export default function Header() {
           <div className="hidden md:flex min-w-full">
             <input
               name="search"
-              class="w-full md:w-64 border h-9 px-5 bg-gray border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+              class="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
               placeholder="Search"
               type="search"
             />
