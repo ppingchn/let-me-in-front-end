@@ -5,6 +5,7 @@ import { FaHome, FaPeopleArrows, FaSearch } from "react-icons/fa";
 import { MdWork, MdNotifications } from "react-icons/md";
 import { RiMessage2Fill } from "react-icons/ri";
 import { RiArrowDownSFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [active, setActive] = useState("Home");
@@ -12,12 +13,12 @@ export default function Header() {
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
   return (
-    <header className="w-96 sm:w-screen h-14 px-5 z-10 bg-white fixed">
+    <header className="w-full sm:w-screen h-14 px-5 z-10 bg-white fixed">
       <div className="flex h-full mx-auto items-center justify-between xl:w-[1128px]">
         <div className="flex items-center gap-0 sm:gap-1 w-full mr-0 md:mr-12">
-          <div className="min-w-fit cursor-pointer">
+          <Link to={"/home"} className="min-w-fit cursor-pointer">
             <AiFillLinkedin className="text-[48px] text-blue" />
-          </div>
+          </Link>
           <div className="hidden md:flex min-w-full">
             <input
               name="search"

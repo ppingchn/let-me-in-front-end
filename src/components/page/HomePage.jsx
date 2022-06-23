@@ -134,7 +134,7 @@ export default function HomePage() {
         </div>
 
         {/* right section */}
-        <div className="hidden lg:flex lg:flex-auto w-[291px]">
+        <div className="hidden lg:flex lg:flex-auto w-[320px] min-w-[320px] max-w-[320px]">
           <AddToYourFeed />
         </div>
       </div>
