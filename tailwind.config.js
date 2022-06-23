@@ -24,6 +24,7 @@ module.exports = {
 
         "gray-200": "rgb(229 231 235)",
         redNotification: "#DC2626",
+        inputColor: "#EEF3F8",
       },
     },
   },
