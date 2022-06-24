@@ -14,12 +14,12 @@ export default function Experience() {
         <h1 className="font-bold">Experiences</h1>
         <div className="flex gap-2">
           <div
-            className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray"
+            className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
             onClick={() => setModalExprience(true)}
           >
             <AiOutlinePlus className="text-2xl" />
           </div>
-          <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray">
+          <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
             <AiOutlineEdit className="text-2xl" />
           </div>
         </div>
