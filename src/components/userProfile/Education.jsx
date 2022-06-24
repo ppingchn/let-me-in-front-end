@@ -7,7 +7,7 @@ export default function Educations() {
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200 bg-white">
       <div className="flex justify-between items-center px-5 py-3">
-        <h1 className="font-bold">Skills</h1>
+        <h1 className="font-bold">Educations</h1>
         <div className="flex gap-2">
           <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray">
             <AiOutlinePlus className="text-2xl" />

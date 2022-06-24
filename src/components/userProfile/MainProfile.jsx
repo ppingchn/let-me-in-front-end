@@ -1,12 +1,47 @@
 import CompanyAvatar from "../ui/CompanyAvatar";
+import { BsCameraFill } from "react-icons/bs";
+import { useRef, useState } from "react";
 
 export default function MainProfile() {
+  // set coverImage and uploadEl
+  const [coverImage, setCoverImage] = useState(null);
+  const uploadImage = useRef();
+
+  const handleChangeCover = (e) => {
+    if (e.target.files[0]) {
+      const urlcover = URL.createObjectURL(e.target.files[0]);
+      setCoverImage(urlcover);
+    }
+  };
+
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200">
       {/* avatar */}
       <div className="h-fit w-full border-b-[1px] rounded-lg border-gray bg-white pb-3">
         {/* cover image */}
-        <div className="h-48 w-full rounded-t-lg bg-center bg-cover bg-[url('https://media-exp1.licdn.com/dms/image/C5616AQF-aTScD20evQ/profile-displaybackgroundimage-shrink_350_1400/0/1647998353867?e=1661385600&v=beta&t=ywutaMC8DHiEag6UEHMKJAir9nvxvXyma0twjdl8ruQ')]"></div>
+        <div>
+          <img
+            className="h-48 w-full rounded-t-lg bg-center bg-cover"
+            src={
+              coverImage
+                ? coverImage
+                : `https://media-exp1.licdn.com/dms/image/C5616AQF-aTScD20evQ/profile-displaybackgroundimage-shrink_350_1400/0/1647998353867?e=1661385600&v=beta&t=ywutaMC8DHiEag6UEHMKJAir9nvxvXyma0twjdl8ruQ`
+            }
+            alt="coverPhoto"
+          />
+          <input
+            type="file"
+            ref={uploadImage}
+            className="hidden"
+            onChange={handleChangeCover}
+          />
+          <div
+            className="flex justify-center items-center absolute w-10 h-10 right-0 top-0 bg-white rounded-full mt-5 mr-5 cursor-pointer drop-shadow-sm"
+            onClick={() => uploadImage.current.click()}
+          >
+            <BsCameraFill className="text-blue text-xl" />
+          </div>
+        </div>
         {/* profile image */}
         <div className="h-14 w-full relative flex justify-start pl-5">
           <div className="absolute bottom-2">
