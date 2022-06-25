@@ -5,8 +5,10 @@ import { FaHome, FaPeopleArrows, FaSearch } from "react-icons/fa";
 import { MdWork, MdNotifications } from "react-icons/md";
 import { RiMessage2Fill } from "react-icons/ri";
 import { RiArrowDownSFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  let navigate = useNavigate();
   const [active, setActive] = useState("Home");
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
@@ -21,7 +23,7 @@ export default function Header() {
           <div className="hidden md:flex min-w-full">
             <input
               name="search"
-              class="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+              className="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
               placeholder="Search"
               type="search"
             />
@@ -33,7 +35,7 @@ export default function Header() {
               <div className="absolute flex min-w-full">
                 <input
                   name="search"
-                  class="w-[300px] z-10 md:z-0 md:w-64 border h-9 px-5 bg-gray border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+                  className="w-[300px] z-10 md:z-0 md:w-64 border h-9 px-5 bg-gray border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
                   placeholder="Search"
                   type="search"
                   onBlur={() => setToggleSearchMobile(false)}
@@ -54,7 +56,8 @@ export default function Header() {
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20  ${
               active === "Home" ? "border-b-2 border-b-darkgray" : ""
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Home")}
+            onClick={() => {setActive("Home")
+          navigate("/home")}}
           >
             <FaHome className="text-2xl" />
             <span className="hidden sm:flex text-xs">Home</span>
@@ -63,7 +66,9 @@ export default function Header() {
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray ${
               active === "MyNetwork" ? "border-b-2 border-b-darkgray" : ""
             } hover:text-black`}
-            onClick={() => setActive("MyNetwork")}
+            onClick={() => {setActive("MyNetwork")
+            navigate("/myNetwork")
+          }}
           >
             <FaPeopleArrows className="text-2xl" />
             <span className="hidden sm:flex text-xs">My Network</span>
@@ -105,7 +110,7 @@ export default function Header() {
             onClick={() => setToggleProfileMenu(!toggleProfileMenu)}
           >
             <img
-              class="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
+              className="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
@@ -122,7 +127,7 @@ export default function Header() {
                   <div className="flex flex-col w-full border-b-[1px] border-gray p-2 gap-2">
                     <div className="flex items-center gap-1 cursor-pointer">
                       <img
-                        class="inline-block h-14 w-14 rounded-full"
+                        className="inline-block h-14 w-14 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
