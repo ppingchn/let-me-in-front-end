@@ -8,7 +8,7 @@ export default function Chat() {
   return (
     <div
       className={`fixed ${
-        toggleShow ? `bottom-3/4` : `bottom-0`
+        toggleShow ? `bottom-2/4 lg:bottom-1/2` : `bottom-0`
       } right-0 w-72 h-12 bg-white rounded-t-xl transition-all`}
     >
       <div
@@ -29,7 +29,7 @@ export default function Chat() {
         </div>
       </div>
       <div className="relative border-l-[1px] border-r-[1px] border-slate-200">
-        <div className="flex flex-col absolute w-full h-[600px] bg-white">
+        <div className="flex flex-col absolute w-full h-[700px] bg-white">
           <div className="p-2">
             <div className="flex items-center p-2 bg-inputColor rounded gap-2">
               <HiSearch />
