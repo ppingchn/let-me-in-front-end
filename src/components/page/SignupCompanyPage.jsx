@@ -1,10 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
-import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
-import Profile from "../informationForm/Profile";
-import PersonalInformation from "../informationForm/PersonalInformation";
-import WorkExperience from "../informationForm/WorkExperience";
+import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from 'react';
+import Profile from '../informationForm/Profile';
+import PersonalInformation from '../informationForm/PersonalInformation';
+import WorkExperience from '../informationForm/WorkExperience';
 
 export default function SignupCompanyPage() {
   //useState
@@ -14,44 +14,50 @@ export default function SignupCompanyPage() {
   const [countArray, setCountArray] = useState([0]);
 
   //Profile
-  const [profilePic, setProfilePic] = useState("");
-  const [coverPhoto, setCoverPhoto] = useState("");
+  const [profilePic, setProfilePic] = useState('');
+  const [coverPhoto, setCoverPhoto] = useState('');
 
   // Personal Information
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [about, setAbout] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [about, setAbout] = useState('');
 
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
     {
-     index:0,
-      companyName: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      workDescription: "",
+      index: 0,
+      companyName: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      workDescription: '',
     },
   ]);
 
-  const [position, setPositon] = useState("");
-  const [workDescription, setWorkDescription] = useState("");
+  const [position, setPositon] = useState('');
+  const [workDescription, setWorkDescription] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  //Company Detail
+  const [companyName, setCompanyName] = useState('');
+  const [websiteName, setWebsiteName] = useState('');
+  const [overView, setOverView] = useState('');
+  const [location, setLocation] = useState(null);
+
   //Address Information
-  const [country, setCountry] = useState("");
-  const [stressAddress, setStressAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [province, setProvince] = useState("");
-  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState('');
+  const [stressAddress, setStressAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('');
+  const [postalCode, setPostalCode] = useState('');
 
   // [{key:1 , name ;""},{key:2,...}]
 
@@ -68,19 +74,19 @@ export default function SignupCompanyPage() {
     let clone = [...companyArray];
     const newCloneArray = {
       index: count,
-      companyName: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      workDescription: "",
+      companyName: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      workDescription: '',
     };
     setCompanyArray([...clone, newCloneArray]);
     // console.log(countArray);
     console.log(companyArray);
-    console.log("first");
+    console.log('first');
   };
 
-  console.log(companyArray)
+  console.log(companyArray);
 
   const handleClickDecrease = (e) => {
     e.preventDefault();
@@ -91,7 +97,7 @@ export default function SignupCompanyPage() {
     cloneCountArray.pop();
     setCountArray(cloneCountArray);
     console.log(countArray);
-    console.log("second");
+    console.log('second');
   };
   // console.log(countArray);
 
@@ -120,7 +126,7 @@ export default function SignupCompanyPage() {
       // console.log(profilePic)
 
       // setLoading(false)
-      navigate("/");
+      navigate('/');
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
