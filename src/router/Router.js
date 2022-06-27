@@ -5,14 +5,16 @@ import HeaderLayout from "../components/HeaderLayout";
 import HomePage from "../components/page/HomePage";
 import Logo from "../components/layout/Logo";
 import SignupCompanyPage from "../components/page/SignupCompanyPage";
+import UserPage from "../components/page/UserPage";
 
 export default function Router() {
   return (
     <Routes>
-      {false ? (
+      {true ? (
         <>
           <Route path="/" element={<HeaderLayout />}>
             <Route path="home" element={<HomePage />} />
+            <Route path="user/:id" element={<UserPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </>
