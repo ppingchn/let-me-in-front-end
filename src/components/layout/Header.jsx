@@ -56,8 +56,10 @@ export default function Header() {
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20  ${
               active === "Home" ? "border-b-2 border-b-darkgray" : ""
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => {setActive("Home")
-          navigate("/home")}}
+            onClick={() => {
+              setActive("Home");
+              navigate("/home");
+            }}
           >
             <FaHome className="text-2xl" />
             <span className="hidden sm:flex text-xs">Home</span>
@@ -66,9 +68,10 @@ export default function Header() {
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray ${
               active === "MyNetwork" ? "border-b-2 border-b-darkgray" : ""
             } hover:text-black`}
-            onClick={() => {setActive("MyNetwork")
-            navigate("/myNetwork")
-          }}
+            onClick={() => {
+              setActive("MyNetwork");
+              navigate("/myNetwork");
+            }}
           >
             <FaPeopleArrows className="text-2xl" />
             <span className="hidden sm:flex text-xs">My Network</span>
@@ -77,7 +80,10 @@ export default function Header() {
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
               active === "Jobs" ? "border-b-2 border-b-darkgray" : ""
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Jobs")}
+            onClick={() => {
+              setActive("Jobs");
+              navigate("/jobs");
+            }}
           >
             <MdWork className="text-2xl" />
             <span className="hidden sm:flex text-xs">Jobs</span>

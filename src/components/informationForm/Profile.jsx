@@ -34,6 +34,7 @@ function Profile({ profilePic, setProfilePic, coverPhoto, setCoverPhoto }) {
             profilePic={profilePic}
             // defaultProfilePic={user.profilePic}
             onChange={(e) => {
+              // console.dir(e.target.files)
               if (e.target.files[0]) {
                 setProfilePic(e.target.files[0]);
               }
