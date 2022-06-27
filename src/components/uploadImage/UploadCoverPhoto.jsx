@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 // import uploadImagePic from "../../../assets/images/uploadImagePic.png";
 
 function UploadCoverPhoto({
@@ -11,7 +11,6 @@ function UploadCoverPhoto({
   const inputEl = useRef();
   let location = useLocation();
 
-  console.log(location.pathname);
   return (
     <>
       <div
@@ -26,10 +25,12 @@ function UploadCoverPhoto({
               style={{ right: 6 }}
               onClick={(e) => {
                 e.stopPropagation();
-                inputEl.current.CoverPhoto = "";
+                inputEl.current.CoverPhoto = '';
                 onDelete();
               }}
-            ><i className="fa-solid fa-xmark" ></i></button>
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
             <img
               src={URL.createObjectURL(coverPhoto)}
               alt="coverPhoto"
@@ -39,8 +40,6 @@ function UploadCoverPhoto({
           </>
         ) : (
           <>
-        
-
             <div className="mt-1 sm:mt-0 sm:col-span-2">
               <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-500 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
