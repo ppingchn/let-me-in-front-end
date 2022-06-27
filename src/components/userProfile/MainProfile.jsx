@@ -93,6 +93,22 @@ export default function MainProfile({ role, menuSelect, setMenuSelect }) {
             <div className="flex gap-2">
               {role === "user" ? (
                 <>
+                  {follow ? (
+                    <button
+                      className="flex items-center px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-darkgray border-[1px] font-bold"
+                      onClick={() => setFollow(!follow)}
+                    >
+                      <span>Follow</span>
+                    </button>
+                  ) : (
+                    <button
+                      className="flex items-center gap-2 px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-blue border-[1px] border-blue font-bold"
+                      onClick={() => setFollow(!follow)}
+                    >
+                      <MdCheck className="text-2xl" />
+                      <span>Follow</span>
+                    </button>
+                  )}
                   <button className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold">
                     Message
                   </button>

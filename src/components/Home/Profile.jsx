@@ -1,5 +1,4 @@
 import { FaBookmark } from "react-icons/fa";
-import Avatar from "../ui/Avatar";
 
 export default function Profile() {
   return (

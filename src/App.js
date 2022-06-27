@@ -5,7 +5,7 @@ import Router from "./router/Router";
 
 function App() {
   // let socket = socketClient(SERVER);
-  // socket.on("connection", () => {
+  // socket.emit("connection", () => {
   //   console.log(`I'm connected with the back-end`);
   // });
   return <Router />;

@@ -10,8 +10,8 @@ export default function CreateJobAlert({ companyName }) {
         <div className="flex gap-2 items-center">
           <MdNotificationsNone className="text-2xl" />
           <div className="flex flex-col">
-            <h1 className="font-medium">Educations</h1>
-            <span>{`Create job alert for ${companyName}`}</span>
+            <h1 className="hidden sm:flex font-medium">{`Create job alert for ${companyName}`}</h1>
+            <span className="hidden sm:flex">{`Get notified when ${companyName} posts new jobs that match your interest.`}</span>
           </div>
         </div>
         <div className="flex gap-2">

@@ -7,6 +7,11 @@ import Skill from "../userProfile/Skill";
 import AboutCompany from "../userProfile/AboutCompany";
 import PagePosts from "../userProfile/PagePosts";
 import CreateJobAlert from "../userProfile/CreateJobAlert";
+import RecentlyPostedJob from "../userProfile/RecentlyPostedJob";
+import Overview from "../userProfile/Overview";
+import Location from "../userProfile/Location";
+import Employee from "../userProfile/Employee";
+import PeopleYouMayKnow from "../userProfile/PeopleYouMayKnow";
 
 export default function UserPage() {
   const [menuSelect, setMenuSelect] = useState("Home");
@@ -24,22 +29,37 @@ export default function UserPage() {
               role={"company"}
             />
             {false ? (
+              // this zone for user component
               <>
                 <Experience />
                 <Educations />
                 <Skill />
               </>
             ) : (
+              // if user === 'company' then check menuselect
               <>
                 {menuSelect === "Home" && (
                   <>
                     <AboutCompany setMenuSelect={setMenuSelect} />
-                    <PagePosts />
+                    <PagePosts setMenuSelect={setMenuSelect} />
+                  </>
+                )}
+                {menuSelect === "About" && (
+                  <>
+                    <Overview />
+                    <Location />
                   </>
                 )}
                 {menuSelect === "Jobs" && (
                   <>
                     <CreateJobAlert companyName={"DNEG"} />
+                    <RecentlyPostedJob />
+                  </>
+                )}
+                {menuSelect === "People" && (
+                  <>
+                    <Employee />
+                    <PeopleYouMayKnow />
                   </>
                 )}
               </>

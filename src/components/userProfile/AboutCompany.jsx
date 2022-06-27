@@ -17,23 +17,17 @@ export default function AboutCompany({ content, setMenuSelect }) {
   const [showMore, setShowMore] = useState(false);
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200 bg-white">
-      <div className="flex justify-between items-center px-5 py-3">
+      <div className="flex justify-between items-center px-5 py-5">
         <h1 className="font-bold">About</h1>
-        <div className="flex gap-2">
-          <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
-            <AiOutlinePlus className="text-2xl" />
-          </div>
-          <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
-            <AiOutlineEdit className="text-2xl" />
-          </div>
-        </div>
       </div>
       <div className="flex flex-col items-start px-5 py-3">
         {content.length >= 200 ? (
           <>
-            <p>{showMore ? content : content.slice(0, 200) + "..."}</p>
+            <p className="text-darkgray text-sm">
+              {showMore ? content : content.slice(0, 200) + "..."}
+            </p>
             <span
-              className="w-full flex justify-end font-bold cursor-pointer hover:underline"
+              className="w-full flex justify-end text-darkgray font-bold cursor-pointer hover:underline"
               onClick={() => setShowMore(!showMore)}
             >
               {showMore ? `show less` : `show more`}

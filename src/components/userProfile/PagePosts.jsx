@@ -2,7 +2,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import PagePostsElement from "./PagePostsElement";
 import { useRef } from "react";
 
-export default function PagePosts() {
+export default function PagePosts({ setMenuSelect }) {
   const scrollEl = useRef(null);
   console.log(scrollEl);
 
@@ -45,7 +45,10 @@ export default function PagePosts() {
       </div>
       <div className="flex flex-col w-full">
         {/* if experience more than six Showmore appear */}
-        <button className="flex justify-center items-center gap-2 w-full hover:bg-gray border-t-[1px] border-gray transition-all py-3 font-bold text-darkgray">
+        <button
+          className="flex justify-center items-center gap-2 w-full hover:bg-gray border-t-[1px] border-gray transition-all py-3 font-bold text-darkgray"
+          onClick={() => setMenuSelect("Posts")}
+        >
           See all posts
         </button>
       </div>
