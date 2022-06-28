@@ -141,7 +141,7 @@ function PeopleFilter() {
                         to="#"
                         className={classNames(
                           active ? "bg-gray-200 " : "text-gray-500",
-                          "block p,x-4 py-2 text-sm"
+                          "block px-4 py-2 text-sm"
                         )}
                         onClick={() => setFilter("Out-of-Network")}
                       >
