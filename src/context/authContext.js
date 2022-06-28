@@ -14,9 +14,14 @@ function AuthContextProvider({ children }) {
   const register = async (input) => {
     await registerApi(input);
   };
+  const logout = async () => {
+    removeAccessToken();
+    setUser(null);
+    navigate('/');
+  };
   useEffect(() => {}, []);
   return (
-    <AuthContext.Provider value={{ user, register, login }}>
+    <AuthContext.Provider value={{ user, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
