@@ -1,4 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
+<<<<<<< HEAD
+import { useState } from "react";
+import { AiFillLinkedin } from "react-icons/ai";
+import { FaHome, FaPeopleArrows, FaSearch } from "react-icons/fa";
+import { MdWork, MdNotifications } from "react-icons/md";
+import { RiMessage2Fill } from "react-icons/ri";
+import { RiArrowDownSFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+
+export default function Header() {
+  let navigate = useNavigate();
+  const [active, setActive] = useState("Home");
+=======
 import { useState } from 'react';
 import { AiFillLinkedin } from 'react-icons/ai';
 import { FaHome, FaPeopleArrows, FaSearch } from 'react-icons/fa';
@@ -11,6 +24,7 @@ import { useAuth } from '../../context/authContext';
 export default function Header() {
   const navigate = useNavigate();
   const [active, setActive] = useState('Home');
+>>>>>>> dev
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
@@ -38,7 +52,7 @@ export default function Header() {
               <div className="absolute flex min-w-full">
                 <input
                   name="search"
-                  class="w-[300px] z-10 md:z-0 md:w-64 border h-9 px-5 bg-gray border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+                  className="w-[300px] z-10 md:z-0 md:w-64 border h-9 px-5 bg-gray border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
                   placeholder="Search"
                   type="search"
                   onBlur={() => setToggleSearchMobile(false)}
@@ -60,8 +74,13 @@ export default function Header() {
               active === 'Home' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
             onClick={() => {
+<<<<<<< HEAD
+              setActive("Home");
+              navigate("/home");
+=======
               navigate('home');
               setActive('Home');
+>>>>>>> dev
             }}
           >
             <FaHome className="text-2xl" />
@@ -72,8 +91,13 @@ export default function Header() {
               active === 'MyNetwork' ? 'border-b-2 border-b-darkgray' : ''
             } hover:text-black`}
             onClick={() => {
+<<<<<<< HEAD
+              setActive("MyNetwork");
+              navigate("/myNetwork");
+=======
               navigate('myNetwork');
               setActive('MyNetwork');
+>>>>>>> dev
             }}
           >
             <FaPeopleArrows className="text-2xl" />
@@ -84,8 +108,13 @@ export default function Header() {
               active === 'Jobs' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
             onClick={() => {
+<<<<<<< HEAD
+              setActive("Jobs");
+              navigate("/jobs");
+=======
               navigate('job');
               setActive('Jobs');
+>>>>>>> dev
             }}
           >
             <MdWork className="text-2xl" />
@@ -142,7 +171,7 @@ export default function Header() {
                   <div className="flex flex-col w-full border-b-[1px] border-gray p-2 gap-2">
                     <div className="flex items-center gap-1 cursor-pointer">
                       <img
-                        class="inline-block h-14 w-14 rounded-full"
+                        className="inline-block h-14 w-14 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />

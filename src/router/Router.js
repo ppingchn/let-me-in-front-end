@@ -20,6 +20,7 @@ export default function Router() {
       {user ? (
         <>
           <Route path="/" element={<HeaderLayout />}>
+            <Route index element={<Navigate to="/home" />} />
             <Route path="home" element={<HomePage />} />
             <Route path="messaging" element={<MessagePage />} />
             <Route path="notification" element={<NotificationPage />} />

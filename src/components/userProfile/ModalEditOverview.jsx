@@ -6,16 +6,9 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import validator from 'validator';
 // Import React dependencies.
 // Import the Slate editor factory.
-import { createEditor } from 'slate';
 
 // Import the Slate components and React plugin.
-import { Slate, Editable, withReact } from 'slate-react';
-import CodeElement from '../SlateEditor/CodeElement';
-import DefaultElement from '../SlateEditor/DefaultElement';
-import { Editor, Transforms } from 'slate';
-import BoldElement from '../SlateEditor/BoldElement';
 import RichTextEditor from '../SlateEditor/Draft';
-import { set } from 'react-hook-form';
 // import RichTextExample from '../SlateEditor/TestEditText';
 
 export default function ModalEditOverView({
