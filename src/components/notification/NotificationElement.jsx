@@ -24,9 +24,9 @@ export default function NotificationElement({ role }) {
       )}
       {/* content */}
       <span className="w-full text-sm">
-        Welcome to the Wrap-Up, your summary of the day's top news and talking
+        {`Welcome to the Wrap-Up, your summary of the day's top news and talking
         points, curated by LinkedIn News Asia. Today, we ask: Is there a quote
-        that motivates you at work?
+        that motivates you at work?`.length > 100}
       </span>
       {/* dropdown */}
       <div className="w-10 flex flex-col items-end">
