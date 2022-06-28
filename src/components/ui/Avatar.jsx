@@ -1,7 +1,7 @@
 export default function Avatar({ width, height, picture }) {
   return (
     <img
-      class={`inline-block h-${height} w-${width} rounded-full`}
+      className={`inline-block h-${height} w-${width} rounded-full`}
       src={
         picture
           ? picture
