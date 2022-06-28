@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 // import uploadImagePic from "../../../assets/images/uploadImagePic.png";
 
 function UploadProfilePic({
@@ -11,7 +11,6 @@ function UploadProfilePic({
   const inputEl = useRef();
   let location = useLocation();
 
-  console.log(location.pathname);
   return (
     <>
       <div
@@ -21,7 +20,6 @@ function UploadProfilePic({
       >
         {profilePic ? (
           <>
-           
             {/* <button
               className=" absolute"
               style={{ right: 6 }}
@@ -47,7 +45,7 @@ function UploadProfilePic({
               <div className="flex items-center">
                 <img
                   className="rounded-full  "
-                  style={{width:60}}
+                  style={{ width: 60 }}
                   src={URL.createObjectURL(profilePic)}
                 >
                   {/* <img
@@ -69,7 +67,7 @@ function UploadProfilePic({
                   className="ml-5 bg-white py-2 px-3 border border-gray-500 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={(e) => {
                     e.stopPropagation();
-                    inputEl.current.profilePic = "";
+                    inputEl.current.profilePic = '';
                     onDelete();
                   }}
                 >

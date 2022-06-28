@@ -1,4 +1,4 @@
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark } from 'react-icons/fa';
 
 export default function Profile() {
   return (
@@ -9,7 +9,7 @@ export default function Profile() {
         <div className="h-14 w-full relative flex justify-center">
           <div className="absolute sm:bottom-4">
             <img
-              class="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
+              className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />

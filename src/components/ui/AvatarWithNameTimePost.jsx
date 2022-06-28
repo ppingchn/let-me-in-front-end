@@ -1,4 +1,4 @@
-import { FaGlobeAsia } from "react-icons/fa";
+import { FaGlobeAsia } from 'react-icons/fa';
 
 export default function AvatarWithNameTimePost({ padding }) {
   return (
@@ -8,7 +8,7 @@ export default function AvatarWithNameTimePost({ padding }) {
       }`}
     >
       <img
-        class="inline-block h-12 w-12 sm:h-12 sm:w-12 rounded-full cursor-pointer"
+        className="inline-block h-12 w-12 sm:h-12 sm:w-12 rounded-full cursor-pointer"
         src="https://media-exp1.licdn.com/dms/image/C4D03AQHcpbUcANnETg/profile-displayphoto-shrink_100_100/0/1654666437384?e=1661385600&v=beta&t=EPU0QYVtly7ZvonPgyOsbm4FjOftaxZf6TpEPio-1CE"
         alt=""
       />
