@@ -1,46 +1,51 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
-import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
-import Profile from "../informationForm/Profile";
-import PersonalInformation from "../informationForm/PersonalInformation";
-import WorkExperience from "../informationForm/WorkExperience";
-import Education from "../informationForm/Education";
+import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from 'react';
+import Profile from '../informationForm/Profile';
+import PersonalInformation from '../informationForm/PersonalInformation';
+import WorkExperience from '../informationForm/WorkExperience';
+import Education from '../informationForm/Education';
+import { useAuth } from '../../context/authContext';
 
 export default function SignupPage() {
+  // Use Context (custom hook)
+  const { register } = useAuth();
+
   //useState
 
   //This Page
   const [countWork, setCountWork] = useState(1);
   const [countWorkArray, setCountWorkArray] = useState([0]);
 
-  const [countEducation , setCountEducation] = useState(1)
-  const [countEducationArray , setCountEducationArray] = useState([0])
+  const [countEducation, setCountEducation] = useState(1);
+  const [countEducationArray, setCountEducationArray] = useState([0]);
 
   //Profile
-  const [profilePic, setProfilePic] = useState("");
-  const [coverPhoto, setCoverPhoto] = useState("");
+  const [profilePic, setProfilePic] = useState('');
+  const [coverPhoto, setCoverPhoto] = useState('');
 
   // Personal Information
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [about, setAbout] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [about, setAbout] = useState('');
 
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
     {
       index: 0,
-      companyName: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      workDescription: "",
+      companyName: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      workDescription: '',
     },
   ]);
 
@@ -49,23 +54,21 @@ export default function SignupPage() {
 
   const [educationArray, setEducationArray] = useState([
     {
-     index:0,
-      degree: "",
-      university: "",
-      field: "",
-      startDateEducation: "",
-      endDateEducation: "",
+      index: 0,
+      degree: '',
+      university: '',
+      field: '',
+      startDateEducation: '',
+      endDateEducation: '',
     },
   ]);
 
-
   //Address Information
-  const [country, setCountry] = useState("");
-  const [stressAddress, setStressAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [province, setProvince] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-
+  const [country, setCountry] = useState('');
+  const [stressAddress, setStressAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('');
+  const [postalCode, setPostalCode] = useState('');
 
   //Additional
   let navigate = useNavigate();
@@ -81,19 +84,17 @@ export default function SignupPage() {
     let clone = [...companyArray];
     const newCloneArray = {
       index: countWork,
-      companyName: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      workDescription: "",
+      companyName: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      workDescription: '',
     };
     setCompanyArray([...clone, newCloneArray]);
     // console.log(countWorkArray);
     // console.log(companyArray);
     // console.log("first");
   };
-
-  console.log(companyArray);
 
   const handleClickDecrease = (e) => {
     e.preventDefault();
@@ -119,20 +120,18 @@ export default function SignupPage() {
     let cloneEducation = [...educationArray];
     const newCloneEducationArray = {
       index: countEducation,
-      companyName: "",
-      position: "",
-      startDateEducation: "",
-      endDateEducation: "",
-      workDescription: "",
+      companyName: '',
+      position: '',
+      startDateEducation: '',
+      endDateEducation: '',
+      workDescription: '',
     };
-    
+
     setEducationArray([...cloneEducation, newCloneEducationArray]);
     // console.log(countEducationArray);
     // console.log(companyArray);
     // console.log("first");
   };
-
-  console.log(educationArray);
 
   const handleClickDecreaseEducation = (e) => {
     e.preventDefault();
@@ -152,32 +151,25 @@ export default function SignupPage() {
       e.preventDefault();
       //validate input first
 
-      // setLoading(true)
-      // //end validate
-      // await signUp({
-      //   profilePic,
-      //   coverPhoto,
-      //   firstname,
-      //   lastname,
-      //   gender,
-      //   birthDate,
-      //   email,
-      //   phoneNumber,
-      //   password,
-      //   confirmPassword,
-      //   about,
-      //   country,
-      //   stressAddress,
-      //   city,
-      //   province,
-      //   postalCode,
-      //   companyArray,
-      //   educationArray,
-      // });
-      // console.log(profilePic)
-
-      // setLoading(false)
-      navigate("/");
+      // change raw to formData
+      const registerData = new FormData();
+      registerData.append('role', 'user');
+      registerData.append('username', username);
+      registerData.append('firstName', firstname);
+      registerData.append('lastName', lastname);
+      registerData.append('password', password);
+      registerData.append('confirmPassword', confirmPassword);
+      registerData.append('profilePic', profilePic);
+      registerData.append('coverPic', coverPhoto);
+      registerData.append('email', email);
+      registerData.append('gender', gender);
+      registerData.append('birthDate', birthDate);
+      registerData.append('phoneNumber', phoneNumber);
+      registerData.append('educationArray', JSON.stringify(educationArray));
+      registerData.append('experienceArray', JSON.stringify(companyArray));
+      registerData.append('skillArray', JSON.stringify(companyArray));
+      await register(registerData);
+      navigate('/');
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
@@ -188,10 +180,7 @@ export default function SignupPage() {
     <>
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form
-            className="space-y-8 "
-            onSubmit={handleSubmitSignUp}
-          >
+          <form className="space-y-8 " onSubmit={handleSubmitSignUp}>
             <div className="space-y-8 divide-y divide-gray-500 sm:space-y-5">
               <Profile
                 profilePic={profilePic}
@@ -201,8 +190,16 @@ export default function SignupPage() {
               />
 
               <PersonalInformation
-                setStartBirthDate={setBirthDate}
+                setFirstName={setFirstName}
+                setLastName={setLastName}
+                setGender={setGender}
+                setBirthDate={setBirthDate}
                 birthDate={birthDate}
+                setEmail={setEmail}
+                setPhoneNumber={setPhoneNumber}
+                setUsername={setUsername}
+                setPassword={setPassword}
+                setConfirmPassword={setConfirmPassword}
               />
 
               <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
@@ -231,7 +228,6 @@ export default function SignupPage() {
                       index={idx}
                       companyArray={companyArray}
                       setCompanyArray={setCompanyArray}
-                 
                     />
                   );
                 })}
@@ -268,7 +264,7 @@ export default function SignupPage() {
                 );
               })}
             </div>
-            
+
             {/* Submit */}
             <div className="pt-5">
               <div className="flex justify-end">

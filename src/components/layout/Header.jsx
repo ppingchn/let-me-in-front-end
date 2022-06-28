@@ -1,27 +1,32 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { useState } from "react";
-import { AiFillLinkedin } from "react-icons/ai";
-import { FaHome, FaPeopleArrows, FaSearch } from "react-icons/fa";
-import { MdWork, MdNotifications } from "react-icons/md";
-import { RiMessage2Fill } from "react-icons/ri";
-import { RiArrowDownSFill } from "react-icons/ri";
+import { useState } from 'react';
+import { AiFillLinkedin } from 'react-icons/ai';
+import { FaHome, FaPeopleArrows, FaSearch } from 'react-icons/fa';
+import { MdWork, MdNotifications } from 'react-icons/md';
+import { RiMessage2Fill } from 'react-icons/ri';
+import { RiArrowDownSFill } from 'react-icons/ri';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 export default function Header() {
-  const [active, setActive] = useState("Home");
+  const navigate = useNavigate();
+  const [active, setActive] = useState('Home');
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
+  const { logout } = useAuth();
+
   return (
-    <header className="w-96 sm:w-screen h-14 px-5 z-10 bg-white fixed">
+    <header className="w-full sm:w-screen h-14 px-5 z-10 bg-white fixed">
       <div className="flex h-full mx-auto items-center justify-between xl:w-[1128px]">
         <div className="flex items-center gap-0 sm:gap-1 w-full mr-0 md:mr-12">
-          <div className="min-w-fit cursor-pointer">
+          <Link to={'/home'} className="min-w-fit cursor-pointer">
             <AiFillLinkedin className="text-[48px] text-blue" />
-          </div>
+          </Link>
           <div className="hidden md:flex min-w-full">
             <input
               name="search"
-              class="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+              className="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
               placeholder="Search"
               type="search"
             />
@@ -52,45 +57,60 @@ export default function Header() {
           </div>
           <div
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20  ${
-              active === "Home" ? "border-b-2 border-b-darkgray" : ""
+              active === 'Home' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Home")}
+            onClick={() => {
+              navigate('home');
+              setActive('Home');
+            }}
           >
             <FaHome className="text-2xl" />
             <span className="hidden sm:flex text-xs">Home</span>
           </div>
           <div
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 cursor-pointer text-darkgray ${
-              active === "MyNetwork" ? "border-b-2 border-b-darkgray" : ""
+              active === 'MyNetwork' ? 'border-b-2 border-b-darkgray' : ''
             } hover:text-black`}
-            onClick={() => setActive("MyNetwork")}
+            onClick={() => {
+              navigate('myNetwork');
+              setActive('MyNetwork');
+            }}
           >
             <FaPeopleArrows className="text-2xl" />
             <span className="hidden sm:flex text-xs">My Network</span>
           </div>
           <div
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
-              active === "Jobs" ? "border-b-2 border-b-darkgray" : ""
+              active === 'Jobs' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Jobs")}
+            onClick={() => {
+              navigate('job');
+              setActive('Jobs');
+            }}
           >
             <MdWork className="text-2xl" />
             <span className="hidden sm:flex text-xs">Jobs</span>
           </div>
           <div
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
-              active === "Messaging" ? "border-b-2 border-b-darkgray" : ""
+              active === 'Messaging' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Messaging")}
+            onClick={() => {
+              navigate('messaging');
+              setActive('Messaging');
+            }}
           >
             <RiMessage2Fill className="text-2xl" />
             <span className="hidden sm:flex text-xs">Messaging</span>
           </div>
           <div
             className={`flex flex-col items-center justify-center h-full w-12 sm:w-20 ${
-              active === "Notification" ? "border-b-2 border-b-darkgray" : ""
+              active === 'Notification' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
-            onClick={() => setActive("Notification")}
+            onClick={() => {
+              navigate('notification');
+              setActive('Notification');
+            }}
           >
             <MdNotifications className="text-2xl" />
             <span className="hidden sm:flex text-xs">Notification</span>
@@ -105,7 +125,7 @@ export default function Header() {
             onClick={() => setToggleProfileMenu(!toggleProfileMenu)}
           >
             <img
-              class="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
+              className="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
@@ -156,7 +176,10 @@ export default function Header() {
                       Job Posting Account
                     </span>
                   </div>
-                  <div className="flex flex-col w-full border-b-[1px] border-gray px-4 py-2 gap-2">
+                  <div
+                    className="flex flex-col w-full border-b-[1px] border-gray px-4 py-2 gap-2"
+                    onClick={logout}
+                  >
                     <span className="text-darkgray text-xs hover:underline decoration-1 cursor-pointer">
                       Sign Out
                     </span>
