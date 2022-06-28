@@ -163,9 +163,11 @@ export default function SignupPage() {
       registerData.append('coverPic', coverPhoto);
       registerData.append('email', email);
       registerData.append('gender', gender);
+      registerData.append('birthDate', birthDate);
       registerData.append('phoneNumber', phoneNumber);
       registerData.append('educationArray', JSON.stringify(educationArray));
       registerData.append('experienceArray', JSON.stringify(companyArray));
+      registerData.append('skillArray', JSON.stringify(companyArray));
       await register(registerData);
       navigate('/');
     } catch (err) {

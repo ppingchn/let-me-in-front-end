@@ -155,6 +155,7 @@ function PersonalInformation({
                 autoComplete="country-name"
                 onChange={(e) => setGender(e.target.value)}
                 className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                placeholder={'select gender'}
               >
                 <option>Male</option>
                 <option>Female</option>
@@ -176,6 +177,7 @@ function PersonalInformation({
                 selected={birthDate}
                 onChange={(date: Date) => setBirthDate(date)}
                 className="border-gray-500 rounded-md"
+                defaultValue="MM/DD/YYYY"
               />
             </div>
           </div>

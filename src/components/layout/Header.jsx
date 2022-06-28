@@ -6,12 +6,15 @@ import { MdWork, MdNotifications } from 'react-icons/md';
 import { RiMessage2Fill } from 'react-icons/ri';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 export default function Header() {
   const navigate = useNavigate();
   const [active, setActive] = useState('Home');
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
+
+  const { logout } = useAuth();
 
   return (
     <header className="w-full sm:w-screen h-14 px-5 z-10 bg-white fixed">
@@ -23,7 +26,7 @@ export default function Header() {
           <div className="hidden md:flex min-w-full">
             <input
               name="search"
-              class="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
+              className="w-full md:w-64 border h-9 px-5 bg-inputColor border-transparent rounded sm:text-sm focus:border-black border-2 focus:outline-none"
               placeholder="Search"
               type="search"
             />
@@ -122,7 +125,7 @@ export default function Header() {
             onClick={() => setToggleProfileMenu(!toggleProfileMenu)}
           >
             <img
-              class="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
+              className="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
@@ -173,7 +176,10 @@ export default function Header() {
                       Job Posting Account
                     </span>
                   </div>
-                  <div className="flex flex-col w-full border-b-[1px] border-gray px-4 py-2 gap-2">
+                  <div
+                    className="flex flex-col w-full border-b-[1px] border-gray px-4 py-2 gap-2"
+                    onClick={logout}
+                  >
                     <span className="text-darkgray text-xs hover:underline decoration-1 cursor-pointer">
                       Sign Out
                     </span>
