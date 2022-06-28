@@ -9,12 +9,15 @@ import UserPage from '../components/page/UserPage';
 import JobPage from '../components/page/MessagePage';
 import MessagePage from '../components/page/MessagePage';
 import NotificationPage from '../components/page/NotificationsPage';
-
+import { useAuth } from '../context/authContext';
 
 export default function Router() {
+  const { user } = useAuth();
+  console.log(user);
+
   return (
     <Routes>
-      {false ? (
+      {user ? (
         <>
           <Route path="/" element={<HeaderLayout />}>
             <Route path="home" element={<HomePage />} />
