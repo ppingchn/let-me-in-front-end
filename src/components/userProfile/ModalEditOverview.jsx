@@ -1,28 +1,46 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { IoMdClose } from "react-icons/io";
-import { RiErrorWarningFill } from "react-icons/ri";
-import validator from "validator";
+import React, { Fragment, useCallback, useRef, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { IoMdClose } from 'react-icons/io';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import validator from 'validator';
+// Import React dependencies.
+// Import the Slate editor factory.
+import { createEditor } from 'slate';
 
-export default function ModalEditOverView({ open, setOpen }) {
+// Import the Slate components and React plugin.
+import { Slate, Editable, withReact } from 'slate-react';
+import CodeElement from '../SlateEditor/CodeElement';
+import DefaultElement from '../SlateEditor/DefaultElement';
+import { Editor, Transforms } from 'slate';
+import BoldElement from '../SlateEditor/BoldElement';
+import RichTextEditor from '../SlateEditor/Draft';
+import { set } from 'react-hook-form';
+// import RichTextExample from '../SlateEditor/TestEditText';
+
+export default function ModalEditOverView({
+  open,
+  setOpen,
+  setOverviewTmp,
+  overviewTmp,
+}) {
   const [error, setError] = useState({});
   const cancelButtonRef = useRef(null);
 
   const [overview, setOverview] = useState({
-    detailContent: "",
-    website: "",
+    detailContent: '',
+    website: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let error = {};
 
-    if (validator.isEmpty(overview.detailContent + "")) {
-      error.detailContent = "detailContent name is required";
+    if (validator.isEmpty(overview.detailContent + '')) {
+      error.detailContent = 'detailContent name is required';
     }
-    if (validator.isEmpty(overview.website + "")) {
-      error.website = "website is required";
+    if (validator.isEmpty(overview.website + '')) {
+      error.website = 'website is required';
     }
 
     setError({ ...error });
@@ -42,6 +60,12 @@ export default function ModalEditOverView({ open, setOpen }) {
     const clone = { ...overview };
     clone[0].website = e.target.value;
     setOverview(clone);
+  };
+
+  const getValue = (value) => {
+    console.log(value);
+    setOverviewTmp(value);
+    // setValue(value);
   };
 
   return (
@@ -80,7 +104,7 @@ export default function ModalEditOverView({ open, setOpen }) {
                   <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                     {/* <h1 className="text-xl">Create a post</h1> */}
                     <Dialog.Title as="h3" className="text-xl">
-                      Add experience
+                      Edit overview
                     </Dialog.Title>
                     <div
                       className="h-8 w-8 rounded-full hover:bg-gray flex justify-center items-center text-xl"
@@ -137,6 +161,49 @@ export default function ModalEditOverView({ open, setOpen }) {
                           {error.website}
                         </span>
                       )}
+                    </div>
+                    <div className="w-full flex flex-col gap-1">
+                      {/* <Slate editor={editor} value={initialValue}>
+                        <div className="flex">
+                          <button
+                            onClick={(event) => {
+                              event.preventDefault();
+                              // Determine whether any of the currently selected blocks are code blocks.
+
+                              const [match] = Editor.nodes(editor, {
+                                match: (n) => n.type === 'bold',
+                              });
+                              // Toggle the block type depending on whether there's already a match.
+                              Transforms.setNodes(
+                                editor,
+                                { type: match ? 'paragraph' : 'bold' },
+                                { match: (n) => Editor.isBlock(editor, n) },
+                              );
+                            }}
+                          >
+                            B
+                          </button>
+                        </div>
+                        <Editable
+                          renderElement={renderElement}
+                          // onKeyDown={(event) => {
+                          //   if (event.key === '`' && event.ctrlKey) {
+                          //     event.preventDefault();
+                          //     // Determine whether any of the currently selected blocks are code blocks.
+                          //     const [match] = Editor.nodes(editor, {
+                          //       match: (n) => n.type === 'code',
+                          //     });
+                          //     // Toggle the block type depending on whether there's already a match.
+                          //     Transforms.setNodes(
+                          //       editor,
+                          //       { type: match ? 'paragraph' : 'code' },
+                          //       { match: (n) => Editor.isBlock(editor, n) },
+                          //     );
+                          //   }
+                          // }}
+                        />
+                      </Slate> */}
+                      <RichTextEditor initialValue="" getValue={getValue} />
                     </div>
                   </div>
 
