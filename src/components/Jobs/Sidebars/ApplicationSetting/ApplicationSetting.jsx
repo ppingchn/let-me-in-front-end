@@ -88,7 +88,7 @@ function ApplicationSetting() {
               }}
               onDelete={() => setResume(null)}
             />
-            <p className="text-xs text-gray-500 mt-2">DOC, DOCX, PDF (5MB)</p>
+            <p className="text-xs text-gray-500 mt-2">DOCX, PDF (5MB)</p>
           </div>
         </div>
           <div className="flex justify-start">

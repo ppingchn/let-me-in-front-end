@@ -22,6 +22,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
 
   const fileTypes = [
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/pdf"
   ];
 
   return (
@@ -33,7 +34,8 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
               <div className="border-[1px] border-gray-200  rounded-lg grid grid-cols-8 mt-4 w-[350px]  ">
                 <div className="col-1 flex justify-center bg-red-600 py-5 px-5 rounded-l-lg">
                   <p className="font-medium text-white">
-                    {capitalize(resume.name?.split(".")[1])}
+                    {/* {capitalize(resume.name?.split(".")[1])} */}
+                    {resume.name?.split(".")[1].toUpperCase()}
                   </p>
                 </div>
                 <div className="flex items-center ml-2 col-span-5">
@@ -176,7 +178,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                   </svg>
                 </div>
               </div>
-              {/* Error span (DOC,DOCX,PDF) */}
+              {/* Error span (DOCX,PDF) */}
               <div className="flex items-center mt-3 text-red-600 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +193,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                   <path d="M10.8 1H5.2L1 5.2v5.6L5.2 15h5.6l4.2-4.2V5.2zM12 9H4V7h8z"></path>
                 </svg>
                 <span className="ml-2 text-sm">
-                  Please upload an acceptable document format (DOC, DOCX, PDF).
+                  Please upload an acceptable document format (DOCX, PDF).
                 </span>
               </div>
             </>

@@ -18,7 +18,6 @@ function PeopleFilter() {
 
   
 
-  console.log(filter);
 
   const handleClickFollowing = () => {
     setFollowing(!following);
@@ -34,10 +33,6 @@ function PeopleFilter() {
     }
   };
 
-//   //bottom
-//   const handleClickFollow = () => {
-//     setFollow(!follow);
-//   };
   return (
     <div>
       {/* top bar */}
@@ -120,7 +115,7 @@ function PeopleFilter() {
                           active ? "bg-gray-200 " : "text-gray-500 ",
                           "block px-4 py-2 text-sm"
                         )}
-                        onClick={setFilter("All")}
+                        onClick={() =>setFilter("All")}
                       >
                         All
                       </Link>
@@ -134,7 +129,7 @@ function PeopleFilter() {
                           active ? "bg-gray-200 " : "text-gray-500",
                           "block px-4 py-2 text-sm"
                         )}
-                        // onClick={setFilter("Connections")}
+                        onClick={() =>setFilter("Connections")}
                       >
                         Connections
                       </Link>
@@ -148,7 +143,7 @@ function PeopleFilter() {
                           active ? "bg-gray-200 " : "text-gray-500",
                           "block p,x-4 py-2 text-sm"
                         )}
-                        onClick={setFilter("Out-of-Network")}
+                        onClick={() => setFilter("Out-of-Network")}
                       >
                         Out-of-Network
                       </Link>
@@ -162,7 +157,7 @@ function PeopleFilter() {
                           active ? "bg-gray-200 " : "text-gray-500",
                           "block px-4 py-2 text-sm"
                         )}
-                        onClick={setFilter("Companies")}
+                        onClick={() => setFilter("Companies")}
                       >
                         Companies
                       </Link>
