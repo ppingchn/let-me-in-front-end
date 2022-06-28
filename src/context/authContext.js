@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { registerApi, loginApi } from '../api/registerApi';
+import { getAccessToken, setAccessToken } from '../service/localStorage';
 
 const AuthContext = createContext();
 
@@ -7,7 +8,8 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const fetchMe = async () => {};
   const login = async (input) => {
-    await loginApi(input);
+    const res = await loginApi(input);
+    setAccessToken(res.data.token);
   };
   const register = async (input) => {
     await registerApi(input);
