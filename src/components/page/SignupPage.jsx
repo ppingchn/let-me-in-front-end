@@ -65,8 +65,9 @@ export default function SignupPage() {
 
   //Address Information
   const [country, setCountry] = useState('');
-  const [stressAddress, setStressAddress] = useState('');
-  const [city, setCity] = useState('');
+  const [houseNumber, setHouseNumber] = useState('');
+  const [subDistrict, setSubDistrict] = useState('');
+  const [district, setDistrict] = useState('');
   const [province, setProvince] = useState('');
   const [postalCode, setPostalCode] = useState('');
 
@@ -107,7 +108,6 @@ export default function SignupPage() {
     // console.log(countWorkArray);
     // console.log("second");
   };
-  // console.log(countWorkArray);
 
   //Handle Education
   const handleClickIncreaseEducation = (e) => {
@@ -144,7 +144,6 @@ export default function SignupPage() {
     // console.log(countWorkArray);
     // console.log("second");
   };
-  // console.log(countWorkArray);
 
   const handleSubmitSignUp = async (e) => {
     try {
@@ -165,6 +164,12 @@ export default function SignupPage() {
       registerData.append('gender', gender);
       registerData.append('birthDate', birthDate);
       registerData.append('phoneNumber', phoneNumber);
+      registerData.append('country', country);
+      registerData.append('houseNumber', houseNumber);
+      registerData.append('subDistrict', subDistrict);
+      registerData.append('district', district);
+      registerData.append('province', province);
+      registerData.append('postCode', postalCode);
       registerData.append('educationArray', JSON.stringify(educationArray));
       registerData.append('experienceArray', JSON.stringify(companyArray));
       registerData.append('skillArray', JSON.stringify(companyArray));
@@ -200,6 +205,12 @@ export default function SignupPage() {
                 setUsername={setUsername}
                 setPassword={setPassword}
                 setConfirmPassword={setConfirmPassword}
+                setCountry={setCountry}
+                setHouseNumber={setHouseNumber}
+                setSubDistrict={setSubDistrict}
+                setDistrict={setDistrict}
+                setProvince={setProvince}
+                setPostalCode={setPostalCode}
               />
 
               <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
