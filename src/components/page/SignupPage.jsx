@@ -162,6 +162,7 @@ export default function SignupPage() {
       registerData.append('profilePic', profilePic);
       registerData.append('coverPic', coverPhoto);
       registerData.append('email', email);
+      registerData.append('gender', gender);
       registerData.append('phoneNumber', phoneNumber);
       registerData.append('educationArray', JSON.stringify(educationArray));
       registerData.append('experienceArray', JSON.stringify(companyArray));
