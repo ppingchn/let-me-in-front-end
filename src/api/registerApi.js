@@ -5,3 +5,7 @@ export function registerApi(input) {
 export function loginApi(input) {
   return axios.post('/login', input);
 }
+
+export function getMe() {
+  return axios.get('/users/me');
+}
