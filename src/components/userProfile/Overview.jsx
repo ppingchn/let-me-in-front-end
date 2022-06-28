@@ -1,15 +1,26 @@
-import { useState } from "react";
-import { AiOutlinePlus, AiOutlineEdit } from "react-icons/ai";
-import ModalEditOverView from "./ModalEditOverview";
+import { useState } from 'react';
+import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
+import ModalEditOverView from './ModalEditOverview';
+import JoditEditor from 'jodit-react';
 
 export default function Overview({ companySize }) {
   const [modalEditOverview, setModalEditOverview] = useState(false);
+  const [overviewTmp, setOverviewTmp] = useState('<div>test<div/>');
+
+  // const doc = new DOMParser().parseFromString(overviewTmp, 'text/xml');
+  // const div = document.getElementById('overviewContent');
+  // div.append(overviewTmp);
+  // console.log(doc);
+  // let editor = JoditEditor.make('#editor');
+  // editor.value = '<p>start</p>';
 
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200 bg-white">
       <ModalEditOverView
         open={modalEditOverview}
         setOpen={setModalEditOverview}
+        setOverviewTmp={setOverviewTmp}
+        overviewTmp={overviewTmp}
       />
       <div className="flex justify-between items-center px-5 py-3">
         <h1 className="font-bold">Overview</h1>
@@ -25,32 +36,8 @@ export default function Overview({ companySize }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-4 px-5 py-3">
-        <p className="text-sm text-darkgray">
-          We are DNEG, one of the world's leading visual effects, animation and
-          stereo conversion companies for feature film and television, with
-          studios in London, Vancouver, Mumbai, Los Angeles, Chennai, Montréal,
-          Chandigarh, Bangalore and Toronto. Since the opening of our first
-          studio in London in 1998, we’ve always focused on building close
-          working relationships with filmmakers. We thrive on collaboration and
-          the creative energy this provides, and we are dedicated to delivering
-          excellence on every project we are involved with. We’ve brought home
-          the Oscar for ‘Best VFX’ for six out of the last eight years. In
-          total, we’ve been honoured with 7 Academy Award wins, 7 BAFTA Awards
-          and 18 Visual Effects Society Awards for our visual effects work on
-          shows like 'Dune', 'Foundation', 'Last Night in Soho', 'TENET', ‘First
-          Man’, ‘Altered Carbon’, ‘Blade Runner 2049’, ‘Dunkirk’, ‘Ex Machina’,
-          ‘Interstellar’, ‘Inception’ and ‘Harry Potter and The Deathly Hallows
-          Part 2’. Recent movie projects include: 'Dune', 'The Matrix
-          Resurrections', 'Venom: Let There Be Carnage', 'Ghostbusters:
-          Afterlife', 'No Time To Die', 'Jungle Cruise', 'F9: The Fast Saga',
-          'Zack Snyder’s Justice League' and 'TENET'. DNEG Episodic recent
-          projects include: 'Foundation', 'Doctor Who Season 13', 'The Wheel of
-          Time', ‘Shadow and Bone, ‘The Irregulars’, and ‘Cursed’. DNEG
-          Animation has recently delivered DNEG's very first major animated
-          feature - ‘Ron’s Gone Wrong’ – for Twentieth Century Fox and Locksmith
-          Animation, along with animated short 'Mr. Spam Gets a New Hat'.
-        </p>
+      <div id="overviewContent" className="flex flex-col gap-4 px-5 py-3">
+        {/* <>{editor.value}</> */}
         <div className="flex flex-col gap-2">
           <span className="font-bold">Website</span>
           <a

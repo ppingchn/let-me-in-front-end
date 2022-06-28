@@ -1,20 +1,20 @@
-import { useState } from "react";
-import AddToYourFeed from "../Home/AddToYourFeed";
-import MainProfile from "../userProfile/MainProfile";
-import Experience from "../userProfile/Experience";
-import Educations from "../userProfile/Education";
-import Skill from "../userProfile/Skill";
-import AboutCompany from "../userProfile/AboutCompany";
-import PagePosts from "../userProfile/PagePosts";
-import CreateJobAlert from "../userProfile/CreateJobAlert";
-import RecentlyPostedJob from "../userProfile/RecentlyPostedJob";
-import Overview from "../userProfile/Overview";
-import Location from "../userProfile/Location";
-import Employee from "../userProfile/Employee";
-import PeopleYouMayKnow from "../userProfile/PeopleYouMayKnow";
+import { useState } from 'react';
+import AddToYourFeed from '../Home/AddToYourFeed';
+import MainProfile from '../userProfile/MainProfile';
+import Experience from '../userProfile/Experience';
+import Educations from '../userProfile/Education';
+import Skill from '../userProfile/Skill';
+import AboutCompany from '../userProfile/AboutCompany';
+import PagePosts from '../userProfile/PagePosts';
+import CreateJobAlert from '../userProfile/CreateJobAlert';
+import RecentlyPostedJob from '../userProfile/RecentlyPostedJob';
+import Overview from '../userProfile/Overview';
+import Location from '../userProfile/Location';
+import Employee from '../userProfile/Employee';
+import PeopleYouMayKnow from '../userProfile/PeopleYouMayKnow';
 
 export default function UserPage() {
-  const [menuSelect, setMenuSelect] = useState("Home");
+  const [menuSelect, setMenuSelect] = useState('Home');
 
   return (
     <div className="relative top-14 bg-gray w-full sm:w-screen px-5 py-5 h-fit">
@@ -26,7 +26,7 @@ export default function UserPage() {
             <MainProfile
               setMenuSelect={setMenuSelect}
               menuSelect={menuSelect}
-              role={"company"}
+              role={'company'}
             />
             {false ? (
               // this zone for user component
@@ -38,25 +38,25 @@ export default function UserPage() {
             ) : (
               // if user === 'company' then check menuselect
               <>
-                {menuSelect === "Home" && (
+                {menuSelect === 'Home' && (
                   <>
                     <AboutCompany setMenuSelect={setMenuSelect} />
                     <PagePosts setMenuSelect={setMenuSelect} />
                   </>
                 )}
-                {menuSelect === "About" && (
+                {menuSelect === 'About' && (
                   <>
                     <Overview />
                     <Location />
                   </>
                 )}
-                {menuSelect === "Jobs" && (
+                {menuSelect === 'Jobs' && (
                   <>
-                    <CreateJobAlert companyName={"DNEG"} />
+                    <CreateJobAlert companyName={'DNEG'} />
                     <RecentlyPostedJob />
                   </>
                 )}
-                {menuSelect === "People" && (
+                {menuSelect === 'People' && (
                   <>
                     <Employee />
                     <PeopleYouMayKnow />

@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { AiOutlinePlus, AiOutlineEdit } from "react-icons/ai";
-import LongdoMapComponent from "../../longdo-map/LongdoMapComponent";
+import { useState } from 'react';
+import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
+import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
 
 export default function Location() {
   const [map, setMap] = useState(null);
@@ -9,7 +9,7 @@ export default function Location() {
     // const result = map.location(longdo.LocationMode.Pointer);
     map.location({ lon: 100.46941682696342, lat: 13.727880393074473 }, true);
     // map.location(longdo.LocationMode.Geolocation);
-    // let result = map.location();
+    let result = map.location();
     // console.log(result);
   };
 
