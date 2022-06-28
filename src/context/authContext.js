@@ -1,19 +1,20 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { registerApi } from '../api/registerApi';
+import { registerApi, loginApi } from '../api/registerApi';
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const fetchMe = async () => {};
+  const login = async (input) => {
+    await loginApi(input);
+  };
   const register = async (input) => {
-    console.log(input);
-    console.log('register check');
     await registerApi(input);
   };
   useEffect(() => {}, []);
   return (
-    <AuthContext.Provider value={{ user, register }}>
+    <AuthContext.Provider value={{ user, register, login }}>
       {children}
     </AuthContext.Provider>
   );
