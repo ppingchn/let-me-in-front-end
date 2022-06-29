@@ -1,7 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { useState } from 'react';
 import { AiFillLinkedin } from 'react-icons/ai';
-import { FaHome, FaPeopleArrows, FaSearch } from 'react-icons/fa';
+import {
+  FaHome,
+  FaPeopleArrows,
+  FaSearch,
+  FaRegUserCircle,
+} from 'react-icons/fa';
 import { MdWork, MdNotifications } from 'react-icons/md';
 import { RiMessage2Fill } from 'react-icons/ri';
 import { RiArrowDownSFill } from 'react-icons/ri';
@@ -14,9 +19,7 @@ export default function Header() {
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
-  const { user } = useAuth();
-
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <header className="w-full sm:w-screen h-14 px-5 z-10 bg-white fixed">
@@ -126,11 +129,15 @@ export default function Header() {
             className="flex flex-col items-center justify-center h-full w-20"
             onClick={() => setToggleProfileMenu(!toggleProfileMenu)}
           >
-            <img
-              className="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            {user.profilePic ? (
+              <img
+                className="inline-block h-9 w-9 sm:h-6 sm:w-6 rounded-full cursor-pointer"
+                src={user.profilePic}
+                alt=""
+              />
+            ) : (
+              <FaRegUserCircle className="text-2xl" />
+            )}
             <div className="hidden sm:flex cursor-pointer">
               <span className="text-xs text-darkgray">Me</span>
               <RiArrowDownSFill />
@@ -145,11 +152,11 @@ export default function Header() {
                     <div className="flex items-center gap-1 cursor-pointer">
                       <img
                         className="inline-block h-14 w-14 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={user.profilePic}
                         alt=""
                       />
                       <div className="flex flex-col">
-                        <span className="text-md">Tom Holland</span>
+                        <span className="text-md">{user.username}</span>
                         <span className="text-xs">actor</span>
                       </div>
                     </div>
