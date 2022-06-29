@@ -3,8 +3,11 @@ import ExperienceElement from './ExperienceElement';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
 import ModalAddExperience from './ModalAddExperience';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Experience(props) {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const { isUser } = props;
 
   const [modalExperience, setModalExprience] = useState(false);
@@ -23,7 +26,10 @@ export default function Experience(props) {
               >
                 <AiOutlinePlus className="text-2xl" />
               </div>
-              <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
+              <div
+                className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
+                onClick={() => navigate(`/user/${id}/details/experience`)}
+              >
                 <AiOutlineEdit className="text-2xl" />
               </div>
             </>

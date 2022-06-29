@@ -73,7 +73,6 @@ export default function SignupCompanyPage() {
 
       //validate input first
 
-
       const companyData = new FormData();
       companyData.append('role', 'company');
       companyData.append('username', username);
