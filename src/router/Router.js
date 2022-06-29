@@ -13,7 +13,6 @@ import { useAuth } from '../context/authContext';
 
 export default function Router() {
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <Routes>
