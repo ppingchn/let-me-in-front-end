@@ -23,7 +23,6 @@ export default function HomePage() {
           {/* profile */}
           <div className="flex flex-col gap-5 md:sticky md:top-16">
             <Profile />
-            <Profile />
           </div>
         </div>
 
