@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import ExperienceElement from "./ExperienceElement";
-import { HiArrowNarrowRight } from "react-icons/hi";
-import { AiOutlinePlus, AiOutlineEdit } from "react-icons/ai";
-import ModalAddExperience from "./ModalAddExperience";
+import React, { useState } from 'react';
+import ExperienceElement from './ExperienceElement';
+import { HiArrowNarrowRight } from 'react-icons/hi';
+import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
+import ModalAddExperience from './ModalAddExperience';
 
-export default function Experience() {
+export default function Experience(props) {
+  const { isUser } = props;
+
   const [modalExperience, setModalExprience] = useState(false);
 
   return (
@@ -13,15 +15,19 @@ export default function Experience() {
       <div className="flex justify-between items-center px-5 py-3">
         <h1 className="font-bold">Experiences</h1>
         <div className="flex gap-2">
-          <div
-            className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
-            onClick={() => setModalExprience(true)}
-          >
-            <AiOutlinePlus className="text-2xl" />
-          </div>
-          <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
-            <AiOutlineEdit className="text-2xl" />
-          </div>
+          {isUser && (
+            <>
+              <div
+                className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
+                onClick={() => setModalExprience(true)}
+              >
+                <AiOutlinePlus className="text-2xl" />
+              </div>
+              <div className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer">
+                <AiOutlineEdit className="text-2xl" />
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="flex flex-col w-full">

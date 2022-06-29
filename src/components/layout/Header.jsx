@@ -14,6 +14,8 @@ export default function Header() {
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [toggleSearchMobile, setToggleSearchMobile] = useState(false);
 
+  const { user } = useAuth();
+
   const { logout } = useAuth();
 
   return (
@@ -151,7 +153,13 @@ export default function Header() {
                         <span className="text-xs">actor</span>
                       </div>
                     </div>
-                    <button className="w-full border-[1px] border-blue text-blue hover:border-[2px] rounded-full text-sm font-medium transition-all h-6">
+                    <button
+                      className="w-full border-[1px] border-blue text-blue hover:border-[2px] rounded-full text-sm font-medium transition-all h-6"
+                      onClick={() => {
+                        navigate(`/user/${user.id}`);
+                        setActive('userPage');
+                      }}
+                    >
                       View Profile
                     </button>
                   </div>
