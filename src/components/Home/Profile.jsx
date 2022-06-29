@@ -20,8 +20,7 @@ export default function Profile() {
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
           <span className="text-black font-medium">{user.username}</span>
           <span className="text-center text-xs text-darkgray">
-            My name is Kan. I previously work as a matchmove artist. Now my goal
-            is being a web fullstack developer.
+            {user.detail}
           </span>
         </div>
       </div>
