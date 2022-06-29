@@ -1,47 +1,28 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { IoMdClose } from "react-icons/io";
-import { RiErrorWarningFill } from "react-icons/ri";
-import DatePicker from "react-datepicker";
-import validator from "validator";
+import { Fragment, useRef, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { IoMdClose } from 'react-icons/io';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import DatePicker from 'react-datepicker';
+import validator from 'validator';
+import { addExperience } from '../../api/userApi';
+import { useParams } from 'react-router-dom';
 
 export default function ModalAddExperience({ open, setOpen }) {
   const [error, setError] = useState({});
   const cancelButtonRef = useRef(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let error = {};
-
-    if (validator.isEmpty(companyArray[0].companyName + "")) {
-      error.companyName = "Company name is required";
-    }
-    if (validator.isEmpty(companyArray[0].position + "")) {
-      error.position = "Position is required";
-    }
-    if (validator.isEmpty(companyArray[0].workDescription + "")) {
-      error.workDescription = "Work description is required";
-    }
-    setError({ ...error });
-
-    if (Object.keys(error).length === 0) {
-      console.log(companyArray);
-      setOpen(false);
-    }
-  };
+  const { id } = useParams();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const [companyArray, setCompanyArray] = useState([
     {
-      index: 0,
-      companyName: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      workDescription: "",
+      companyName: '',
+      position: '',
+      startDate: new Date(),
+      endDate: new Date(),
+      workDescription: '',
     },
   ]);
   const handleChangeCompanyName = (e) => {
@@ -70,6 +51,33 @@ export default function ModalAddExperience({ open, setOpen }) {
     const clone = { ...companyArray };
     clone[0].endDate = date;
     setCompanyArray(clone);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let error = {};
+
+    if (validator.isEmpty(companyArray[0].companyName + '')) {
+      error.companyName = 'Company name is required';
+    }
+    if (validator.isEmpty(companyArray[0].position + '')) {
+      error.position = 'Position is required';
+    }
+    if (validator.isEmpty(companyArray[0].workDescription + '')) {
+      error.workDescription = 'Work description is required';
+    }
+    setError({ ...error });
+
+    if (Object.keys(error).length === 0) {
+      await addExperience(
+        companyArray[0].companyName,
+        companyArray[0].position,
+        companyArray[0].startDate,
+        companyArray[0].endDate,
+        id,
+        companyArray[0].workDescription,
+      );
+    }
   };
 
   return (
@@ -207,7 +215,7 @@ export default function ModalAddExperience({ open, setOpen }) {
                       <textarea
                         name="workDescription"
                         className="w-full focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
-                        placeholder="Ex: Microsoft"
+                        placeholder="Ex: Collecting and analyzing financial, political and socioeconomic data"
                         onChange={handleChangeWorkDescription}
                         rows={6}
                       />
