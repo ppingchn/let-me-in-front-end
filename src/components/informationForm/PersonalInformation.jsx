@@ -412,22 +412,24 @@ function PersonalInformation({
             />
           </div>
         </div>
-        {/* LongDo Map at here */}
-        <div className="flex flex-col gap-5  w-full">
-          <span className="text-sm font-medium text-gray-700">
-            Select location
-          </span>
-          <div className="h-[500px]">
-            <LongdoMapComponent setMap={setMap} setLongdo={setLongdo} />
+        {/* LongDo Map at here for only company*/}
+        {location.pathname === '/signupCompany' ? (
+          <div className="flex flex-col gap-5  w-full">
+            <span className="text-sm font-medium text-gray-700">
+              Select location
+            </span>
+            <div className="h-[500px]">
+              <LongdoMapComponent setMap={setMap} setLongdo={setLongdo} />
+            </div>
+            <button
+              type="button"
+              className=" mx-auto ml-3 items-center px-4 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
+              onClick={getLocation}
+            >
+              Select location
+            </button>
           </div>
-          <button
-            type="button"
-            className=" mx-auto ml-3 items-center px-4 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
-            onClick={getLocation}
-          >
-            Select location
-          </button>
-        </div>
+        ) : null}
       </div>
     </div>
   );
