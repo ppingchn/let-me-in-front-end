@@ -55,15 +55,6 @@ export default function SignupCompanyPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
-      //validate input first
-      const address = {
-        country,
-        houseNumber,
-        subDistrict,
-        district,
-        province,
-        postalCode,
-      };
 
       const companyData = new FormData();
       companyData.append('role', 'company');
@@ -76,7 +67,12 @@ export default function SignupCompanyPage() {
       companyData.append('detail', detail);
       companyData.append('phoneNumber', phoneNumber);
       companyData.append('websiteLink', websiteLink);
-      companyData.append('address', address);
+      companyData.append('country', country);
+      companyData.append('houseNumber', houseNumber);
+      companyData.append('subDistrict', subDistrict);
+      companyData.append('district', district);
+      companyData.append('province', province);
+      companyData.append('postCode', postalCode);
       companyData.append('companyName', companyName);
       companyData.append('location', location);
       await register(companyData);
