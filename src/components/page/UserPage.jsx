@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddToYourFeed from '../Home/AddToYourFeed';
 import MainProfile from '../userProfile/MainProfile';
 import Experience from '../userProfile/Experience';
@@ -15,6 +15,9 @@ import PeopleYouMayKnow from '../userProfile/PeopleYouMayKnow';
 
 export default function UserPage() {
   const [menuSelect, setMenuSelect] = useState('Home');
+  const [isUser, setIsUser] = useState(true);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="relative top-14 bg-gray w-full sm:w-screen px-5 py-5 h-fit">
@@ -26,14 +29,15 @@ export default function UserPage() {
             <MainProfile
               setMenuSelect={setMenuSelect}
               menuSelect={menuSelect}
-              role={'company'}
+              role={'user'}
+              isUser={isUser}
             />
-            {false ? (
+            {true ? (
               // this zone for user component
               <>
-                <Experience />
-                <Educations />
-                <Skill />
+                <Experience isUser={isUser} />
+                <Educations isUser={isUser} />
+                <Skill isUser={isUser} />
               </>
             ) : (
               // if user === 'company' then check menuselect

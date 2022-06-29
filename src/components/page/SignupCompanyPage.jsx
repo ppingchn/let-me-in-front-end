@@ -27,7 +27,7 @@ export default function SignupCompanyPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [about, setAbout] = useState('');
+  const [detail, setDetail] = useState('');
 
   const [position, setPositon] = useState('');
   const [workDescription, setWorkDescription] = useState('');
@@ -38,7 +38,6 @@ export default function SignupCompanyPage() {
   //Company Detail
   const [companyName, setCompanyName] = useState('');
   const [websiteLink, setWebsiteLink] = useState('');
-  const [overView, setOverView] = useState('');
   const [location, setLocation] = useState(null);
 
   //Address Information
@@ -71,7 +70,9 @@ export default function SignupCompanyPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
+
       //validate input first
+
 
       const companyData = new FormData();
       companyData.append('role', 'company');
@@ -81,10 +82,10 @@ export default function SignupCompanyPage() {
       companyData.append('profilePic', profilePic);
       companyData.append('coverPic', coverPhoto);
       companyData.append('email', email);
+      companyData.append('detail', detail);
       companyData.append('phoneNumber', phoneNumber);
       companyData.append('websiteLink', websiteLink);
       companyData.append('companyName', companyName);
-      companyData.append('overview', overView);
       companyData.append('location', location);
       companyData.append('country', country);
       companyData.append('houseNumber', houseNumber);
@@ -124,8 +125,8 @@ export default function SignupCompanyPage() {
                 setPhoneNumber={setPhoneNumber}
                 setCompanyName={setCompanyName}
                 setWebsiteLink={setWebsiteLink}
-                setOverView={setOverView}
                 setLocation={setLocation}
+                setDetail={setDetail}
                 setCountry={setCountry}
                 setHouseNumber={setHouseNumber}
                 setSubDistrict={setSubDistrict}

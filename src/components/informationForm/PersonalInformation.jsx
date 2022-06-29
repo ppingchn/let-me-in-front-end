@@ -17,7 +17,7 @@ function PersonalInformation({
   setCompanyName,
   setWebsiteLink,
   setOverView,
-  setLocation,
+  setDetail,
   setCountry,
   setHouseNumber,
   setSubDistrict,
@@ -161,8 +161,8 @@ function PersonalInformation({
                 className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
                 placeholder={'select gender'}
               >
-                <option>Male</option>
-                <option>Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
           </div>
@@ -270,31 +270,18 @@ function PersonalInformation({
             htmlFor="about"
             className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
-            {location.pathname === '/signup'
-              ? 'About'
-              : location.pathname === '/signupCompany'
-              ? 'Overview'
-              : null}
+            About
           </label>
           <div className="mt-1 sm:mt-0 sm:col-span-2">
-            {location.pathname === '/signup' ? (
-              <textarea
-                id="about"
-                name="about"
-                rows={6}
-                className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-500 rounded-md"
-                defaultValue={''}
-              />
-            ) : location.pathname === '/signupCompany' ? (
-              <textarea
-                id="about"
-                name="about"
-                onChange={(e) => setOverView(e.target.value)}
-                rows={6}
-                className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-500 rounded-md"
-                defaultValue={''}
-              />
-            ) : null}
+            <textarea
+              id="about"
+              name="about"
+              rows={6}
+              className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-500 rounded-md"
+              onChange={(e) => setDetail(e.target.value)}
+              defaultValue={''}
+            />
+
             <p className="mt-2 text-sm text-gray-500">
               Write a few sentences about yourself.
             </p>

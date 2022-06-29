@@ -1,17 +1,11 @@
-import { useLocation } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useLocation } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import { useState } from 'react';
 
-function WorkExperience({
-  index,
-  companyArray,
-  setCompanyArray,
-}) {
-
+function WorkExperience({ index, companyArray, setCompanyArray }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
 
   const handleChangeCompanyName = (e) => {
     const clone = { ...companyArray };
@@ -33,12 +27,12 @@ function WorkExperience({
     setCompanyArray(clone);
   };
   const handleChangeEndDate = (date: Date) => {
-    setEndDate(date)
+    setEndDate(date);
     const clone = { ...companyArray };
     console.log(clone);
-    clone[index].endDate = (date);
+    clone[index].endDate = date;
     setCompanyArray(clone);
-    console.log(companyArray)
+    console.log(companyArray);
   };
   const handleChangeWorkDescription = (e) => {
     const clone = { ...companyArray };
@@ -90,6 +84,24 @@ function WorkExperience({
             />
           </div>
         </div>
+        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label
+            htmlFor="position"
+            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+          >
+            Work description
+          </label>
+          <div className="mt-1 sm:mt-0 sm:col-span-2">
+            <input
+              type="text"
+              name="position"
+              id="position"
+              autoComplete="family-name"
+              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              onChange={handleChangeWorkDescription}
+            />
+          </div>
+        </div>
 
         <div className="sm:grid sm:grid-cols-12 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 content-center">
           <label
@@ -119,7 +131,6 @@ function WorkExperience({
             />
           </div>
         </div>
-
 
         {/* <div className="sm:border-t sm:border-gray-00"></div> */}
       </div>

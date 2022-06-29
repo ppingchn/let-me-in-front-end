@@ -35,7 +35,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [about, setAbout] = useState('');
+  const [detail, setDetail] = useState('');
 
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
@@ -162,6 +162,7 @@ export default function SignupPage() {
       registerData.append('coverPic', coverPhoto);
       registerData.append('email', email);
       registerData.append('gender', gender);
+      registerData.append('detail', detail);
       registerData.append('birthDate', birthDate);
       registerData.append('phoneNumber', phoneNumber);
       registerData.append('country', country);
@@ -202,6 +203,7 @@ export default function SignupPage() {
                 birthDate={birthDate}
                 setEmail={setEmail}
                 setPhoneNumber={setPhoneNumber}
+                setDetail={setDetail}
                 setUsername={setUsername}
                 setPassword={setPassword}
                 setConfirmPassword={setConfirmPassword}
