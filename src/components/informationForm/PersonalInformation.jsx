@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
 
 function PersonalInformation({
   birthDate,
@@ -23,6 +24,9 @@ function PersonalInformation({
   setDistrict,
   setProvince,
   setPostalCode,
+  setMap,
+  setLongdo,
+  getLocation,
 }) {
   let location = useLocation();
 
@@ -295,9 +299,8 @@ function PersonalInformation({
             Use a permanent address where you can receive mail.
           </p>
         </div>
-        {/* LongDo Map at here */}
 
-        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <div className="sm:grid mt-10 sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label
             htmlFor="street-address"
             className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
@@ -408,6 +411,22 @@ function PersonalInformation({
               className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+        </div>
+        {/* LongDo Map at here */}
+        <div className="flex flex-col gap-5  w-full">
+          <span className="text-sm font-medium text-gray-700">
+            Select location
+          </span>
+          <div className="h-[500px]">
+            <LongdoMapComponent setMap={setMap} setLongdo={setLongdo} />
+          </div>
+          <button
+            type="button"
+            className=" mx-auto ml-3 items-center px-4 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
+            onClick={getLocation}
+          >
+            Select location
+          </button>
         </div>
       </div>
     </div>

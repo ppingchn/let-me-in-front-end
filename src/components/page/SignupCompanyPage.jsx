@@ -6,6 +6,7 @@ import Profile from '../informationForm/Profile';
 import PersonalInformation from '../informationForm/PersonalInformation';
 import WorkExperience from '../informationForm/WorkExperience';
 import { useAuth } from '../../context/authContext';
+import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
 
 export default function SignupCompanyPage() {
   // useAuthContext
@@ -51,10 +52,27 @@ export default function SignupCompanyPage() {
 
   //Additional
   let navigate = useNavigate();
+  const [longdo, setLongdo] = useState(null);
+  const [map, setMap] = useState(null);
+
+  const getLocation = () => {
+    // const result = map.location(longdo.LocationMode.Pointer);
+    // map.location({ lon: 100.46941682696342, lat: 13.727880393074473 }, true);
+    // map.location(longdo.LocationMode.Geolocation);
+    let result = map.location();
+    map.Overlays.clear();
+    let marker = new longdo.Marker(result);
+    map.Overlays.add(marker);
+    setLocation(result);
+    console.log(result);
+  };
 
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
+
+      //validate input first
+
 
       const companyData = new FormData();
       companyData.append('role', 'company');
@@ -67,14 +85,14 @@ export default function SignupCompanyPage() {
       companyData.append('detail', detail);
       companyData.append('phoneNumber', phoneNumber);
       companyData.append('websiteLink', websiteLink);
+      companyData.append('companyName', companyName);
+      companyData.append('location', location);
       companyData.append('country', country);
       companyData.append('houseNumber', houseNumber);
       companyData.append('subDistrict', subDistrict);
       companyData.append('district', district);
       companyData.append('province', province);
       companyData.append('postCode', postalCode);
-      companyData.append('companyName', companyName);
-      companyData.append('location', location);
       await register(companyData);
       navigate('/');
     } catch (err) {
@@ -115,6 +133,9 @@ export default function SignupCompanyPage() {
                 setDistrict={setDistrict}
                 setProvince={setProvince}
                 setPostalCode={setPostalCode}
+                setMap={setMap}
+                setLongdo={setLongdo}
+                getLocation={getLocation}
               />
             </div>
 

@@ -6,6 +6,7 @@ import {
   removeAccessToken,
   setAccessToken,
 } from '../service/localStorage';
+import axios from '../config/axios';
 
 const AuthContext = createContext();
 
@@ -32,12 +33,15 @@ function AuthContextProvider({ children }) {
   const login = async (input) => {
     const res = await loginApi(input);
     setAccessToken(res.data.token);
-    const resMe = fetchMe();
+    const resMe = await axios.get('/users/me');
     setUser(resMe.data.user);
   };
 
   const register = async (input) => {
-    await registerApi(input);
+    const res = await registerApi(input);
+    setAccessToken(res.data.token);
+    const resMe = await axios.get('/users/me');
+    setUser(resMe.data.user);
   };
 
   const logout = async () => {
