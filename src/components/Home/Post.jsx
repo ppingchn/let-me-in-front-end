@@ -35,7 +35,6 @@ export default function Post({ content }) {
     console.log(`submit ${comment}`);
     setComment('');
   };
-  console.log(content);
 
   return (
     <div className="h-fit w-full flex flex-col gap-2 bg-white border-[1px] rounded-lg border-slate-200 py-3">
