@@ -1,9 +1,11 @@
-import Avatar from "../ui/Avatar";
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { HiSearch } from "react-icons/hi";
-import { useState } from "react";
+import Avatar from '../ui/Avatar';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
+import { HiSearch } from 'react-icons/hi';
+import { useState } from 'react';
+import { useAuth } from '../../context/authContext';
 
 export default function Chat() {
+  const { user } = useAuth();
   const [toggleShow, setToggleShow] = useState(false);
   return (
     <div
@@ -17,7 +19,7 @@ export default function Chat() {
       >
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Avatar width={8} height={8} />
+            <Avatar width={8} height={8} picture={user.profilePic} />
             <div className="absolute w-3 h-3 bg-green-700 bottom-[-2px] right-[-2px] rounded-full border-2 border-white"></div>
           </div>
           <span className="text-sm font-medium">Messaging</span>

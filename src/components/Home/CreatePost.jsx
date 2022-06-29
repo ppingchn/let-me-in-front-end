@@ -1,13 +1,15 @@
 import { BsImageFill, BsFillCalendarDateFill } from 'react-icons/bs';
 import { RiVideoFill } from 'react-icons/ri';
+import { useAuth } from '../../context/authContext';
 
 export default function CreatePost({ setOpenCreatePostModal }) {
+  const { user } = useAuth();
   return (
     <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] rounded-lg border-slate-200 px-4 py-3">
       <div className="flex h-12 gap-2">
         <img
           className="inline-block h-12 w-12 sm:h-12 sm:w-12 rounded-full cursor-pointer"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          src={user.profilePic}
           alt=""
         />
         <button

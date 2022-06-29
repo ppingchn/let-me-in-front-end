@@ -1,6 +1,8 @@
 import { FaBookmark } from 'react-icons/fa';
+import { useAuth } from '../../context/authContext';
 
 export default function Profile() {
+  const { user } = useAuth();
   return (
     <div className="h-fit w-full sm:min-w-[230px] sm:max-w-[233px] border-[1px] rounded-lg border-slate-200">
       {/* avatar */}
@@ -10,13 +12,13 @@ export default function Profile() {
           <div className="absolute sm:bottom-4">
             <img
               className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src={user.profilePic}
               alt=""
             />
           </div>
         </div>
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
-          <span className="text-black font-medium">Tom Holland</span>
+          <span className="text-black font-medium">{user.username}</span>
           <span className="text-center text-xs text-darkgray">
             My name is Kan. I previously work as a matchmove artist. Now my goal
             is being a web fullstack developer.
