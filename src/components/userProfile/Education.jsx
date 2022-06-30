@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import EducationElement from './EducationElement';
 import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
 import ModalAddEducation from './ModalAddEducation';
+import { useParams } from 'react-router-dom';
+import { getEducation } from '../../api/userApi';
 
 export default function Educations(props) {
   const { isUser } = props;
+  const { id } = useParams();
+
   const [modalEducation, setModalEducation] = useState(false);
+  const [education, setEducation] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchEducation = async () => {
+      try {
+        setLoading(true);
+        const res = await getEducation(id);
+        setEducation(res.data.educations);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEducation();
+  }, []);
 
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200 bg-white">

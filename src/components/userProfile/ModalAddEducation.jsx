@@ -1,10 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { IoMdClose } from "react-icons/io";
-import { RiErrorWarningFill } from "react-icons/ri";
-import DatePicker from "react-datepicker";
-import validator from "validator";
+import { Fragment, useRef, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { IoMdClose } from 'react-icons/io';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import DatePicker from 'react-datepicker';
+import validator from 'validator';
+import { addEducation } from '../../api/userApi';
 
 export default function ModalAddEducation({ open, setOpen }) {
   const [error, setError] = useState({});
@@ -13,31 +14,39 @@ export default function ModalAddEducation({ open, setOpen }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const [education, setEducation] = useState({
-    university: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-    feild: "",
-  });
+  const [education, setEducation] = useState([
+    {
+      university: '',
+      degree: '',
+      feild: '',
+      startDate: '',
+      endDate: '',
+    },
+  ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let error = {};
 
-    if (validator.isEmpty(education.university + "")) {
-      error.university = "University name is required";
+    if (validator.isEmpty(education.university + '')) {
+      error.university = 'University name is required';
     }
-    if (validator.isEmpty(education.degree + "")) {
-      error.degree = "Degree is required";
+    if (validator.isEmpty(education.degree + '')) {
+      error.degree = 'Degree is required';
     }
-    if (validator.isEmpty(education.feild + "")) {
-      error.feild = "Feild is required";
+    if (validator.isEmpty(education.feild + '')) {
+      error.feild = 'Feild is required';
     }
     setError({ ...error });
 
     if (Object.keys(error).length === 0) {
-      console.log(education);
+      await addEducation(
+        education[0].degree,
+        education[0].university,
+        education[0].feild,
+        education[0].startDate,
+        education[0].endDate,
+      );
       setOpen(false);
     }
   };
@@ -106,7 +115,7 @@ export default function ModalAddEducation({ open, setOpen }) {
                   <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                     {/* <h1 className="text-xl">Create a post</h1> */}
                     <Dialog.Title as="h3" className="text-xl">
-                      Add experience
+                      Add education
                     </Dialog.Title>
                     <div
                       className="h-8 w-8 rounded-full hover:bg-gray flex justify-center items-center text-xl"

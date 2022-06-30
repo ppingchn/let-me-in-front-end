@@ -5,7 +5,11 @@ import { IoMdClose } from 'react-icons/io';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
-import { addExperience } from '../../api/userApi';
+import {
+  addExperience,
+  deleteExperience,
+  editExperience,
+} from '../../api/userApi';
 import { useParams } from 'react-router-dom';
 
 export default function ModalEditExperience({
@@ -19,9 +23,12 @@ export default function ModalEditExperience({
   district,
   province,
   country,
+  fetchExperience,
+  idExperience,
   workDescription,
 }) {
   const [error, setError] = useState({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const cancelButtonRef = useRef(null);
   const { id } = useParams();
 
@@ -81,15 +88,22 @@ export default function ModalEditExperience({
     setError({ ...error });
 
     if (Object.keys(error).length === 0) {
-      await addExperience(
+      await editExperience(
         companyArray[0].companyName,
         companyArray[0].position,
         companyArray[0].startDate,
         companyArray[0].endDate,
-        id,
+        idExperience,
         companyArray[0].workDescription,
       );
+      fetchExperience();
+      setOpen(false);
     }
+  };
+  const handleDelete = async (e) => {
+    await deleteExperience(idExperience);
+    fetchExperience();
+    setOpen(false);
   };
 
   return (
@@ -245,7 +259,22 @@ export default function ModalEditExperience({
                   </div>
 
                   {/* bottom section */}
-                  <div className="flex px-4 sm:px-6 py-3 justify-end rounded-t-lg items-center border-t-[1px] border-gray">
+                  <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-t-[1px] border-gray">
+                    {confirmDelete ? (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={handleDelete}
+                      >
+                        Delete Now
+                      </button>
+                    ) : (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={() => setConfirmDelete(true)}
+                      >
+                        Delete
+                      </button>
+                    )}
                     <button
                       className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
                       onClick={handleSubmit}

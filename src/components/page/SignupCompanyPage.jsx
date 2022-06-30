@@ -63,8 +63,7 @@ export default function SignupCompanyPage() {
     map.Overlays.clear();
     let marker = new longdo.Marker(result);
     map.Overlays.add(marker);
-    setLocation(result);
-    console.log(result);
+    setLocation(JSON.stringify(result));
   };
 
   const handleSubmitSignUp = async (e) => {

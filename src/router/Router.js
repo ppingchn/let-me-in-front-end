@@ -10,6 +10,7 @@ import JobPage from '../components/page/MessagePage';
 import MessagePage from '../components/page/MessagePage';
 import NotificationPage from '../components/page/NotificationsPage';
 import { useAuth } from '../context/authContext';
+import ExperienceEditPage from '../components/page/ExperienceEditPage';
 
 export default function Router() {
   const { user } = useAuth();
@@ -24,6 +25,10 @@ export default function Router() {
             <Route path="messaging" element={<MessagePage />} />
             <Route path="notification" element={<NotificationPage />} />
             <Route path="user/:id" element={<UserPage />} />
+            <Route
+              path="user/:id/details/experience"
+              element={<ExperienceEditPage />}
+            />
           </Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </>
