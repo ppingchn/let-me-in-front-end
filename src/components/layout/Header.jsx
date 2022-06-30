@@ -89,7 +89,7 @@ export default function Header() {
               active === 'Jobs' ? 'border-b-2 border-b-darkgray' : ''
             } cursor-pointer text-darkgray hover:text-black`}
             onClick={() => {
-              navigate('job');
+              navigate('jobs');
               setActive('Jobs');
             }}
           >
