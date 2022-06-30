@@ -10,6 +10,7 @@ import JobPage from '../components/page/MessagePage';
 import MessagePage from '../components/page/MessagePage';
 import NotificationPage from '../components/page/NotificationsPage';
 import { useAuth } from '../context/authContext';
+import ExperienceEditPage from '../components/page/ExperienceEditPage';
 
 import MyNetwork from '../components/page/MyNetwork';
 import Connections from '../components/MyNetwork/Sidebars/Connection/Connections';
@@ -32,9 +33,11 @@ export default function Router() {
             <Route path="messaging" element={<MessagePage />} />
             <Route path="notification" element={<NotificationPage />} />
             <Route path="user/:id" element={<UserPage />} />
+            <Route
+              path="user/:id/details/experience"
+              element={<ExperienceEditPage />} 
+            />
 
-            <Route index element={<Navigate to="/home" />} />
-            <Route path="home" element={<HomePage />} />
             {/* myNetwork */}
             <Route path="myNetwork" element={<MyNetwork />} />
             <Route path="myNetwork/connections" element={<Connections />} />

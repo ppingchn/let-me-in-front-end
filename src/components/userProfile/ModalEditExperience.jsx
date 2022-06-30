@@ -5,78 +5,105 @@ import { IoMdClose } from 'react-icons/io';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
-import { addEducation } from '../../api/userApi';
+import {
+  addExperience,
+  deleteExperience,
+  editExperience,
+} from '../../api/userApi';
+import { useParams } from 'react-router-dom';
 
-export default function ModalAddEducation({ open, setOpen }) {
+export default function ModalEditExperience({
+  open,
+  setOpen,
+  companyAvatar,
+  position,
+  companyName,
+  contract,
+  date,
+  district,
+  province,
+  country,
+  fetchExperience,
+  idExperience,
+  workDescription,
+}) {
   const [error, setError] = useState({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const cancelButtonRef = useRef(null);
+  const { id } = useParams();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const [education, setEducation] = useState([
+  const [companyArray, setCompanyArray] = useState([
     {
-      university: '',
-      degree: '',
-      feild: '',
-      startDate: '',
-      endDate: '',
+      companyName: companyName ?? '',
+      position: position ?? '',
+      startDate: new Date(),
+      endDate: new Date(),
+      workDescription: workDescription ?? '',
     },
   ]);
+  const handleChangeCompanyName = (e) => {
+    const clone = { ...companyArray };
+    clone[0].companyName = e.target.value;
+    setCompanyArray(clone);
+  };
+  const handleChangePosition = (e) => {
+    const clone = { ...companyArray };
+    clone[0].position = e.target.value;
+    setCompanyArray(clone);
+  };
+  const handleChangeWorkDescription = (e) => {
+    const clone = { ...companyArray };
+    clone[0].workDescription = e.target.value;
+    setCompanyArray(clone);
+  };
+  const handleChangeStartDate = (date: Date) => {
+    setStartDate(date);
+    const clone = { ...companyArray };
+    clone[0].startDate = date;
+    setCompanyArray(clone);
+  };
+  const handleChangeEndDate = (date: Date) => {
+    setEndDate(date);
+    const clone = { ...companyArray };
+    clone[0].endDate = date;
+    setCompanyArray(clone);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let error = {};
 
-    if (validator.isEmpty(education.university + '')) {
-      error.university = 'University name is required';
+    if (validator.isEmpty(companyArray[0].companyName + '')) {
+      error.companyName = 'Company name is required';
     }
-    if (validator.isEmpty(education.degree + '')) {
-      error.degree = 'Degree is required';
+    if (validator.isEmpty(companyArray[0].position + '')) {
+      error.position = 'Position is required';
     }
-    if (validator.isEmpty(education.feild + '')) {
-      error.feild = 'Feild is required';
+    if (validator.isEmpty(companyArray[0].workDescription + '')) {
+      error.workDescription = 'Work description is required';
     }
     setError({ ...error });
 
     if (Object.keys(error).length === 0) {
-      await addEducation(
-        education[0].degree,
-        education[0].university,
-        education[0].feild,
-        education[0].startDate,
-        education[0].endDate,
+      await editExperience(
+        companyArray[0].companyName,
+        companyArray[0].position,
+        companyArray[0].startDate,
+        companyArray[0].endDate,
+        idExperience,
+        companyArray[0].workDescription,
       );
+      fetchExperience();
       setOpen(false);
     }
   };
-
-  const handleChangeUniversity = (e) => {
-    const clone = { ...education };
-    clone[0].university = e.target.value;
-    setEducation(clone);
-  };
-  const handleChangeDegree = (e) => {
-    const clone = { ...education };
-    clone[0].degree = e.target.value;
-    setEducation(clone);
-  };
-  const handleChangeFeild = (e) => {
-    const clone = { ...education };
-    clone[0].feild = e.target.value;
-    setEducation(clone);
-  };
-  const handleChangeStartDate = (date: Date) => {
-    setStartDate(date);
-    const clone = { ...education };
-    clone[0].startDate = date;
-    setEducation(clone);
-  };
-  const handleChangeEndDate = (date: Date) => {
-    setEndDate(date);
-    const clone = { ...education };
-    clone[0].endDate = date;
-    setEducation(clone);
+  const handleDelete = async (e) => {
+    await deleteExperience(idExperience);
+    fetchExperience();
+    setOpen(false);
   };
 
   return (
@@ -115,7 +142,7 @@ export default function ModalAddEducation({ open, setOpen }) {
                   <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                     {/* <h1 className="text-xl">Create a post</h1> */}
                     <Dialog.Title as="h3" className="text-xl">
-                      Add education
+                      Add experience
                     </Dialog.Title>
                     <div
                       className="h-8 w-8 rounded-full hover:bg-gray flex justify-center items-center text-xl"
@@ -130,71 +157,56 @@ export default function ModalAddEducation({ open, setOpen }) {
                     <span className="text-sm text-darkgray">
                       * Indicates required
                     </span>
-
-                    {/* University Name */}
+                    {/* title */}
                     <div className="w-full flex flex-col gap-1">
                       <label
-                        htmlFor="university"
+                        htmlFor="position"
                         className="text-sm text-darkgray"
                       >
-                        University *
+                        Title *
                       </label>
                       <input
-                        name="university"
+                        name="position"
+                        defaultValue={position}
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
-                        placeholder="Ex: Chulalongkorn University"
-                        onChange={handleChangeUniversity}
+                        placeholder="Ex: Retail Sales Manager"
+                        onChange={handleChangePosition}
                       />
-                      {error.university && (
+                      {error.position && (
                         <span className="flex gap-1 items-center text-redNotification">
                           <RiErrorWarningFill />
-                          {error.university}
+                          {error.position}
                         </span>
                       )}
                     </div>
-                    {/* degree */}
+                    {/* Company Name */}
                     <div className="w-full flex flex-col gap-1">
-                      <label htmlFor="degree" className="text-sm text-darkgray">
-                        degree *
+                      <label
+                        htmlFor="companyName"
+                        className="text-sm text-darkgray"
+                      >
+                        Company name *
                       </label>
                       <input
-                        name="degree"
+                        name="companyName"
+                        defaultValue={companyName}
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
-                        placeholder="Ex: Bachelor's"
-                        onChange={handleChangeDegree}
-                      />
-                      {error.degree && (
-                        <span className="flex gap-1 items-center text-redNotification">
-                          <RiErrorWarningFill />
-                          {error.degree}
-                        </span>
-                      )}
-                    </div>
-                    {/* Work Description */}
-                    <div className="w-full flex flex-col gap-1">
-                      <label htmlFor="feild" className="text-sm text-darkgray">
-                        Field *
-                      </label>
-                      <input
-                        name="feild"
-                        className="w-full focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Microsoft"
-                        onChange={handleChangeFeild}
+                        onChange={handleChangeCompanyName}
                       />
-                      {error.feild && (
+                      {error.companyName && (
                         <span className="flex gap-1 items-center text-redNotification">
                           <RiErrorWarningFill />
-                          {error.feild}
+                          {error.companyName}
                         </span>
                       )}
                     </div>
-                    {/* study duration */}
                     <div className="flex flex-col w-full gap-1 items-start content-center">
                       <label
                         htmlFor="birthDate"
                         className="block text-sm text-darkgray"
                       >
-                        Study duration *
+                        Work duration *
                       </label>
                       <div className="flex gap-3 items-center">
                         <div className="">
@@ -219,10 +231,50 @@ export default function ModalAddEducation({ open, setOpen }) {
                         </div>
                       </div>
                     </div>
+
+                    {/* Work Description */}
+                    <div className="w-full flex flex-col gap-1">
+                      <label
+                        htmlFor="workDescription"
+                        className="text-sm text-darkgray"
+                      >
+                        Work description *
+                      </label>
+                      <textarea
+                        name="workDescription"
+                        defaultValue={workDescription}
+                        className="w-full focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
+                        placeholder="Ex: Collecting and analyzing financial, political and socioeconomic data"
+                        onChange={handleChangeWorkDescription}
+                        rows={6}
+                      />
+                      <span className="text-right text-xs text-darkgray">{`${companyArray[0].workDescription.length} / 2,000`}</span>
+                      {error.workDescription && (
+                        <span className="flex gap-1 items-center text-redNotification">
+                          <RiErrorWarningFill />
+                          {error.workDescription}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* bottom section */}
-                  <div className="flex px-4 sm:px-6 py-3 justify-end rounded-t-lg items-center border-t-[1px] border-gray">
+                  <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-t-[1px] border-gray">
+                    {confirmDelete ? (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={handleDelete}
+                      >
+                        Delete Now
+                      </button>
+                    ) : (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={() => setConfirmDelete(true)}
+                      >
+                        Delete
+                      </button>
+                    )}
                     <button
                       className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
                       onClick={handleSubmit}

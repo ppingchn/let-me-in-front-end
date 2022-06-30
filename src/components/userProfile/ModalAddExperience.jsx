@@ -1,20 +1,22 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { IoMdClose } from 'react-icons/io';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
-import { addExperience } from '../../api/userApi';
+import { addExperience, getCompanyByLetter } from '../../api/userApi';
 import { useParams } from 'react-router-dom';
 
-export default function ModalAddExperience({ open, setOpen }) {
+export default function ModalAddExperience({ open, setOpen, fetchExperience }) {
   const [error, setError] = useState({});
   const cancelButtonRef = useRef(null);
   const { id } = useParams();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [companySuggest, setCompanySuggest] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [companyArray, setCompanyArray] = useState([
     {
@@ -25,8 +27,26 @@ export default function ModalAddExperience({ open, setOpen }) {
       workDescription: '',
     },
   ]);
+
+  const fetchCompanyByLetter = async (letter) => {
+    try {
+      setLoading(true);
+      const res = await getCompanyByLetter(letter);
+      setCompanySuggest(res.data.companies);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleChangeCompanyName = (e) => {
     const clone = { ...companyArray };
+    if (e.target.value.length < 3) {
+      setCompanySuggest(null);
+    } else {
+      fetchCompanyByLetter(e.target.value);
+    }
     clone[0].companyName = e.target.value;
     setCompanyArray(clone);
   };
@@ -78,6 +98,8 @@ export default function ModalAddExperience({ open, setOpen }) {
         companyArray[0].workDescription,
       );
     }
+    fetchExperience();
+    setOpen(false);
   };
 
   return (
@@ -164,8 +186,34 @@ export default function ModalAddExperience({ open, setOpen }) {
                         name="companyName"
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Microsoft"
+                        value={companyArray[0].companyName}
                         onChange={handleChangeCompanyName}
                       />
+                      {loading ? (
+                        <span>loading</span>
+                      ) : (
+                        companySuggest && (
+                          <div className="relative z-10 w-full bg-white">
+                            <div className="absolute w-full h-18 flex flex-col gap-2 bg-white border-[1px] border-darkgray px-3 py-1 rounded-lg">
+                              {companySuggest?.map((ele, idx) => (
+                                <span
+                                  key={idx}
+                                  className="cursor-pointer"
+                                  onClick={() => {
+                                    const clone = { ...companyArray };
+                                    clone[0].companyName = ele.companyName;
+                                    console.log(clone);
+                                    setCompanyArray(clone);
+                                    setCompanySuggest(null);
+                                  }}
+                                >
+                                  {ele.companyName}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      )}
                       {error.companyName && (
                         <span className="flex gap-1 items-center text-redNotification">
                           <RiErrorWarningFill />
