@@ -2,7 +2,8 @@ import axios from '../config/axios';
 
 
 export function getAllFriend(input) {
-  return axios.get('/friends', input);
+    // console.log('/friends'+input)
+  return axios.get('/friends'+input);
 }
 export function findFriendId(input) {
   return axios.get('/friends/:requestToId', input);
