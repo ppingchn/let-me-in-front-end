@@ -159,8 +159,10 @@ function PersonalInformation({
                 autoComplete="country-name"
                 onChange={(e) => setGender(e.target.value)}
                 className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
-                placeholder={'select gender'}
               >
+                <option value="" selected disabled hidden>
+                  Select gender
+                </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>

@@ -12,6 +12,14 @@ import NotificationPage from '../components/page/NotificationsPage';
 import { useAuth } from '../context/authContext';
 import ExperienceEditPage from '../components/page/ExperienceEditPage';
 
+import MyNetwork from '../components/page/MyNetwork';
+import Connections from '../components/MyNetwork/Sidebars/Connection/Connections';
+import Contacts from '../components/MyNetwork/Sidebars/Contact/Contacts';
+import PeopleAndFollow from '../components/MyNetwork/Sidebars/PeopleAndFollow/PeopleAndFollow';
+import JobsPage from '../components/page/JobsPage';
+import MyJobs from '../components/Jobs/Sidebars/MyJobs';
+import ApplicationSetting from '../components/Jobs/Sidebars/ApplicationSetting/ApplicationSetting';
+
 export default function Router() {
   const { user } = useAuth();
 
@@ -27,7 +35,23 @@ export default function Router() {
             <Route path="user/:id" element={<UserPage />} />
             <Route
               path="user/:id/details/experience"
-              element={<ExperienceEditPage />}
+              element={<ExperienceEditPage />} 
+            />
+
+            {/* myNetwork */}
+            <Route path="myNetwork" element={<MyNetwork />} />
+            <Route path="myNetwork/connections" element={<Connections />} />
+            <Route path="myNetwork/contacts" element={<Contacts />} />
+            <Route
+              path="myNetwork/peopleAndFollow"
+              element={<PeopleAndFollow />}
+            />
+            {/* Jobs */}
+            <Route path="jobs" element={<JobsPage />} />
+            <Route path="jobs/myJobs" element={<MyJobs />}></Route>
+            <Route
+              path="jobs/applicationSetting"
+              element={<ApplicationSetting />}
             />
           </Route>
           <Route path="*" element={<Navigate to="/home" />} />
