@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import AuthContextProvider from './context/authContext';
+import PostContextProvider from './context/postContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <PostContextProvider>
+          <App />
+        </PostContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
