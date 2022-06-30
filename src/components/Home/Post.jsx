@@ -3,13 +3,13 @@ import AvatarWithNameTimePost from '../ui/AvatarWithNameTimePost';
 import { TiThumbsUp } from 'react-icons/ti';
 import { BiCommentDetail, BiShare } from 'react-icons/bi';
 import { RiSendPlaneLine } from 'react-icons/ri';
-import { BsEmojiSmile, BsImageFill } from 'react-icons/bs';
+import { BsEmojiSmile, BsImageFill, BsThreeDots } from 'react-icons/bs';
 import ModalLikeList from './ModalLikeList';
 import ModalSharePostList from './ModalSharePostList';
 import { useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
-export default function Post({ content }) {
+export default function Post({ data }) {
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -43,39 +43,32 @@ export default function Post({ content }) {
         open={openShareListModal}
         setOpen={setOpenShareListModal}
       />
-      <AvatarWithNameTimePost padding={4} />
+      <div className="flex justify-between items-center px-4">
+        <AvatarWithNameTimePost
+          username={data.User.username}
+          profilePic={data.User.profilePic}
+        />
+
+        <BsThreeDots />
+      </div>
       <p className="px-4 whitespace-pre">
         {/* Who remembers this? 🙂
         <br />
         <br />
         <br />
         Credit: @techAmazing */}
-        {content}
+        {data.detail}
       </p>
-      {/* <img
-        src="https://media-exp1.licdn.com/dms/image/C5622AQFrI4paS9oNhg/feedshare-shrink_2048_1536/0/1655612102834?e=1658966400&v=beta&t=Ksdx44oeeRFldldABuhu_k5tbihip0PKNUmgFEYoTuQ"
-        alt=""
-        className="w-full cursor-pointer"
-      /> */}
       <div className="flex flex-col gap-2">
         <div className=" grid grid-cols-1 gap-2 px-4">
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C5622AQFrI4paS9oNhg/feedshare-shrink_2048_1536/0/1655612102834?e=1658966400&v=beta&t=Ksdx44oeeRFldldABuhu_k5tbihip0PKNUmgFEYoTuQ"
-            alt=""
-            className="w-auto aspect-auto object-center object-cover cursor-pointer h-[200px]"
-          />
-        </div>
-        <div className=" max-h-[400px] grid grid-cols-2 gap-2 px-4">
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C5622AQFrI4paS9oNhg/feedshare-shrink_2048_1536/0/1655612102834?e=1658966400&v=beta&t=Ksdx44oeeRFldldABuhu_k5tbihip0PKNUmgFEYoTuQ"
-            alt=""
-            className="w-full cursor-pointer"
-          />
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C5622AQFrI4paS9oNhg/feedshare-shrink_2048_1536/0/1655612102834?e=1658966400&v=beta&t=Ksdx44oeeRFldldABuhu_k5tbihip0PKNUmgFEYoTuQ"
-            alt=""
-            className="w-full cursor-pointer"
-          />
+          {data?.PostPictures?.map((el, idx) => (
+            <img
+              key={idx}
+              src={el.postPic}
+              alt=""
+              className="w-auto aspect-auto object-center object-cover cursor-pointer h-[200px]"
+            />
+          ))}
         </div>
       </div>
       <div className="flex justify-between mx-4 pb-2 border-b-[1px] border-slate-200">
