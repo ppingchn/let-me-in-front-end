@@ -8,19 +8,36 @@ import { BsImageFill } from 'react-icons/bs';
 import { TbMinusVertical } from 'react-icons/tb';
 import { BiMessageRoundedDetail } from 'react-icons/bi';
 import { useAuth } from '../../context/authContext';
+import { usePost } from '../../context/postContext';
 
-export default function ModalCreatePost({ open, setOpen, setContent }) {
+export default function ModalCreatePost({ open, setOpen }) {
   const { user } = useAuth();
+  const { createUserPost } = usePost();
   const cancelButtonRef = useRef(null);
   const [show, setShow] = useState('main');
-  const [imageUpload, setImageUpload] = useState(null);
-
+  const [detail, setDetail] = useState('');
+  const [imageUpload, setImageUpload] = useState('');
   const inputPhotoEl = useRef(null);
 
+  const handleCreatePost = async () => {
+    try {
+      const postFormData = new FormData();
+      postFormData.append('detail', detail);
+      for (let img of imageUpload) {
+        console.log(img);
+        postFormData.append('postPicArr', img);
+      }
+      await createUserPost(postFormData);
+      setImageUpload('');
+      setOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleChangeCover = (e) => {
-    if (e.target.files[0]) {
-      const urlcover = URL.createObjectURL(e.target.files[0]);
-      setImageUpload(urlcover);
+    if (e.target.files) {
+      setImageUpload(e.target.files);
     }
   };
 
@@ -77,7 +94,7 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                           alt=""
                         />
                         <div className="flex flex-col">
-                          <h1 className="font-bold">Tom Holland</h1>
+                          <h1 className="font-bold">{user.username}</h1>
                           <div className="w-28 h-8 px-3 border-[1px] hover:border-[2px] bg-white hover:bg-gray border-darkgray rounded-full transition-all">
                             <div className="w-full h-full flex items-center justify-between">
                               <FaGlobeAsia className="text-darkgray" />
@@ -96,7 +113,7 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                         placeholder="What do you want to talk about?"
                         rows="6"
                         onChange={(e) => {
-                          setContent(e.target.value);
+                          setDetail(e.target.value);
                         }}
                         // onKeyPress={(e) => {
                         //   if (e.key === 'Enter') {
@@ -105,6 +122,7 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                         // }}
                       ></textarea>
                       <input
+                        multiple
                         type="file"
                         className="hidden"
                         ref={inputPhotoEl}
@@ -112,11 +130,14 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                       />
                       {imageUpload && (
                         <div className="relative">
-                          <img
-                            src={imageUpload}
-                            alt="imageUpload"
-                            onClick={() => inputPhotoEl.current.click()}
-                          />
+                          {Array.from(imageUpload).map((el, idx) => (
+                            <img
+                              key={idx}
+                              src={URL.createObjectURL(el)}
+                              alt="imageUpload"
+                              onClick={() => inputPhotoEl.current.click()}
+                            />
+                          ))}
                           <div
                             className="absolute flex justify-center items-center mr-1 mt-1 right-0 top-0 bg-white w-8 h-8 rounded-full"
                             onClick={() => setImageUpload(null)}
@@ -155,7 +176,10 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                         </div>
                       </div>
 
-                      <button className="h-10 w-16 rounded-full hover:bg-gray ">
+                      <button
+                        className="h-10 w-16 rounded-full hover:bg-gray"
+                        onClick={() => handleCreatePost()}
+                      >
                         Post
                       </button>
                     </div>
@@ -174,19 +198,23 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                         <IoMdClose />
                       </div>
                     </div>
-                    <div className="flex px-4 sm:px-6 py-4 min-h-32 justify-center rounded-t-lg items-center">
+                    <div className="flex flex-col px-4 sm:px-6 py-4 min-h-32 justify-center rounded-t-lg items-center">
                       <input
+                        multiple
                         type="file"
                         className="hidden"
                         ref={inputPhotoEl}
                         onChange={handleChangeCover}
                       />
                       {imageUpload ? (
-                        <img
-                          src={imageUpload}
-                          alt="imageUpload"
-                          onClick={() => inputPhotoEl.current.click()}
-                        />
+                        Array.from(imageUpload).map((el, idx) => (
+                          <img
+                            key={idx}
+                            src={URL.createObjectURL(el)}
+                            alt="imageUpload"
+                            onClick={() => inputPhotoEl.current.click()}
+                          />
+                        ))
                       ) : (
                         <button
                           className="p-2 font-bold text-blue hover:bg-gray rounded transition-all"
@@ -206,7 +234,10 @@ export default function ModalCreatePost({ open, setOpen, setContent }) {
                           <span className="text-sm text-darkgray">back</span>
                         </button>
                       </div>
-                      <div className="w-fit h-7 px-4 border-[1px] hover:border-[2px] bg-white hover:bg-gray border-darkgray rounded-full transition-all cursor-pointer">
+                      <div
+                        className="w-fit h-7 px-4 border-[1px] hover:border-[2px] bg-white hover:bg-gray border-darkgray rounded-full transition-all cursor-pointer"
+                        onClick={() => setShow('main')}
+                      >
                         <button className="w-full h-full flex items-center justify-center">
                           <span className="text-sm text-darkgray">done</span>
                         </button>
