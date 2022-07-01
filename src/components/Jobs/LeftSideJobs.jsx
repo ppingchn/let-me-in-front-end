@@ -1,7 +1,7 @@
-import { TiContacts } from "react-icons/ti";
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { TiContacts } from 'react-icons/ti';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LeftSideJobs() {
   let navigate = useNavigate;
@@ -20,7 +20,7 @@ function LeftSideJobs() {
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="24"
               height="24"
               focusable="false"
@@ -43,7 +43,7 @@ function LeftSideJobs() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -64,7 +64,7 @@ function LeftSideJobs() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -82,7 +82,7 @@ function LeftSideJobs() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -94,15 +94,16 @@ function LeftSideJobs() {
             </div>
             {/* Application settings */}
             <div className="w-full flex flex-col ">
-              <Link 
-              to="/jobs/applicationSetting"
-              className="flex ml-5 text-gray-500 hover:bg-gray-200 py-2">
+              <Link
+                to="/jobs/applicationSetting"
+                className="flex ml-5 text-gray-500 hover:bg-gray-200 py-2"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -122,7 +123,7 @@ function LeftSideJobs() {
               onClick={() => setToggleShow(!toggleShow)}
             >
               <span className="font-small ">
-                {toggleShow ? "Show less" : "Show more"}
+                {toggleShow ? 'Show less' : 'Show more'}
               </span>
               <div className="ml-2 text-[20px]">
                 {toggleShow ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
@@ -142,7 +143,7 @@ function LeftSideJobs() {
             viewBox="0 0 24 24"
             data-supported-dps="24x24"
             fill="currentColor"
-            class="mercado-match"
+            className="mercado-match"
             width="24"
             height="24"
             focusable="false"
@@ -150,7 +151,7 @@ function LeftSideJobs() {
           >
             <path d="M19 12h2v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h6v2H6a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1zm4-8a2.91 2.91 0 01-.87 2l-8.94 9L7 17l2-6.14 9-9A3 3 0 0123 4zm-4 2.35L17.64 5l-7.22 7.22 1.35 1.34z"></path>
           </svg>
-         <p> Post a free job</p>
+          <p> Post a free job</p>
         </Link>
       </div>
     </>

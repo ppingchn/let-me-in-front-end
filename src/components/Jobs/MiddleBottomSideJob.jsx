@@ -1,28 +1,28 @@
-import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { IoClose } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 function MiddleBottomSideJob() {
   const CompanyArray = [
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
   ];
   return (
@@ -67,7 +67,7 @@ function MiddleBottomSideJob() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="24"
                       height="24"
                       focusable="false"
@@ -91,7 +91,7 @@ function MiddleBottomSideJob() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="24"
                       height="24"
                       focusable="false"
@@ -108,10 +108,9 @@ function MiddleBottomSideJob() {
       </div>
       {/* Show all */}
       <div className="text-blue text-center font-medium py-1 ">
-          <button className="px-3 py-1 hover:bg-hover-light-blue rounded-lg">
-
+        <button className="px-3 py-1 hover:bg-hover-light-blue rounded-lg">
           Show all
-          </button>
+        </button>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-import { Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
-import ProfileConnection from "../Connection/ProfileConnection";
-import { Link } from "react-router-dom";
+import { Fragment, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import ProfileConnection from '../Connection/ProfileConnection';
+import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 function PeopleFilter() {
@@ -14,10 +14,7 @@ function PeopleFilter() {
   const [follower, setFollower] = useState(false);
 
   //middle State
-  const [filter, setFilter] = useState("All");
-
-  
-
+  const [filter, setFilter] = useState('All');
 
   const handleClickFollowing = () => {
     setFollowing(!following);
@@ -43,7 +40,7 @@ function PeopleFilter() {
         <div className="col-1">
           <button
             className={`font-medium px-1 pt-3 pb-3 ${
-              following ? "text-green-700 border-b-4 border-green-700 " : ""
+              following ? 'text-green-700 border-b-4 border-green-700 ' : ''
             }`}
             onClick={handleClickFollowing}
           >
@@ -51,7 +48,7 @@ function PeopleFilter() {
           </button>
           <button
             className={`font-medium px-1 pt-3 pb-3 ml-5 ${
-              follower ? "text-green-700 border-b-4 border-green-700 " : ""
+              follower ? 'text-green-700 border-b-4 border-green-700 ' : ''
             }`}
             onClick={handleClickFollower}
           >
@@ -82,7 +79,7 @@ function PeopleFilter() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -112,10 +109,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500 ",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500 ',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() =>setFilter("All")}
+                        onClick={() => setFilter('All')}
                       >
                         All
                       </Link>
@@ -126,10 +123,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() =>setFilter("Connections")}
+                        onClick={() => setFilter('Connections')}
                       >
                         Connections
                       </Link>
@@ -140,10 +137,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() => setFilter("Out-of-Network")}
+                        onClick={() => setFilter('Out-of-Network')}
                       >
                         Out-of-Network
                       </Link>
@@ -154,10 +151,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() => setFilter("Companies")}
+                        onClick={() => setFilter('Companies')}
                       >
                         Companies
                       </Link>
@@ -169,7 +166,6 @@ function PeopleFilter() {
           </Menu>
         </div>
       </div>
-
     </div>
   );
 }

@@ -10,13 +10,13 @@ export default function MessageListElement({ role, active }) {
       <div>
         {role === 'user' ? (
           <img
-            class="inline-block h-12 w-12 sm:h-12 sm:w-12 rounded-full cursor-pointer"
+            className="inline-block h-12 w-12 sm:h-12 sm:w-12 rounded-full cursor-pointer"
             src="https://media-exp1.licdn.com/dms/image/C5635AQFLYHLx2MfUTg/profile-framedphoto-shrink_400_400/0/1599535039224?e=1656594000&v=beta&t=O9y8eKEW1-wXS4dTovWyH7Nd17POXUuH0WvZFgFGLfA"
             alt=""
           />
         ) : (
           <img
-            class="inline-block h-12 w-12 sm:h-12 sm:w-12 cursor-pointer"
+            className="inline-block h-12 w-12 sm:h-12 sm:w-12 cursor-pointer"
             src="https://media-exp1.licdn.com/dms/image/C560BAQEn3FvAF4Gpjg/company-logo_200_200/0/1654087026909?e=1664409600&v=beta&t=NTO3cCLbdpI5Q7OLiSHPusrPeo5BiJFNhjv9iYQYsYA"
             alt=""
           />

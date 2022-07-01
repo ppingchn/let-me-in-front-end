@@ -3,7 +3,7 @@ export default function MessageElementWithAvatar() {
     <div className="flex gap-4">
       {/* avatar */}
       <img
-        class="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
+        className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
         src="https://media-exp1.licdn.com/dms/image/C4D03AQHcpbUcANnETg/profile-displayphoto-shrink_100_100/0/1654666437384?e=1661385600&v=beta&t=EPU0QYVtly7ZvonPgyOsbm4FjOftaxZf6TpEPio-1CE"
         alt=""
       />
