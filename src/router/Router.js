@@ -19,6 +19,7 @@ import PeopleAndFollow from '../components/MyNetwork/Sidebars/PeopleAndFollow/Pe
 import JobsPage from '../components/page/JobsPage';
 import MyJobs from '../components/Jobs/Sidebars/MyJobs';
 import ApplicationSetting from '../components/Jobs/Sidebars/ApplicationSetting/ApplicationSetting';
+import EducationEditPage from '../components/page/EducationEditPage';
 
 export default function Router() {
   const { user } = useAuth();
@@ -35,7 +36,11 @@ export default function Router() {
             <Route path="user/:id" element={<UserPage />} />
             <Route
               path="user/:id/details/experience"
-              element={<ExperienceEditPage />} 
+              element={<ExperienceEditPage />}
+            />
+            <Route
+              path="user/:id/details/education"
+              element={<EducationEditPage />}
             />
 
             {/* myNetwork */}

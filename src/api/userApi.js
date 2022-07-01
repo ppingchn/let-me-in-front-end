@@ -59,7 +59,31 @@ export function addEducation(degree, university, field, yearStart, yearEnd) {
     yearEnd,
   });
 }
+export function editEducation(
+  degree,
+  university,
+  field,
+  yearStart,
+  yearEnd,
+  id,
+) {
+  return axios.put(`/education/${id}`, {
+    degree,
+    university,
+    field,
+    yearStart,
+    yearEnd,
+  });
+}
+
+export function deleteEducation(id) {
+  return axios.delete(`/education/${id}`);
+}
 
 export function getCompanyByLetter(letter) {
   return axios.get(`/users/companyByLetter/${letter}`);
+}
+
+export function uploadCoverImage(coverImage) {
+  return axios.put('/users/coverImage', coverImage);
 }

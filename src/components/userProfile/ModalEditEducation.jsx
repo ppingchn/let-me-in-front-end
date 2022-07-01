@@ -5,22 +5,38 @@ import { IoMdClose } from 'react-icons/io';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
-import { addEducation } from '../../api/userApi';
+import {
+  addEducation,
+  deleteEducation,
+  editEducation,
+} from '../../api/userApi';
+import dayjs from 'dayjs';
 
-export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
+export default function ModalEditEducation({
+  open,
+  setOpen,
+  id,
+  university,
+  degree,
+  field,
+  yearStart,
+  yearEnd,
+  fetchEducation,
+}) {
   const [error, setError] = useState({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const cancelButtonRef = useRef(null);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(yearStart));
+  const [endDate, setEndDate] = useState(new Date(yearEnd));
 
   const [education, setEducation] = useState([
     {
-      university: '',
-      degree: '',
-      feild: '',
-      startDate: '',
-      endDate: '',
+      university: university ?? '',
+      degree: degree ?? '',
+      feild: field ?? '',
+      startDate: dayjs(yearStart) ?? '',
+      endDate: dayjs(yearEnd) ?? '',
     },
   ]);
 
@@ -40,16 +56,23 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
     setError({ ...error });
 
     if (Object.keys(error).length === 0) {
-      await addEducation(
+      await editEducation(
         education[0].degree,
         education[0].university,
         education[0].feild,
         education[0].startDate,
         education[0].endDate,
+        id,
       );
       fetchEducation();
       setOpen(false);
     }
+  };
+
+  const handleDelete = async (e) => {
+    await deleteEducation(id);
+    fetchEducation();
+    setOpen(false);
   };
 
   const handleChangeUniversity = (e) => {
@@ -116,7 +139,7 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
                   <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                     {/* <h1 className="text-xl">Create a post</h1> */}
                     <Dialog.Title as="h3" className="text-xl">
-                      Add education
+                      Edit education
                     </Dialog.Title>
                     <div
                       className="h-8 w-8 rounded-full hover:bg-gray flex justify-center items-center text-xl"
@@ -142,9 +165,11 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
                       </label>
                       <input
                         name="university"
+                        defaultValue={university}
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Chulalongkorn University"
                         onChange={handleChangeUniversity}
+                        value={education.university}
                       />
                       {error.university && (
                         <span className="flex gap-1 items-center text-redNotification">
@@ -160,9 +185,11 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
                       </label>
                       <input
                         name="degree"
+                        defaultValue={degree}
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Bachelor's"
                         onChange={handleChangeDegree}
+                        value={education.degree}
                       />
                       {error.degree && (
                         <span className="flex gap-1 items-center text-redNotification">
@@ -181,6 +208,7 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
                         className="w-full focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Microsoft"
                         onChange={handleChangeFeild}
+                        defaultValue={field}
                       />
                       {error.feild && (
                         <span className="flex gap-1 items-center text-redNotification">
@@ -223,7 +251,22 @@ export default function ModalAddEducation({ open, setOpen, fetchEducation }) {
                   </div>
 
                   {/* bottom section */}
-                  <div className="flex px-4 sm:px-6 py-3 justify-end rounded-t-lg items-center border-t-[1px] border-gray">
+                  <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-t-[1px] border-gray">
+                    {confirmDelete ? (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={handleDelete}
+                      >
+                        Delete Now
+                      </button>
+                    ) : (
+                      <button
+                        className="flex items-center px-4 py-[5px] bg-gray hover:bg-red-900 transition-all text-darkgray hover:text-white rounded font-bold"
+                        onClick={() => setConfirmDelete(true)}
+                      >
+                        Delete
+                      </button>
+                    )}
                     <button
                       className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
                       onClick={handleSubmit}
