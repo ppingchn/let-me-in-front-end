@@ -8,8 +8,11 @@ import ModalLikeList from './ModalLikeList';
 import ModalSharePostList from './ModalSharePostList';
 import { useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { useAuth } from '../../context/authContext';
+import EditPostDropdown from '../Post/EditPostDropdown';
 
 export default function Post({ data }) {
+  const { user } = useAuth();
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -49,7 +52,7 @@ export default function Post({ data }) {
           profilePic={data.User.profilePic}
         />
 
-        <BsThreeDots />
+        {user.id === data.User.id && <EditPostDropdown data={data} />}
       </div>
       <p className="px-4 whitespace-pre">
         {/* Who remembers this? 🙂
