@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { createComment, deleteComment, editComment } from '../api/commentApi';
 import { fetchPost, createPost, updatePost, deletePost } from '../api/postApi';
 import { useAuth } from './authContext';
 
@@ -23,12 +24,33 @@ function PostContextProvider({ children }) {
     await deletePost(postId);
     fetchAllPost();
   };
+  const createPostComment = async (input) => {
+    await createComment(input);
+    fetchAllPost();
+  };
+  const editPostComment = async (postId, input) => {
+    await editComment(postId, input);
+    fetchAllPost();
+  };
+  const deletePostComment = async (postId) => {
+    await deleteComment(postId);
+    fetchAllPost();
+  };
   useEffect(() => {
     fetchAllPost();
   }, [user]);
   return (
     <PostContext.Provider
-      value={{ post, createUserPost, editUserPost, deletePost, deleteUserPost }}
+      value={{
+        post,
+        createUserPost,
+        editUserPost,
+        deletePost,
+        deleteUserPost,
+        createPostComment,
+        editPostComment,
+        deletePostComment,
+      }}
     >
       {children}
     </PostContext.Provider>
