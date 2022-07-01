@@ -47,7 +47,7 @@ export default function UserPage() {
       }
     };
     fetchUser();
-  }, []);
+  }, [id]);
 
   return (
     <>
