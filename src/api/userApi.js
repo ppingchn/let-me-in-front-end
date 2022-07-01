@@ -84,6 +84,10 @@ export function getCompanyByLetter(letter) {
   return axios.get(`/users/companyByLetter/${letter}`);
 }
 
+export function getAllUserByLetter(letter) {
+  return axios.get(`/users/allUserByLetter/${letter}`);
+}
+
 export function uploadCoverImage(coverImage) {
   return axios.put('/users/coverImage', coverImage);
 }
