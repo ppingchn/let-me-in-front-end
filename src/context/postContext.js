@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchPost, createPost, updatePost } from '../api/postApi';
+import { fetchPost, createPost, updatePost, deletePost } from '../api/postApi';
 import { useAuth } from './authContext';
 
 const PostContext = createContext();
@@ -19,11 +19,17 @@ function PostContextProvider({ children }) {
     await updatePost(postId, input);
     fetchAllPost();
   };
+  const deleteUserPost = async (postId) => {
+    await deletePost(postId);
+    fetchAllPost();
+  };
   useEffect(() => {
     fetchAllPost();
   }, [user]);
   return (
-    <PostContext.Provider value={{ post, createUserPost, editUserPost }}>
+    <PostContext.Provider
+      value={{ post, createUserPost, editUserPost, deletePost, deleteUserPost }}
+    >
       {children}
     </PostContext.Provider>
   );

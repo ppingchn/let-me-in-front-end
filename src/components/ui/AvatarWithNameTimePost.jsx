@@ -1,10 +1,15 @@
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { FaGlobeAsia } from 'react-icons/fa';
 
 export default function AvatarWithNameTimePost({
   padding,
   username,
+  time,
   profilePic,
 }) {
+  dayjs.extend(relativeTime);
+
   return (
     <div
       className={`flex items-center gap-2 ${
@@ -18,11 +23,11 @@ export default function AvatarWithNameTimePost({
       />
       <div className="flex flex-col">
         <span className="font-bold text-xs">{username}</span>
-        <span className="text-xs text-darkgray">
+        {/* <span className="text-xs text-darkgray">
           Elected Member of Parliament, Thailand
-        </span>
+        </span> */}
         <div className="flex gap-1 items-center">
-          <span className="text-xs text-darkgray">13hr</span>
+          <span className="text-xs text-darkgray">{dayjs(time).fromNow()}</span>
           <span className="text-xs text-darkgray">•</span>
           <FaGlobeAsia className="text-darkgray text-sm" />
         </div>

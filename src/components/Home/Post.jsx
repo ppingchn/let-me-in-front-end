@@ -49,6 +49,7 @@ export default function Post({ data }) {
       <div className="flex justify-between items-center px-4">
         <AvatarWithNameTimePost
           username={data.User.username}
+          time={data.createdAt}
           profilePic={data.User.profilePic}
         />
 

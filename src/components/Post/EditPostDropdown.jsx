@@ -4,8 +4,10 @@ import { BsThreeDots } from 'react-icons/bs';
 import { HiTrash } from 'react-icons/hi';
 import { MdModeEditOutline } from 'react-icons/md';
 import EditPostModal from './EditPostModal';
+import { usePost } from '../../context/postContext';
 
 function EditPostDropdown({ data }) {
+  const { deleteUserPost } = usePost();
   const [openEditPostModal, setOpenEditPostModal] = useState(false);
   return (
     <>
@@ -32,7 +34,10 @@ function EditPostDropdown({ data }) {
               </button>
             </Menu.Item>
             <Menu.Item>
-              <button className="flex gap-2 items-center hover:bg-gray px-5 py-4">
+              <button
+                className="flex gap-2 items-center hover:bg-gray px-5 py-4"
+                onClick={() => deleteUserPost(data.id)}
+              >
                 <HiTrash size="20" />
                 <span>Delete post</span>
               </button>
