@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-function PeopleBottomFiltered({index , length}) {
-
-    //bottom state
+function PeopleBottomFiltered({ index, length }) {
+  //bottom state
   const [follow, setFollow] = useState(true);
 
   //bottom
@@ -34,7 +33,7 @@ function PeopleBottomFiltered({index , length}) {
               viewBox="0 0 16 16"
               data-supported-dps="16x16"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="16"
               height="16"
               focusable="false"
@@ -50,7 +49,7 @@ function PeopleBottomFiltered({index , length}) {
               viewBox="0 0 16 16"
               data-supported-dps="16x16"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="16"
               height="16"
               focusable="false"

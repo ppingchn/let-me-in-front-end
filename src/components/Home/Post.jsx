@@ -10,16 +10,17 @@ import { useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useAuth } from '../../context/authContext';
 import EditPostDropdown from '../Post/EditPostDropdown';
+import { usePost } from '../../context/postContext';
 
 export default function Post({ data }) {
   const { user } = useAuth();
+  const { createPostComment } = usePost();
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
+  const [titleComment, setTitleComment] = useState('');
   const [like, setLike] = useState(false);
-  const [comment, setComment] = useState('');
   const [image, setImage] = useState(null);
-
   const uploadImage = useRef(null);
 
   const handleAddImage = (e) => {
@@ -33,10 +34,10 @@ export default function Post({ data }) {
     setLike(!like);
   };
 
-  const submitComment = (e) => {
+  const submitComment = async (e) => {
     e.preventDefault();
-    console.log(`submit ${comment}`);
-    setComment('');
+    await createPostComment({ postId: data.id, title: titleComment });
+    setTitleComment('');
   };
 
   return (
@@ -77,23 +78,29 @@ export default function Post({ data }) {
       </div>
       <div className="flex justify-between mx-4 pb-2 border-b-[1px] border-slate-200">
         <div className="flex gap-1 items-center">
-          <div className="flex justify-center items-center w-4 h-4 rounded-full bg-blue">
-            <TiThumbsUp className="text-white" />
-          </div>
-          <span
-            className="text-sm font-medium text-darkgray cursor-pointer hover:text-blue hover:underline"
-            onClick={() => setOpenLikeListModal(true)}
-          >
-            91
-          </span>
+          {data.LikePosts.length !== 0 && (
+            <>
+              <div className="flex justify-center items-center w-4 h-4 rounded-full bg-blue">
+                <TiThumbsUp className="text-white" />
+              </div>
+              <span
+                className="text-sm font-medium text-darkgray cursor-pointer hover:text-blue hover:underline"
+                onClick={() => setOpenLikeListModal(true)}
+              >
+                {data.LikePosts.length}
+              </span>
+            </>
+          )}
         </div>
         <div className="flex gap-1">
-          <span
-            className="text-sm text-darkgray cursor-pointer hover:text-blue hover:underline"
-            onClick={() => setShowComment(!showComment)}
-          >
-            1 comment
-          </span>
+          {data.Comments.length !== 0 && (
+            <span
+              className="text-sm text-darkgray cursor-pointer hover:text-blue hover:underline"
+              onClick={() => setShowComment(!showComment)}
+            >
+              {data.Comments.length} comment
+            </span>
+          )}
           <span className="text-sm text-darkgray">•</span>
           <span
             className="text-sm text-darkgray cursor-pointer hover:text-blue hover:underline"
@@ -144,8 +151,8 @@ export default function Post({ data }) {
           <div className="w-full h-fit mb-1 px-4">
             <div className="flex h-full gap-1">
               <img
-                class="inline-block h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                className="inline-block h-10 w-10 rounded-full"
+                src={user.profilePic}
                 alt=""
               />
               <div className="flex flex-col w-full h-full px-3 border-[1px] bg-white border-darkgray rounded-xl transition-all">
@@ -155,9 +162,9 @@ export default function Post({ data }) {
                       type="text"
                       className="border-transparent w-full rounded-full focus:outline-none focus:border-none  focus:ring-0 active:ring-0 h-full"
                       placeholder="Add a comment..."
-                      value={comment}
+                      value={titleComment}
                       onChange={(e) => {
-                        setComment(e.target.value);
+                        setTitleComment(e.target.value);
                       }}
                     />
                   </form>
@@ -199,7 +206,10 @@ export default function Post({ data }) {
           </div>
 
           <div className="px-4">
-            <AvatarWithComment />
+            {data?.Comments &&
+              data?.Comments.map((el, idx) => {
+                return <AvatarWithComment key={idx} data={el} />;
+              })}
           </div>
         </>
       )}

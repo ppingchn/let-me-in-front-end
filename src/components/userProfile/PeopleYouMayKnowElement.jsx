@@ -1,4 +1,4 @@
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark } from 'react-icons/fa';
 
 export default function PeopleYouMayKnowElement() {
   return (
@@ -9,7 +9,7 @@ export default function PeopleYouMayKnowElement() {
         <div className="h-8 sm:h-12 w-full relative flex justify-center">
           <div className="absolute bottom-0 sm:bottom-2">
             <img
-              class="inline-block h-20 w-20 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
+              className="inline-block h-20 w-20 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />

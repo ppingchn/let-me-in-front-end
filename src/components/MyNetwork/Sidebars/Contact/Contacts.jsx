@@ -1,4 +1,3 @@
-
 function Contacts() {
   return (
     <div className="relative top-9 bg-gray w-full sm:w-screen  py-5 h-fit">
@@ -11,7 +10,7 @@ function Contacts() {
           <div className="border-t-[1px] border-slate-200 py-3">
             <div className="grid grid-cols-4 gap-3">
               <div className="col-1 text-center">
-              <i className="fa-solid fa-address-book text-[60px]  "></i>
+                <i className="fa-solid fa-address-book text-[60px]  "></i>
               </div>
               <div className="col-span-3">
                 <p className=" text-xl">Connect with people you know, fast</p>
@@ -20,8 +19,9 @@ function Contacts() {
                   connections.
                 </p>
                 <div>
-
-                <button className="text-blue font-medium py-1 mt-2 hover:bg-hover-light-blue rounded-lg">Sync your contacts</button>
+                  <button className="text-blue font-medium py-1 mt-2 hover:bg-hover-light-blue rounded-lg">
+                    Sync your contacts
+                  </button>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@ function Contacts() {
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="24"
               height="24"
               focusable="false"
@@ -55,7 +55,7 @@ function Contacts() {
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="24"
               height="24"
               focusable="false"
@@ -73,7 +73,7 @@ function Contacts() {
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
               fill="currentColor"
-              class="mercado-match"
+              className="mercado-match"
               width="24"
               height="24"
               focusable="false"
