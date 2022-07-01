@@ -24,7 +24,6 @@ export default function ModalCreatePost({ open, setOpen }) {
       const postFormData = new FormData();
       postFormData.append('detail', detail);
       for (let img of imageUpload) {
-        console.log(img);
         postFormData.append('postPicArr', img);
       }
       await createUserPost(postFormData);
