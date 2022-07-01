@@ -21,7 +21,6 @@ export default function Experience(props) {
     try {
       setLoading(true);
       const res = await getExperience(id);
-      console.log(res.data.result);
       setExperience(res.data.result);
     } catch (err) {
       console.log(err);
@@ -117,8 +116,7 @@ export default function Experience(props) {
             >
               {!showMore ? (
                 <>
-                  {' '}
-                  <span>Show all 6 experiences</span>{' '}
+                  <span>Show all 6 experiences</span>
                   <HiArrowNarrowRight className="text-xl" />
                 </>
               ) : (

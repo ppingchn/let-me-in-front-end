@@ -12,7 +12,7 @@ import Overview from '../userProfile/Overview';
 import Location from '../userProfile/Location';
 import Employee from '../userProfile/Employee';
 import PeopleYouMayKnow from '../userProfile/PeopleYouMayKnow';
-import { getUserById } from '../../api/userApi';
+import { getEducation, getUserById } from '../../api/userApi';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 
@@ -21,6 +21,7 @@ export default function UserPage() {
   const [isUser, setIsUser] = useState(true);
   const [loading, setLoading] = useState(false);
   const [userById, setUserById] = useState(null);
+  const [education, setEducation] = useState(null);
   const { id } = useParams();
 
   const { user } = useAuth();
@@ -30,8 +31,10 @@ export default function UserPage() {
       try {
         setLoading(true);
         const res = await getUserById(id);
+        const resEducation = await getEducation(id);
         setUserById(res.data.user);
-        console.log(res.data.user);
+        setEducation(resEducation.data.educations);
+
         if (user.id === res.data.user.id) {
           setIsUser(true);
         } else {
@@ -117,7 +120,7 @@ export default function UserPage() {
                   // this zone for user component
                   <>
                     <Experience isUser={isUser} />
-                    <Educations isUser={isUser} />
+                    <Educations isUser={isUser} education={education} />
                     <Skill isUser={isUser} />
                   </>
                 ) : (
