@@ -10,7 +10,6 @@ export default function ExperienceElement(props) {
     yearStart,
     yearEnd,
   } = props;
-  console.log(profilePic);
   return (
     <div className="flex w-11/12 gap-3 py-4 border-b-[1px] border-gray mx-5 p-2">
       <CompanyAvatar
