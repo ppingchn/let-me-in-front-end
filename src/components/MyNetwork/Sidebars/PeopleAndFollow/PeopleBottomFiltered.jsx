@@ -1,26 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { createFollows, deleteFollows } from '../../../../api/followApi';
 
-function PeopleBottomFiltered({index , length}) {
+function PeopleBottomFiltered({
+  companyId,
+  followerId,
+  profilePic,
+  companyName,
+  firstName,
+  lastName,
+}) {
 
-    //bottom state
+  //bottom state
   const [follow, setFollow] = useState(true);
 
   //bottom
   const handleClickFollow = () => {
+    // console.log(follow)
     setFollow(!follow);
+    // console.log(!follow)
   };
+  
+  // useEffect(async()=>{
+  //  if (follow) {
+  //   if(companyId){
+  //     await createFollows(companyId)
+  //   }else if (followerId){
+  //     await createFollows(followerId)
+  //   }
+  //  }else{
+  //   if(companyId){
+  //     await deleteFollows(companyId)
+  //   }else if (followerId){
+  //     await deleteFollows(followerId)
+  //   }
+  //  }
+  // },[follow])
   return (
     <div className="col-1 bg-white border-slate-200 border-[1px] rounded-lg">
       <div className=" flex flex-col gap-2 px-3 py-3 rounded-l-lg">
         <img
-          src="https://media-exp1.licdn.com/dms/image/C510BAQG6BUUPIVuQIQ/company-logo_100_100/0/1531983085978?e=1664409600&amp;v=beta&amp;t=bfcbucqGbMyLKuHHWaI41rtajO7lAvRlAE_IIUMhLZ8"
+          src={profilePic}
           loading="lazy"
           alt="Toyota Motor Corporation"
           id="ember1126"
-          className="lazy-image EntityPhoto-square-5 ember-view rounded-full w-20"
+          className="lazy-image EntityPhoto-square-5 ember-view rounded-full w-20 h-20"
         />
-        <p className="text-black font-medium">Toyota Motor Corporation</p>
-        <p className="text-sm">Automotive</p>
+        <p className="text-black font-medium">
+            {firstName} {lastName}
+            {companyName}
+        </p>
+        {/* <p className="text-sm">Automotive</p> */}
         <p className="h-14"></p>
       </div>
       <div

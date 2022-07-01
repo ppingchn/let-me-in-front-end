@@ -1,23 +1,37 @@
-import { Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
-import ProfileConnection from "../Connection/ProfileConnection";
-import { Link } from "react-router-dom";
+import { Fragment, useEffect, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import ProfileConnection from '../Connection/ProfileConnection';
+import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
-function PeopleFilter() {
-  //top State
-  const [following, setFollowing] = useState(false);
-  const [follower, setFollower] = useState(false);
+function PeopleFilter({
+  // setFollowingArr,
+  // followingArr,
+  // setFollowerArr,
+  // followerArr,
+  setFilter,
+  filter,
+  setFollowing,
+  following,
+  setFollower,
+  follower,
+  // setFollowingCount,
+  followingCount,
+  // setFollowerCount,
+  followerCount
+}) {
 
-  //middle State
-  const [filter, setFilter] = useState("All");
+  // console.log(followingCount);
+  // console.log(followerCount);
+  // console.log(followingArr);
+  // console.log(followerArr);
 
-  
-
+  // //middle State
+  // const [filter, setFilter] = useState('All');
 
   const handleClickFollowing = () => {
     setFollowing(!following);
@@ -43,19 +57,19 @@ function PeopleFilter() {
         <div className="col-1">
           <button
             className={`font-medium px-1 pt-3 pb-3 ${
-              following ? "text-green-700 border-b-4 border-green-700 " : ""
+              following ? 'text-green-700 border-b-4 border-green-700 ' : ''
             }`}
             onClick={handleClickFollowing}
           >
-            3 Following
+            {followingCount} Following
           </button>
           <button
             className={`font-medium px-1 pt-3 pb-3 ml-5 ${
-              follower ? "text-green-700 border-b-4 border-green-700 " : ""
+              follower ? 'text-green-700 border-b-4 border-green-700 ' : ''
             }`}
             onClick={handleClickFollower}
           >
-            1 Follower
+            {followerCount} Follower
           </button>
         </div>
       </div>
@@ -89,10 +103,7 @@ function PeopleFilter() {
                 >
                   <path d="M18.72 11H22v2h-3.28a2 2 0 01-2.74.7 2 2 0 01-.7-.7H2v-2h13.28a2 2 0 012.72-.7 2 2 0 01.72.7zM7 16a2 2 0 00-1.72 1H2v2h3.28a2 2 0 002.72.7 2 2 0 00.7-.7H22v-2H8.72A2 2 0 007 16zm6.72-11A2 2 0 0011 4.3a2 2 0 00-.7.7H2v2h8.28a2 2 0 002.72.7 2 2 0 00.7-.7H22V5z"></path>
                 </svg>
-                {/* <ChevronDownIcon
-                  className="-mr-1 ml-2 h-5 w-5"
-                  aria-hidden="true"
-                /> */}
+                
               </Menu.Button>
             </div>
 
@@ -112,10 +123,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500 ",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500 ',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() =>setFilter("All")}
+                        onClick={() => setFilter('All')}
                       >
                         All
                       </Link>
@@ -126,10 +137,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() =>setFilter("Connections")}
+                        onClick={() => setFilter('Connections')}
                       >
                         Connections
                       </Link>
@@ -140,10 +151,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() => setFilter("Out-of-Network")}
+                        onClick={() => setFilter('Out-of-Network')}
                       >
                         Out-of-Network
                       </Link>
@@ -154,10 +165,10 @@ function PeopleFilter() {
                       <Link
                         to="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
-                        onClick={() => setFilter("Companies")}
+                        onClick={() => setFilter('Companies')}
                       >
                         Companies
                       </Link>
@@ -169,7 +180,6 @@ function PeopleFilter() {
           </Menu>
         </div>
       </div>
-
     </div>
   );
 }
