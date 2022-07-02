@@ -1,7 +1,19 @@
 import { FaBookmark } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
+import { requestFriend } from '../../api/friendApi';
 
-function ProfileMayKnown() {
+function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
+
+  const handleClickRequest = async () => {
+    // console.log("1111")
+    await requestFriend(requestToId);
+  };
+  console.log(requestToId)
+
+  //   useEffect(()=>{
+  //     handleClickRequest()
+  // },[click])
+
   return (
     <div className="h-fit w-full sm:w-[200px] lg:w-[230px]  border-[1px] rounded-lg border-slate-200">
       {/* avatar */}
@@ -13,33 +25,46 @@ function ProfileMayKnown() {
         </div>
         <div className="h-14 w-full relative flex justify-center">
           <div className="absolute sm:bottom-4">
-            <img
-              className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            {profilePic ? (
+              <img
+                className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
+                src={profilePic}
+                alt="profilePic"
+              />
+            ) : (
+              <img
+                className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt=""
+              />
+            )}
           </div>
         </div>
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
-          <span className="text-black font-medium">Tom Holland</span>
+          <span className="text-black font-medium">
+            {firstName} {lastName}
+          </span>
           <span className="text-center text-xs text-darkgray">
-            Front-end at CodeCamp Thailand
+            {/* Front-end at CodeCamp Thailand */}
+            --
           </span>
 
+          <span className="h-10"></span>
           <div className="mt-2 text-center text-darkgray">
-            <img
+            {/* <img
               className="inline-block h-8 w-8 sm:h-8 sm:w-8 rounded-full cursor-pointer border-2 border-white"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
-            <span className="text-xs">CodeCamp Thailand</span>
+            <span className="text-xs">CodeCamp Thailand</span> */}
           </div>
 
           <button
             type="button"
             className="inline-flex items-center px-16 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
+            onClick={() =>handleClickRequest()}
           >
-            Accept
+            Add Friend
           </button>
         </div>
       </div>

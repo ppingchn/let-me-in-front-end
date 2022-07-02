@@ -1,15 +1,16 @@
-import Avatar from "../../../ui/Avatar";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
-import { SearchIcon } from "@heroicons/react/solid";
-import ProfileConnection from "../Connection/ProfileConnection";
+import Avatar from '../../../ui/Avatar';
+import { Fragment, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import { SearchIcon } from '@heroicons/react/solid';
+import ProfileConnection from '../Connection/ProfileConnection';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 function ConnectionLeft() {
+  const [sort, setSort] = useState('Recently added');
   return (
     <div>
       <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] rounded-t-lg border-slate-200 px-4 pt-3 pb-3 ">
@@ -20,7 +21,7 @@ function ConnectionLeft() {
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button className="inline-flex justify-center w-full text-gray-500  text-sm  font-medium  hover:bg-gray-200 ">
-                Recently added
+                {sort}
                 <ChevronDownIcon
                   className="-mr-1 ml-2 h-5 w-5"
                   aria-hidden="true"
@@ -44,8 +45,8 @@ function ConnectionLeft() {
                       <a
                         href="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500 ",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500 ',
+                          'block px-4 py-2 text-sm',
                         )}
                       >
                         Account settings
@@ -57,11 +58,12 @@ function ConnectionLeft() {
                       <a
                         href="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
+                        onClick={() => setSort('Recently added')}
                       >
-                        Support
+                        Recently added
                       </a>
                     )}
                   </Menu.Item>
@@ -70,29 +72,29 @@ function ConnectionLeft() {
                       <a
                         href="#"
                         className={classNames(
-                          active ? "bg-gray-200 " : "text-gray-500",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block px-4 py-2 text-sm',
                         )}
+                        onClick={() => setSort('First name')}
                       >
-                        License
+                        First name
                       </a>
                     )}
                   </Menu.Item>
-                  <form method="POST" action="#">
                     <Menu.Item>
                       {({ active }) => (
                         <button
                           type="submit"
                           className={classNames(
-                            active ? "bg-gray-200 " : "text-gray-500",
-                            "block w-full text-left px-4 py-2 text-sm"
+                            active ? 'bg-gray-200 ' : 'text-gray-500',
+                            'block w-full text-left px-4 py-2 text-sm',
                           )}
+                          onClick={() => setSort('Last name')}
                         >
-                          Sign out
+                          Last name
                         </button>
                       )}
                     </Menu.Item>
-                  </form>
                 </div>
               </Menu.Items>
             </Transition>
