@@ -3,8 +3,9 @@ import { BsCameraFill } from 'react-icons/bs';
 import { FiCheck } from 'react-icons/fi';
 import { MdCheck } from 'react-icons/md';
 import { IoMdClose } from 'react-icons/io';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { uploadCoverImage } from '../../api/userApi';
+import { createFollow, deleteFollow, getFollowById } from '../../api/followApi';
 
 export default function MainProfile({
   role,
@@ -18,6 +19,7 @@ export default function MainProfile({
   province,
   country,
   companyName,
+  userId,
 }) {
   // set coverImage and uploadEl
 
@@ -26,6 +28,22 @@ export default function MainProfile({
   const [comfirmUpload, setComfirmUpload] = useState(false);
   const [loading, setLoading] = useState(false);
   const uploadImage = useRef();
+
+  useEffect(() => {
+    const fetchFollow = async () => {
+      try {
+        const res = await getFollowById(userId);
+        if (res.data.follow) {
+          setFollow(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!isUser) {
+      fetchFollow();
+    }
+  }, []);
 
   const handleChangeCover = (e) => {
     if (e.target.files[0]) {
@@ -39,6 +57,18 @@ export default function MainProfile({
     formData.append('coverImage', coverImage);
     await uploadCoverImage(formData);
     setComfirmUpload(false);
+  };
+
+  const handleToggleFollow = async () => {
+    try {
+      if (follow) {
+        await deleteFollow(userId);
+        setFollow(false);
+      } else {
+        setFollow(true);
+        await createFollow(userId);
+      }
+    } catch (err) {}
   };
 
   return (
@@ -147,18 +177,18 @@ export default function MainProfile({
                     ? !isUser && (
                         <button
                           className="flex items-center px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-darkgray border-[1px] font-bold"
-                          onClick={() => setFollow(!follow)}
+                          onClick={handleToggleFollow}
                         >
-                          <span>Follow</span>
+                          <span>Connected</span>
                         </button>
                       )
                     : !isUser && (
                         <button
                           className="flex items-center gap-2 px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-blue border-[1px] border-blue font-bold"
-                          onClick={() => setFollow(!follow)}
+                          onClick={handleToggleFollow}
                         >
                           <MdCheck className="text-2xl" />
-                          <span>Follow</span>
+                          <span>Connect</span>
                         </button>
                       )}
                   {!isUser && (
@@ -172,17 +202,17 @@ export default function MainProfile({
                 </>
               ) : (
                 <>
-                  {follow ? (
+                  {!follow ? (
                     <button
                       className="flex items-center px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-darkgray border-[1px] font-bold"
-                      onClick={() => setFollow(!follow)}
+                      onClick={handleToggleFollow}
                     >
                       <span>Follow</span>
                     </button>
                   ) : (
                     <button
                       className="flex items-center gap-2 px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-blue border-[1px] border-blue font-bold"
-                      onClick={() => setFollow(!follow)}
+                      onClick={handleToggleFollow}
                     >
                       <MdCheck className="text-2xl" />
                       <span>Follow</span>

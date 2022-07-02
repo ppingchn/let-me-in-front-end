@@ -1,28 +1,30 @@
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useState } from 'react';
-import { BiCheck, BiX } from 'react-icons/bi';
 import { useAuth } from '../../context/authContext';
+import EditReplyDropdown from './EditReplyDropdown';
+import { BiCheck, BiX } from 'react-icons/bi';
 import { usePost } from '../../context/postContext';
-import EditComment from '../Comment/EditComment';
-import ReplyPostComment from '../Comment/ReplyPostComment';
-export default function AvatarWithComment({ data }) {
+
+function Reply({ data }) {
   dayjs.extend(relativeTime);
+  const [title, setTitle] = useState(data.title);
+  const [editOpen, setEditOpen] = useState(false);
   const { user } = useAuth();
-  const { editPostComment } = usePost();
-  const [showReply, setShowReply] = useState(false);
-  const [titleComment, setTitleComment] = useState(data.title);
-  const [titleEdit, setTitleEdit] = useState(false);
-  const handleEditComment = async () => {
-    await editPostComment(data.id, { title: titleComment });
-    setTitleEdit(false);
+  const { editReplyComment, deleteReplyComment } = usePost();
+  const handleClickEdit = async () => {
+    await editReplyComment(data.id, { commentId: data.commentId, title });
+    setEditOpen(false);
+  };
+  const handleDeleteReply = async () => {
+    await deleteReplyComment(data.id);
   };
   return (
     <div className="flex gap-2">
       {/* avatar */}
       <img
         className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
-        src={data.User.profilePic}
+        src={data?.User?.profilePic}
         alt=""
       />
       {/* comment box */}
@@ -31,13 +33,19 @@ export default function AvatarWithComment({ data }) {
           {/* name and position */}
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="font-bold py-0">{data.User.username}</span>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-darkgray ">
+              <div className="flex gap-2 items-center">
+                <span className="font-bold py-0">{data?.User?.username}</span>
+                <span className=" text-xs text-darkgray">reply</span>
+              </div>
+              <div className="flex gap-2 items-center">
+                <span className="text-xs text-darkgray">
                   {dayjs(data.updatedAt).fromNow()}
                 </span>
-                {user.id === data.User.id && (
-                  <EditComment setOpenEdit={setTitleEdit} id={data.id} />
+                {user.id === data?.User?.id && (
+                  <EditReplyDropdown
+                    setOpen={setEditOpen}
+                    setDelete={handleDeleteReply}
+                  />
                 )}
               </div>
             </div>
@@ -45,30 +53,30 @@ export default function AvatarWithComment({ data }) {
               Elected Member of Parliament, Thailand
             </span> */}
           </div>
-          {titleEdit ? (
+          {editOpen ? (
             <div className="">
               <form className="w-full flex">
                 <input
                   type="text"
                   className="border-transparent w-full rounded-full focus:outline-none focus:border-none  focus:ring-0 active:ring-0 h-full"
                   placeholder="Add a comment..."
-                  value={titleComment}
+                  value={title}
                   onChange={(e) => {
-                    setTitleComment(e.target.value);
+                    setTitle(e.target.value);
                   }}
                 />
                 <div className="flex">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      handleEditComment();
+                      handleClickEdit();
                     }}
                   >
                     <BiCheck size="30" />
                   </button>
                   <button
                     onClick={() => {
-                      setTitleEdit(false);
+                      setEditOpen(false);
                     }}
                   >
                     <BiX size="30" />
@@ -80,26 +88,19 @@ export default function AvatarWithComment({ data }) {
             <span className="text-sm">{data.title}</span>
           )}
         </div>
-        <div className="flex gap-2">
-          <span className="text-xs text-darkgray cursor-pointer">Like</span>
-          <span className="text-xs text-darkgray cursor-default">|</span>
-          <span
-            className="text-xs text-darkgray cursor-pointer"
-            onClick={() => setShowReply(!showReply)}
-          >
-            Reply
-          </span>
-          {data.Replies.length > 0 && (
-            <>
-              <span className="text-xs text-darkgray">•</span>
-              <span className="text-xs text-darkgray">
-                {data.Replies.length} reply
+        {/* <div className="flex gap-2">
+              <span className="text-xs text-darkgray cursor-pointer">Like</span>
+              <span className="text-xs text-darkgray cursor-default">|</span>
+              <span
+                className="text-xs text-darkgray cursor-pointer"
+                onClick={() => {}}
+              >
+                Reply
               </span>
-            </>
-          )}
-        </div>
-        {showReply && <ReplyPostComment data={data.Replies} id={data.id} />}
+            </div> */}
       </div>
     </div>
   );
 }
+
+export default Reply;
