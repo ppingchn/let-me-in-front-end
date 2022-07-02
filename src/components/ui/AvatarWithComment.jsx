@@ -5,10 +5,12 @@ import { BiCheck, BiX } from 'react-icons/bi';
 import { useAuth } from '../../context/authContext';
 import { usePost } from '../../context/postContext';
 import EditComment from '../Comment/EditComment';
+import ReplyPostComment from '../Comment/ReplyPostComment';
 export default function AvatarWithComment({ data }) {
   dayjs.extend(relativeTime);
   const { user } = useAuth();
   const { editPostComment } = usePost();
+  const [showReply, setShowReply] = useState(false);
   const [titleComment, setTitleComment] = useState(data.title);
   const [titleEdit, setTitleEdit] = useState(false);
   const handleEditComment = async () => {
@@ -81,7 +83,12 @@ export default function AvatarWithComment({ data }) {
         <div className="flex gap-2">
           <span className="text-xs text-darkgray cursor-pointer">Like</span>
           <span className="text-xs text-darkgray cursor-default">|</span>
-          <span className="text-xs text-darkgray cursor-pointer">Reply</span>
+          <span
+            className="text-xs text-darkgray cursor-pointer"
+            onClick={() => setShowReply(!showReply)}
+          >
+            Reply
+          </span>
           {data.Replies.length > 0 && (
             <>
               <span className="text-xs text-darkgray">•</span>
@@ -91,54 +98,7 @@ export default function AvatarWithComment({ data }) {
             </>
           )}
         </div>
-
-        {/* -------------------  reply area  ------------------- */}
-        {data.Replies.length < 0 && (
-          <div className="flex gap-2">
-            {/* avatar */}
-            <img
-              className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
-              src="https://media-exp1.licdn.com/dms/image/C4D03AQHcpbUcANnETg/profile-displayphoto-shrink_100_100/0/1654666437384?e=1661385600&v=beta&t=EPU0QYVtly7ZvonPgyOsbm4FjOftaxZf6TpEPio-1CE"
-              alt=""
-            />
-            {/* comment box */}
-            <div className="flex flex-col w-full gap-1 rounded">
-              <div className="flex flex-col w-full bg-gray rounded p-2 gap-2">
-                {/* name and position */}
-                <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-2 items-center">
-                      <span className="font-bold py-0">Pita Limjaroenrat</span>
-                      <span className=" text-xs text-darkgray">reply</span>
-                    </div>
-                    <span className="text-xs text-darkgray">19hr</span>
-                  </div>
-                  <span className="text-xs text-darkgray">
-                    Elected Member of Parliament, Thailand
-                  </span>
-                </div>
-                <span className="text-sm">
-                  this is comment ...
-                  <br />
-                  <br />
-                  from Pita.
-                </span>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-xs text-darkgray cursor-pointer">
-                  Like
-                </span>
-                <span className="text-xs text-darkgray cursor-default">|</span>
-                <span
-                  className="text-xs text-darkgray cursor-pointer"
-                  onClick={() => {}}
-                >
-                  Reply
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        {showReply && <ReplyPostComment data={data.Replies} id={data.id} />}
       </div>
     </div>
   );
