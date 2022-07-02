@@ -1,7 +1,7 @@
 export default function CompanyAvatar({ width, height, picture }) {
   return (
     <img
-      class={`inline-block h-${height} w-${width}`}
+      className={`inline-block h-${height} w-${width}`}
       src={
         picture
           ? picture

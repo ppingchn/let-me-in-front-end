@@ -8,7 +8,15 @@ export default function MainProfile({
   menuSelect,
   setMenuSelect,
   isUser,
+  coverPic,
+  profilePic,
+  firstName,
+  lastName,
+  province,
+  country,
+  companyName,
 }) {
+  console.log(profilePic);
   // set coverImage and uploadEl
 
   const [coverImage, setCoverImage] = useState(null);
@@ -29,12 +37,8 @@ export default function MainProfile({
         {/* cover image */}
         <div>
           <img
-            className="h-48 w-full rounded-t-lg bg-center bg-cover"
-            src={
-              coverImage
-                ? coverImage
-                : `https://media-exp1.licdn.com/dms/image/C5616AQF-aTScD20evQ/profile-displaybackgroundimage-shrink_350_1400/0/1647998353867?e=1661385600&v=beta&t=ywutaMC8DHiEag6UEHMKJAir9nvxvXyma0twjdl8ruQ`
-            }
+            className="h-48 w-full rounded-t-lg object-cover bg-center bg-clip-border"
+            src={coverImage ? coverImage : coverPic}
             alt="coverPhoto"
           />
           {isUser && (
@@ -62,14 +66,14 @@ export default function MainProfile({
             {role === 'user' ? (
               <img
                 className="inline-block h-40 w-40 sm:h-40 sm:w-40 rounded-full cursor-pointer border-4 border-white"
-                src="https://media-exp1.licdn.com/dms/image/C5635AQFLYHLx2MfUTg/profile-framedphoto-shrink_400_400/0/1599535039224?e=1656594000&v=beta&t=O9y8eKEW1-wXS4dTovWyH7Nd17POXUuH0WvZFgFGLfA"
-                alt=""
+                src={profilePic}
+                alt="userImage"
               />
             ) : (
               <img
                 className="inline-block h-40 w-40 sm:h-40 sm:w-40 cursor-pointer border-4 border-white"
-                src="https://media-exp1.licdn.com/dms/image/C560BAQEn3FvAF4Gpjg/company-logo_200_200/0/1654087026909?e=1664409600&v=beta&t=NTO3cCLbdpI5Q7OLiSHPusrPeo5BiJFNhjv9iYQYsYA"
-                alt=""
+                src={profilePic}
+                alt="userImage"
               />
             )}
           </div>
@@ -83,18 +87,24 @@ export default function MainProfile({
             {/* profile common detail */}
             <div className="flex flex-col">
               <span className="text-black font-bold text-2xl">
-                Tarinee (Bao) Suriyawongpaisal
+                {` ${
+                  role === 'user' ? `${firstName} ${lastName}` : companyName
+                } `}
               </span>
               <span className="text-darkgray">
                 Graphic designer at ChillChat Company
               </span>
               <div className="flex gap-2 text-sm">
-                <span className="text-center text-darkgray">
-                  Bangkok City, Thailand
-                </span>
-                <span className="text-center text-darkgray">•</span>
-                <span className="text-center text-blue hover:underline cursor-pointer">
-                  {role === 'user' ? 'Contact info' : `${4000} employees`}
+                <span className="text-darkgray">
+                  {`${province}, ${country} • ${
+                    role === 'user' ? (
+                      <span className="text-center text-blue hover:underline cursor-pointer">
+                        Contact info
+                      </span>
+                    ) : (
+                      `${4000} employees`
+                    )
+                  }`}
                 </span>
               </div>
             </div>
@@ -120,7 +130,7 @@ export default function MainProfile({
                           <span>Follow</span>
                         </button>
                       )}
-                  {isUser && (
+                  {!isUser && (
                     <button className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold">
                       Message
                     </button>
@@ -154,7 +164,7 @@ export default function MainProfile({
                       viewBox="0 0 16 16"
                       data-supported-dps="16x16"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="16"
                       height="16"
                       focusable="false"
