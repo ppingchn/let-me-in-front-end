@@ -3,7 +3,7 @@ import AvatarWithNameTimePost from '../ui/AvatarWithNameTimePost';
 import { TiThumbsUp } from 'react-icons/ti';
 import { BiCommentDetail, BiShare } from 'react-icons/bi';
 import { RiSendPlaneLine } from 'react-icons/ri';
-import { BsEmojiSmile, BsImageFill, BsThreeDots } from 'react-icons/bs';
+import { BsEmojiSmile, BsImageFill } from 'react-icons/bs';
 import ModalLikeList from './ModalLikeList';
 import ModalSharePostList from './ModalSharePostList';
 import { useRef, useState } from 'react';
