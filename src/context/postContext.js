@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createComment, deleteComment, editComment } from '../api/commentApi';
+import { createLike, deleteLike } from '../api/likeApi';
 import { fetchPost, createPost, updatePost, deletePost } from '../api/postApi';
 import { createReply, deleteReply, editReply } from '../api/replyApi';
 import { useAuth } from './authContext';
@@ -52,6 +53,16 @@ function PostContextProvider({ children }) {
     await deleteReply(replyId);
     fetchAllPost();
   };
+  // Like function
+  const createLikeComment = async (input) => {
+    await createLike(input);
+    fetchAllPost();
+  };
+  const deleteLikeComment = async (postId) => {
+    await deleteLike(postId);
+    fetchAllPost();
+  };
+
   useEffect(() => {
     fetchAllPost();
   }, [user]);
@@ -69,6 +80,8 @@ function PostContextProvider({ children }) {
         createReplyComment,
         editReplyComment,
         deleteReplyComment,
+        createLikeComment,
+        deleteLikeComment,
       }}
     >
       {children}

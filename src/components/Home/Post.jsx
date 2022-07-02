@@ -14,14 +14,14 @@ import { usePost } from '../../context/postContext';
 
 export default function Post({ data }) {
   const { user } = useAuth();
-  const { createPostComment } = usePost();
+  const { createPostComment, createLikeComment, deleteLikeComment } = usePost();
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
   const [titleComment, setTitleComment] = useState('');
-  const [like, setLike] = useState(false);
   const [image, setImage] = useState(null);
   const uploadImage = useRef(null);
+  const isLike = data?.LikePosts.find((like) => like.userId === user.id);
 
   const handleAddImage = (e) => {
     if (e.target.files[0]) {
@@ -30,8 +30,17 @@ export default function Post({ data }) {
     }
   };
 
-  const handleLike = () => {
-    setLike(!like);
+  const handleLike = async (id) => {
+    try {
+      if (isLike) {
+        await deleteLikeComment(id);
+      } else {
+        await createLikeComment({ postId: id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    // setLike(!like);
   };
 
   const submitComment = async (e) => {
@@ -115,9 +124,9 @@ export default function Post({ data }) {
       <div className="w-full grid grid-cols-4 gap-6 h-12 mb-1 px-4">
         <div
           className="flex hover:bg-gray h-full justify-center items-center rounded gap-1 cursor-pointer"
-          onClick={() => handleLike()}
+          onClick={() => handleLike(data.id)}
         >
-          {like ? (
+          {isLike ? (
             <>
               <TiThumbsUp className="hidden sm:flex text-blue text-2xl" />
               <span className="text-blue">Like</span>
