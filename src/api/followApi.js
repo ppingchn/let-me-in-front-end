@@ -1,13 +1,15 @@
 import axios from '../config/axios';
 
-export function createFollow(companyId) {
-  return axios.post('/follow', { companyId });
+export function getAllFollowing() {
+  return axios.get('/follow/following');
 }
-
-export function deleteFollow(companyId) {
-  return axios.delete(`/follow/${companyId}`);
+export function getAllFollower() {
+  return axios.get('/follow/follower');
 }
-
-export function getFollowById(companyId) {
-  return axios.get(`/follow/${companyId}`);
+export function createFollows(input) {
+  console.log('/follow', input)
+  return axios.post('/follow', input);
+}
+export function deleteFollows(input) {
+  return axios.delete('/follow/'+ input);
 }
