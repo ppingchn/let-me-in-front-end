@@ -142,7 +142,10 @@ export default function UserPage() {
                     )}
                     {menuSelect === 'Jobs' && (
                       <>
-                        <CreateJobAlert companyName={'DNEG'} />
+                        <CreateJobAlert
+                          userId={userById.id}
+                          companyName={userById?.companyDetail?.companyName}
+                        />
                         <RecentlyPostedJob />
                       </>
                     )}
