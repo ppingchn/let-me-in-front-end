@@ -1,7 +1,11 @@
 import CompanyAvatar from '../ui/CompanyAvatar';
 import { BsCameraFill } from 'react-icons/bs';
+import { FiCheck } from 'react-icons/fi';
 import { MdCheck } from 'react-icons/md';
-import { useRef, useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import { useEffect, useRef, useState } from 'react';
+import { uploadCoverImage } from '../../api/userApi';
+import { createFollow, deleteFollow, getFollowById } from '../../api/followApi';
 
 export default function MainProfile({
   role,
@@ -15,19 +19,56 @@ export default function MainProfile({
   province,
   country,
   companyName,
+  userId,
 }) {
-  console.log(profilePic);
   // set coverImage and uploadEl
 
   const [coverImage, setCoverImage] = useState(null);
   const [follow, setFollow] = useState(false);
+  const [comfirmUpload, setComfirmUpload] = useState(false);
+  const [loading, setLoading] = useState(false);
   const uploadImage = useRef();
+
+  useEffect(() => {
+    const fetchFollow = async () => {
+      try {
+        const res = await getFollowById(userId);
+        if (res.data.follow) {
+          setFollow(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!isUser) {
+      fetchFollow();
+    }
+  }, []);
 
   const handleChangeCover = (e) => {
     if (e.target.files[0]) {
-      const urlcover = URL.createObjectURL(e.target.files[0]);
-      setCoverImage(urlcover);
+      setCoverImage(e.target.files[0]);
+      setComfirmUpload(true);
     }
+  };
+
+  const handleSubmitCoverImage = async () => {
+    const formData = new FormData();
+    formData.append('coverImage', coverImage);
+    await uploadCoverImage(formData);
+    setComfirmUpload(false);
+  };
+
+  const handleToggleFollow = async () => {
+    try {
+      if (follow) {
+        await deleteFollow(userId);
+        setFollow(false);
+      } else {
+        setFollow(true);
+        await createFollow(userId);
+      }
+    } catch (err) {}
   };
 
   return (
@@ -38,7 +79,7 @@ export default function MainProfile({
         <div>
           <img
             className="h-48 w-full rounded-t-lg object-cover bg-center bg-clip-border"
-            src={coverImage ? coverImage : coverPic}
+            src={coverImage ? URL.createObjectURL(coverImage) : coverPic}
             alt="coverPhoto"
           />
           {isUser && (
@@ -49,12 +90,32 @@ export default function MainProfile({
                 className="hidden"
                 onChange={handleChangeCover}
               />
-              <div
-                className="flex justify-center items-center absolute w-10 h-10 right-0 top-0 bg-white rounded-full mt-5 mr-5 cursor-pointer drop-shadow-sm"
-                onClick={() => uploadImage.current.click()}
-              >
-                <BsCameraFill className="text-blue text-xl" />
-              </div>
+              {comfirmUpload ? (
+                <div className="flex">
+                  <div
+                    className="flex justify-center items-center absolute mr-20 w-10 h-10 right-0 top-0 bg-white text-blue rounded-full mt-5 mr-5 cursor-pointer drop-shadow-sm hover:bg-red-500 hover:text-white transition-all"
+                    onClick={() => {
+                      setCoverImage(null);
+                      setComfirmUpload(false);
+                    }}
+                  >
+                    <IoMdClose className="text-xl" />
+                  </div>
+                  <div
+                    className="flex justify-center items-center text-blue absolute w-10 h-10 right-0 top-0 bg-white rounded-full mt-5 mr-5 cursor-pointer drop-shadow-sm hover:bg-blue hover:text-white transition-all"
+                    onClick={handleSubmitCoverImage}
+                  >
+                    <FiCheck className="text-xl" />
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="flex justify-center items-center absolute w-10 h-10 right-0 top-0 bg-white rounded-full mt-5 mr-5 cursor-pointer drop-shadow-sm"
+                  onClick={() => uploadImage.current.click()}
+                >
+                  <BsCameraFill className="text-blue text-xl" />
+                </div>
+              )}
             </>
           )}
         </div>
@@ -116,18 +177,18 @@ export default function MainProfile({
                     ? !isUser && (
                         <button
                           className="flex items-center px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-darkgray border-[1px] font-bold"
-                          onClick={() => setFollow(!follow)}
+                          onClick={handleToggleFollow}
                         >
-                          <span>Follow</span>
+                          <span>Connected</span>
                         </button>
                       )
                     : !isUser && (
                         <button
                           className="flex items-center gap-2 px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-blue border-[1px] border-blue font-bold"
-                          onClick={() => setFollow(!follow)}
+                          onClick={handleToggleFollow}
                         >
                           <MdCheck className="text-2xl" />
-                          <span>Follow</span>
+                          <span>Connect</span>
                         </button>
                       )}
                   {!isUser && (
@@ -141,17 +202,17 @@ export default function MainProfile({
                 </>
               ) : (
                 <>
-                  {follow ? (
+                  {!follow ? (
                     <button
                       className="flex items-center px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-darkgray border-[1px] font-bold"
-                      onClick={() => setFollow(!follow)}
+                      onClick={handleToggleFollow}
                     >
                       <span>Follow</span>
                     </button>
                   ) : (
                     <button
                       className="flex items-center gap-2 px-4 py-[5px] bg-white rounded-full transition-all hover:bg-gray text-blue border-[1px] border-blue font-bold"
-                      onClick={() => setFollow(!follow)}
+                      onClick={handleToggleFollow}
                     >
                       <MdCheck className="text-2xl" />
                       <span>Follow</span>

@@ -1,14 +1,14 @@
-import { useRef } from "react";
-import { useLocation } from "react-router-dom";
-import dayjs from "dayjs";
+import { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import dayjs from 'dayjs';
 
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
-import { FiDownload } from "react-icons/fi";
+import { Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { DotsVerticalIcon } from '@heroicons/react/solid';
+import { FiDownload } from 'react-icons/fi';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 function capitalize(word) {
@@ -21,8 +21,8 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
   let location = useLocation();
 
   const fileTypes = [
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/pdf"
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf',
   ];
 
   return (
@@ -35,7 +35,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                 <div className="col-1 flex justify-center bg-red-600 py-5 px-5 rounded-l-lg">
                   <p className="font-medium text-white">
                     {/* {capitalize(resume.name?.split(".")[1])} */}
-                    {resume.name?.split(".")[1].toUpperCase()}
+                    {resume.name?.split('.')[1].toUpperCase()}
                   </p>
                 </div>
                 <div className="flex items-center ml-2 col-span-5">
@@ -44,7 +44,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                     <p>{resume.name}</p>
                     {/* {file.lastModifiedDate} */}
                     <p className="text-sm text-gray-500">
-                      {`Uploaded on ${dayjs().format("DD/MM/YYYY")}`}
+                      {`Uploaded on ${dayjs().format('DD/MM/YYYY')}`}
                     </p>
                   </div>
                 </div>
@@ -77,16 +77,16 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                                 href="#"
                                 className={classNames(
                                   active
-                                    ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                                    : "text-gray-700",
-                                  "block px-4 py-3 text-sm"
+                                    ? 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                                    : 'text-gray-700',
+                                  'block px-4 py-3 text-sm',
                                 )}
                               >
                                 <div
                                   className="flex items-center"
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    inputEl.current.value = "";
+                                    inputEl.current.value = '';
                                     onDelete();
                                   }}
                                 >
@@ -102,9 +102,9 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                                 href="#"
                                 className={classNames(
                                   active
-                                    ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                                    : "text-gray-700 ",
-                                  "block px-4 py-3 text-sm"
+                                    ? 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                                    : 'text-gray-700 ',
+                                  'block px-4 py-3 text-sm',
                                 )}
                               >
                                 <div className="flex items-center">
@@ -120,9 +120,9 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                                 href="#"
                                 className={classNames(
                                   active
-                                    ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                                    : "text-gray-700",
-                                  "block px-4 py-3 text-sm"
+                                    ? 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                                    : 'text-gray-700',
+                                  'block px-4 py-3 text-sm',
                                 )}
                               >
                                 <div className="flex items-center">
@@ -143,7 +143,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
             <>
               <div className="border-[1px] border-gray-200  rounded-lg grid grid-cols-8 mt-4 w-[350px] outline-none ring-2 ring-offset-2 ring-red-600 ">
                 <div className="bg-gray-500 py-5 px-3 rounded-l-lg">
-                  <i class="fa-solid fa-file-lines text-white"></i>
+                  <i className="fa-solid fa-file-lines text-white"></i>
                 </div>
                 <div className="flex items-center ml-2 col-span-5">
                   <div>
@@ -151,7 +151,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                     <p>{resume.name}</p>
                     {/* {file.lastModifiedDate} */}
                     <p className="text-sm text-gray-500">
-                    {`Uploaded on ${dayjs().format("DD/MM/YYYY")}`}
+                      {`Uploaded on ${dayjs().format('DD/MM/YYYY')}`}
                     </p>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                   className="col-span-2 border-l-[1px] border-gray-200 text-gray-500 flex justify-center items-center "
                   onClick={(e) => {
                     e.stopPropagation();
-                    inputEl.current.value = "";
+                    inputEl.current.value = '';
                     onDelete();
                   }}
                 >
@@ -168,11 +168,10 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                     viewBox="0 0 24 24"
                     data-supported-dps="24x24"
                     fill="currentColor"
-                    class="mercado-match"
                     width="35"
                     height="35"
                     focusable="false"
-                    className="hover:bg-gray-200 px-2 py-2 rounded-full"
+                    className=" mercado-match hover:bg-gray-200 px-2 py-2 rounded-full"
                   >
                     <path d="M13.42 12L20 18.58 18.58 20 12 13.42 5.42 20 4 18.58 10.58 12 4 5.42 5.42 4 12 10.58 18.58 4 20 5.42z"></path>
                   </svg>
@@ -185,7 +184,7 @@ function UploadResume({ resume, defaultresume, onChange, onDelete }) {
                   viewBox="0 0 16 16"
                   data-supported-dps="16x16"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="16"
                   height="16"
                   focusable="false"

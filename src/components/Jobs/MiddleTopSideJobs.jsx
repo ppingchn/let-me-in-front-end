@@ -1,13 +1,12 @@
-
 function MiddleTopSideJobs() {
   const buttonArray = [
-    "engineer",
-    "senior engineer",
-    "associate engineer",
-    "engineering specialist",
-    "project management engineer",
-    "special project engineer",
-    "project design engineer",
+    'engineer',
+    'senior engineer',
+    'associate engineer',
+    'engineering specialist',
+    'project management engineer',
+    'special project engineer',
+    'project design engineer',
   ];
 
   return (
@@ -21,7 +20,7 @@ function MiddleTopSideJobs() {
             viewBox="0 0 24 24"
             data-supported-dps="24x24"
             fill="currentColor"
-            class="mercado-match"
+            className="mercado-match"
             width="24"
             height="24"
             focusable="false"

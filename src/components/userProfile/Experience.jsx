@@ -21,7 +21,6 @@ export default function Experience(props) {
     try {
       setLoading(true);
       const res = await getExperience(id);
-      console.log(res.data.result);
       setExperience(res.data.result);
     } catch (err) {
       console.log(err);
@@ -81,7 +80,7 @@ export default function Experience(props) {
               )}
             </div>
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col">
             {!showMore
               ? experience?.slice(0, 5).map((ele) => {
                   return (
@@ -111,20 +110,21 @@ export default function Experience(props) {
                 })}
 
             {/* if experience more than six Showmore appear */}
-            <button
-              className="flex justify-center items-center gap-2 w-full hover:bg-gray border-t-[1px] border-gray transition-all py-3 font-bold text-darkgray"
-              onClick={() => setShowMore(!showMore)}
-            >
-              {!showMore ? (
-                <>
-                  {' '}
-                  <span>Show all 6 experiences</span>{' '}
-                  <HiArrowNarrowRight className="text-xl" />
-                </>
-              ) : (
-                <span>Show less</span>
-              )}
-            </button>
+            {experience?.length > 6 ?? (
+              <button
+                className="flex justify-center items-center gap-2 w-full hover:bg-gray border-t-[1px] border-gray transition-all py-3 font-bold text-darkgray"
+                onClick={() => setShowMore(!showMore)}
+              >
+                {!showMore ? (
+                  <>
+                    <span>Show all 6 experiences</span>
+                    <HiArrowNarrowRight className="text-xl" />
+                  </>
+                ) : (
+                  <span>Show less</span>
+                )}
+              </button>
+            )}
           </div>
         </div>
       )}
