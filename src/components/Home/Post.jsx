@@ -64,18 +64,49 @@ export default function Post({ data }) {
         Credit: @techAmazing */}
         {data.detail}
       </p>
-      <div className="flex flex-col gap-2">
-        <div className=" grid grid-cols-1 gap-2 px-4">
-          {data?.PostPictures?.map((el, idx) => (
+      {data && (
+        <div className="flex flex-col gap-2">
+          <div
+            className={`grid ${
+              data?.PostPictures?.length < 4
+                ? `grid-cols-${data?.PostPictures?.length - 1}`
+                : `grid-cols-3`
+            } gap-2 px-4`}
+          >
+            {/* {data?.PostPictures?.map((el, idx) => (
             <img
               key={idx}
               src={el.postPic}
               alt=""
               className="w-auto aspect-auto object-center object-cover cursor-pointer h-[200px]"
             />
-          ))}
+          ))} */}
+            {data?.PostPictures?.map((el, idx) => {
+              if (idx === 0) {
+                return (
+                  <img
+                    key={idx}
+                    src={el.postPic}
+                    alt=""
+                    className={`w-full aspect-auto col-span-${
+                      data?.PostPictures?.length - 1
+                    } object-center object-cover cursor-pointer h-[200px]`}
+                  />
+                );
+              } else {
+                return (
+                  <img
+                    key={idx}
+                    src={el.postPic}
+                    alt=""
+                    className="w-full aspect-auto object-center object-cover cursor-pointer h-[200px]"
+                  />
+                );
+              }
+            })}
+          </div>
         </div>
-      </div>
+      )}
       <div className="flex justify-between mx-4 pb-2 border-b-[1px] border-slate-200">
         <div className="flex gap-1 items-center">
           {data.LikePosts.length !== 0 && (
