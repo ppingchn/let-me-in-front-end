@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PeopleBottomFiltered from './PeopleBottomFiltered';
 import PeopleFilter from './PeopleFilter';
 import { getAllFollowing, getAllFollower } from '../../../../api/followApi';
 import { findFriendId } from '../../../../api/friendApi';
+import { useAuth } from '../../../../context/authContext';
 
 function PeopleAndFollow() {
+  const { user } = useAuth();
+  const role = user.role;
+  // console.log(role)
+
   const [bottomRenderArray, setBottomRenderArray] = useState([]);
 
   //top State
@@ -27,9 +32,15 @@ function PeopleAndFollow() {
       setFollowingCount(res.data.follow.length);
       const res2 = await getAllFollower();
       setFollowerArr(res2.data.follow);
+      // console.log(res2.data.follow);
       setFollowerCount(res2.data.follow.length);
 
       setBottomRenderArray(res.data.follow);
+      if (role === 'company') {
+        setBottomRenderArray(res2.data.follow);
+        setFollowing(false)
+        setFollower(true)
+      }
     } catch (err) {
       console.log(err);
     }
@@ -42,68 +53,75 @@ function PeopleAndFollow() {
   //middle State
   const [filter, setFilter] = useState('All');
 
+
   useEffect(() => {
     setBottomRenderArray([]);
-    if (following) {
-      if (filter === 'All') {
-        setBottomRenderArray(followingArr);
-      } else if (filter === 'Connections') {
-        followingArr.filter(async (el, idx) => {
-          if (el.FollowerUser) {
-            const res = await findFriendId(el.followerId);
-            if (res.data.friends.length > 0) {
+    if (role === 'user') {
+      if (following) {
+        if (filter === 'All') {
+          setBottomRenderArray(followingArr);
+        } else if (filter === 'Connections') {
+          followingArr.filter(async (el, idx) => {
+            if (el.FollowerUser) {
+              const res = await findFriendId(el.followerId);
+              if (res.data.friends.length > 0) {
+                setBottomRenderArray((prev) => [...prev, el]);
+              }
+            }
+          });
+        } else if (filter === 'Out-of-Network') {
+          followingArr.filter(async (el, idx) => {
+            if (el.FollowerUser) {
+              const res = await findFriendId(el.followerId);
+              if (res.data.friends.length > 0) {
+              } else {
+                setBottomRenderArray((prev) => [...prev, el]);
+              }
+            }
+          });
+        } else if (filter === 'Companies') {
+          followingArr.filter(async (el, idx) => {
+            if (el.Company) {
               setBottomRenderArray((prev) => [...prev, el]);
             }
-          }
-        });
-      } else if (filter === 'Out-of-Network') {
-        followingArr.filter(async (el, idx) => {
-          if (el.FollowerUser) {
-            const res = await findFriendId(el.followerId);
-            if (res.data.friends.length > 0) {
-            } else {
+          });
+        }
+      } else if (follower) {
+        if (filter === 'All') {
+          setBottomRenderArray(followerArr);
+        } else if (filter === 'Connections') {
+          followerArr.filter(async (el, idx) => {
+            if (el.FollowerUser) {
+              // console.log(el.userId);
+              const res = await findFriendId(el.userId);
+              // console.log(res.data.friends);
+              if (res.data.friends.length > 0) {
+                // console.log(res.data.friends)
+                setBottomRenderArray((prev) => [...prev, el]);
+              }
+            }
+          });
+        } else if (filter === 'Out-of-Network') {
+          followerArr.filter(async (el, idx) => {
+            if (el.FollowerUser) {
+              const res = await findFriendId(el.userId);
+              if (res.data.friends.length > 0) {
+              } else {
+                setBottomRenderArray((prev) => [...prev, el]);
+              }
+            }
+          });
+        } else if (filter === 'Companies') {
+          followingArr.filter(async (el, idx) => {
+            if (el.Company) {
               setBottomRenderArray((prev) => [...prev, el]);
             }
-          }
-        });
-      } else if (filter === 'Companies') {
-        followingArr.filter(async (el, idx) => {
-          if (el.Company) {
-            setBottomRenderArray((prev) => [...prev, el]);
-          }
-        });
+          });
+        }
       }
-    } else if (follower) {
-      if (filter === 'All') {
+    } else if (role === 'company') {
+      if (follower) {
         setBottomRenderArray(followerArr);
-      } else if (filter === 'Connections') {
-        followerArr.filter(async (el, idx) => {
-          if (el.FollowerUser) {
-            console.log(el.userId);
-            const res = await findFriendId(el.userId);
-            console.log(res.data.friends);
-            if (res.data.friends.length > 0) {
-              // console.log(res.data.friends)
-              setBottomRenderArray((prev) => [...prev, el]);
-            }
-          }
-        });
-      } else if (filter === 'Out-of-Network') {
-        followerArr.filter(async (el, idx) => {
-          if (el.FollowerUser) {
-            const res = await findFriendId(el.userId);
-            if (res.data.friends.length > 0) {
-            } else {
-              setBottomRenderArray((prev) => [...prev, el]);
-            }
-          }
-        });
-      } else if (filter === 'Companies') {
-        followingArr.filter(async (el, idx) => {
-          if (el.Company) {
-            setBottomRenderArray((prev) => [...prev, el]);
-          }
-        });
       }
     }
   }, [following, follower, filter]);
@@ -131,45 +149,63 @@ function PeopleAndFollow() {
               followingCount={followingCount}
               setFollowerCount={setFollowerCount}
               followerCount={followerCount}
+              role={user.role}
             />
             <div className="h-fit w-full grid grid-cols-5  mb-16 text-gray-500">
               {bottomRenderArray.map((el, idx) => {
-                console.log(el);
-                return following ? (
-                  el.Company ? (
-                    <PeopleBottomFiltered
-                      key={idx}
-                      profilePic={el.Company.profilePic}
-                      companyName={el.Company.CompanyDetails[0].companyName}
-                      companyId={el.companyId}
-                    />
-                  ) : el.FollowerUser ? (
-                    <PeopleBottomFiltered
-                      key={idx}
-                      profilePic={el.FollowerUser.profilePic}
-                      firstName={el.FollowerUser.UserDetails[0].firstName}
-                      lastName={el.FollowerUser.UserDetails[0].lastName}
-                       followerId={el.followerId}
-                    />
-                  ) : null
-                ) : follower ? (
-                  el.Company ? (
-                    <PeopleBottomFiltered
-                      key={idx}
-                      profilePic={el.Company.profilePic}
-                      companyName={el.Company.CompanyDetails[0].companyName}
+                // console.log(el);
+                // console.log(role)
+                return role === 'user' ? (
+                  // console.log("true")
+                  following ? (
+                    el.Company ? (
+                      <PeopleBottomFiltered
+                        key={idx}
+                        profilePic={el.Company.profilePic}
+                        companyName={el.Company.CompanyDetails[0].companyName}
                         companyId={el.companyId}
-                    />
-                  ) : el.User ? (
-                    <PeopleBottomFiltered
-                      key={idx}
-                      profilePic={el.User.profilePic}
-                      firstName={el.User.UserDetails[0].firstName}
-                      lastName={el.User.UserDetails[0].lastName}
-                      followerId={el.followerId}
-                    />
+                        role={role}
+                      />
+                    ) : el.FollowerUser ? (
+                      <PeopleBottomFiltered
+                        key={idx}
+                        profilePic={el.FollowerUser.profilePic}
+                        firstName={el.FollowerUser.UserDetails[0].firstName}
+                        lastName={el.FollowerUser.UserDetails[0].lastName}
+                        followerId={el.followerId}
+                        role={role}
+                      />
+                    ) : null
+                  ) : follower ? (
+                    el.Company ? (
+                      <PeopleBottomFiltered
+                        key={idx}
+                        profilePic={el.Company.profilePic}
+                        companyName={el.Company.CompanyDetails[0].companyName}
+                        companyId={el.companyId}
+                        role={role}
+                      />
+                    ) : el.User ? (
+                      <PeopleBottomFiltered
+                        key={idx}
+                        profilePic={el.User.profilePic}
+                        firstName={el.User.UserDetails[0].firstName}
+                        lastName={el.User.UserDetails[0].lastName}
+                        followerId={el.followerId}
+                        role={role}
+                      />
+                    ) : null
                   ) : null
-                ) : null;
+                ) : (
+                  <PeopleBottomFiltered
+                    key={idx}
+                    profilePic={el.User.profilePic}
+                    firstName={el.User.UserDetails[0].firstName}
+                    lastName={el.User.UserDetails[0].lastName}
+                    followerId={el.followerId}
+                    role={role}
+                  />
+                );
               })}
             </div>
           </div>
