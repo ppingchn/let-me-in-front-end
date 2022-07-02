@@ -14,7 +14,7 @@ import { usePost } from '../../context/postContext';
 
 export default function Post({ data }) {
   const { user } = useAuth();
-  const { createPostComment, createLikeComment, deleteLikeComment } = usePost();
+  const { createPostComment, createLikePost, deleteLikePost } = usePost();
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -33,14 +33,13 @@ export default function Post({ data }) {
   const handleLike = async (id) => {
     try {
       if (isLike) {
-        await deleteLikeComment(id);
+        await deleteLikePost(id);
       } else {
-        await createLikeComment({ postId: id });
+        await createLikePost({ postId: id });
       }
     } catch (err) {
       console.log(err);
     }
-    // setLike(!like);
   };
 
   const submitComment = async (e) => {

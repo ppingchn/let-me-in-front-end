@@ -9,6 +9,8 @@ import { usePost } from '../../context/postContext';
 export default function HomePage() {
   const { post } = usePost();
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
+
+  console.log(post);
   return (
     <div className="relative top-14 bg-gray w-full sm:w-screen px-5 py-5 h-fit">
       <ModalCreatePost
