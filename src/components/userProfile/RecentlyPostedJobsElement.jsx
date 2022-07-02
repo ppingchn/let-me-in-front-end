@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import dayjs from "dayjs";
+import { useState } from 'react';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import dayjs from 'dayjs';
 
 export default function RecentlyPostedJobsElement({
   position,
@@ -12,14 +12,14 @@ export default function RecentlyPostedJobsElement({
 
   const now = dayjs();
   const dateFormat = dayjs(date);
-  const dateDiff = now.diff(dateFormat, "day");
+  const dateDiff = now.diff(dateFormat, 'day');
 
   return (
     <div className="flex flex-col min-h-[240px] min-w-[200px] justify-between gap-4 border-[1px] mx-2 rounded p-3 border-gray cursor-pointer">
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
           <img
-            class="inline-block h-16 w-16 sm:h-16 sm:w-16 cursor-pointer"
+            className="inline-block h-16 w-16 sm:h-16 sm:w-16 cursor-pointer"
             s
             src="https://media-exp1.licdn.com/dms/image/C560BAQEn3FvAF4Gpjg/company-logo_200_200/0/1654087026909?e=1664409600&v=beta&t=NTO3cCLbdpI5Q7OLiSHPusrPeo5BiJFNhjv9iYQYsYA"
             alt=""

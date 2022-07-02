@@ -5,11 +5,7 @@ import { IoMdClose } from 'react-icons/io';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
-import {
-  addExperience,
-  deleteExperience,
-  editExperience,
-} from '../../api/userApi';
+import { deleteExperience, editExperience } from '../../api/userApi';
 import { useParams } from 'react-router-dom';
 
 export default function ModalEditExperience({
@@ -30,7 +26,6 @@ export default function ModalEditExperience({
   const [error, setError] = useState({});
   const [confirmDelete, setConfirmDelete] = useState(false);
   const cancelButtonRef = useRef(null);
-  const { id } = useParams();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());

@@ -1,4 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
+import React from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { IoMdClose } from 'react-icons/io';
@@ -9,37 +9,26 @@ import { TbMinusVertical } from 'react-icons/tb';
 import { BiMessageRoundedDetail } from 'react-icons/bi';
 import { useAuth } from '../../context/authContext';
 import { usePost } from '../../context/postContext';
-
-export default function ModalCreatePost({ open, setOpen }) {
+import { MdModeEditOutline } from 'react-icons/md';
+function EditPostModal({ open, setOpen, data }) {
   const { user } = useAuth();
-  const { createUserPost } = usePost();
+  const { editUserPost } = usePost();
   const cancelButtonRef = useRef(null);
   const [show, setShow] = useState('main');
-  const [detail, setDetail] = useState('');
-  const [imageUpload, setImageUpload] = useState('');
+  const [detail, setDetail] = useState(data?.detail);
+  const [imageUpload, setImageUpload] = useState(data?.PostPictures);
   const inputPhotoEl = useRef(null);
-
-  const handleCreatePost = async () => {
-    try {
-      const postFormData = new FormData();
-      postFormData.append('detail', detail);
-      for (let img of imageUpload) {
-        postFormData.append('postPicArr', img);
-      }
-      await createUserPost(postFormData);
-      setImageUpload('');
-      setOpen(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleChangeCover = (e) => {
     if (e.target.files) {
       setImageUpload(e.target.files);
     }
   };
-
+  const handleUpdatePost = async () => {
+    const updatePostFormData = new FormData();
+    updatePostFormData.append('detail', detail);
+    await editUserPost(data.id, updatePostFormData);
+    setOpen(false);
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -76,7 +65,7 @@ export default function ModalCreatePost({ open, setOpen }) {
                   <div>
                     <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                       <Dialog.Title as="h3" className="text-xl">
-                        Create a post
+                        Edit a post
                       </Dialog.Title>
                       <div
                         className="h-8 w-8 rounded-full hover:bg-gray flex justify-center items-center text-xl"
@@ -111,6 +100,7 @@ export default function ModalCreatePost({ open, setOpen }) {
                         className="w-full h-18 border-transparent focus:outline-none resize-none"
                         placeholder="What do you want to talk about?"
                         rows="6"
+                        value={detail}
                         onChange={(e) => {
                           setDetail(e.target.value);
                         }}
@@ -127,12 +117,12 @@ export default function ModalCreatePost({ open, setOpen }) {
                         ref={inputPhotoEl}
                         onChange={handleChangeCover}
                       />
-                      {imageUpload && (
+                      {imageUpload.length > 0 && (
                         <div className="relative">
-                          {Array.from(imageUpload).map((el, idx) => (
+                          {imageUpload.map((el, idx) => (
                             <img
                               key={idx}
-                              src={URL.createObjectURL(el)}
+                              src={el.postPic}
                               alt="imageUpload"
                               onClick={() => inputPhotoEl.current.click()}
                             />
@@ -177,9 +167,9 @@ export default function ModalCreatePost({ open, setOpen }) {
 
                       <button
                         className="h-10 w-16 rounded-full hover:bg-gray"
-                        onClick={() => handleCreatePost()}
+                        onClick={() => handleUpdatePost()}
                       >
-                        Post
+                        Save
                       </button>
                     </div>
                   </div>
@@ -205,11 +195,11 @@ export default function ModalCreatePost({ open, setOpen }) {
                         ref={inputPhotoEl}
                         onChange={handleChangeCover}
                       />
-                      {imageUpload ? (
-                        Array.from(imageUpload).map((el, idx) => (
+                      {imageUpload.length > 0 ? (
+                        imageUpload.map((el, idx) => (
                           <img
                             key={idx}
-                            src={URL.createObjectURL(el)}
+                            src={el.postPic}
                             alt="imageUpload"
                             onClick={() => inputPhotoEl.current.click()}
                           />
@@ -252,3 +242,5 @@ export default function ModalCreatePost({ open, setOpen }) {
     </Transition.Root>
   );
 }
+
+export default EditPostModal;

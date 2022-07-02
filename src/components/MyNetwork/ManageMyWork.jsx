@@ -1,7 +1,7 @@
-import { TiContacts } from "react-icons/ti";
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { TiContacts } from 'react-icons/ti';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ManageMyWork() {
   let navigate = useNavigate;
@@ -63,7 +63,7 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -82,7 +82,7 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -101,7 +101,7 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -120,7 +120,7 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -139,7 +139,7 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -160,7 +160,7 @@ function ManageMyWork() {
               onClick={() => setToggleShow(!toggleShow)}
             >
               <span className="font-small ">
-                {toggleShow ? "Show less" : "Show more"}
+                {toggleShow ? 'Show less' : 'Show more'}
               </span>
               <div className="ml-2 text-[20px]">
                 {toggleShow ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}

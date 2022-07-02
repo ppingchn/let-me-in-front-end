@@ -1,28 +1,28 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function MyJobsMiddle() {
   const CompanyArray = [
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
     {
-      position: "Project management engineer",
-      companyName: "Google",
-      location: "Bangkok,Bangkok City, Thailand",
-      workEnvironment: "Remote",
-      updatedAtPost: "1 week ago",
+      position: 'Project management engineer',
+      companyName: 'Google',
+      location: 'Bangkok,Bangkok City, Thailand',
+      workEnvironment: 'Remote',
+      updatedAtPost: '1 week ago',
     },
   ];
 
@@ -32,14 +32,14 @@ function MyJobsMiddle() {
   const handleClickApplied = () => {
     setApplied(!applied);
     if (archived) {
-        setArchived(false);
+      setArchived(false);
     }
   };
 
   const handleClickArchived = () => {
     setArchived(!archived);
     if (applied) {
-        setApplied(false);
+      setApplied(false);
     }
   };
   return (
@@ -52,8 +52,8 @@ function MyJobsMiddle() {
             type="button"
             className={`inline-flex items-center px-4 py-1.5 border shadow-sm  text-sm leading-4 font-medium rounded-full ${
               applied
-                ? "bg-green-700 border-2 border-green-700 text-white"
-                : " bg-white-600 hover:bg-gray-200 hover:border-2 text-gray-500"
+                ? 'bg-green-700 border-2 border-green-700 text-white'
+                : ' bg-white-600 hover:bg-gray-200 hover:border-2 text-gray-500'
             }`}
             onClick={handleClickApplied}
           >
@@ -63,8 +63,8 @@ function MyJobsMiddle() {
             type="button"
             className={`inline-flex items-center px-4 py-1.5 border shadow-sm  text-sm leading-4 font-medium rounded-full ${
               archived
-                ? "bg-green-700 border-2 border-green-700 text-white"
-                : " bg-white-600 hover:bg-gray-200 hover:border-2 text-gray-500"
+                ? 'bg-green-700 border-2 border-green-700 text-white'
+                : ' bg-white-600 hover:bg-gray-200 hover:border-2 text-gray-500'
             }`}
             onClick={handleClickArchived}
           >
@@ -105,7 +105,7 @@ function MyJobsMiddle() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="24"
                       height="24"
                       focusable="false"
@@ -129,7 +129,7 @@ function MyJobsMiddle() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="24"
                       height="24"
                       focusable="false"
