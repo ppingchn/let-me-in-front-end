@@ -27,16 +27,20 @@ export default function Header() {
   const [companySuggest, setCompanySuggest] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
-  const cancelButtonRef = useRef(null);
 
-  console.log(userSuggest, companySuggest);
+  let typingTimer;
 
   const fetchAllUserByLetter = async (letter) => {
     try {
-      setLoading(true);
-      const res = await getAllUserByLetter(letter);
-      setCompanySuggest(res.data.companies);
-      setUserSuggest(res.data.user);
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(async () => {
+        setLoading(true);
+        const res = await getAllUserByLetter(letter);
+
+        setCompanySuggest(res.data.companies);
+        setUserSuggest(res.data.user);
+        setLoading(false);
+      }, 2000);
     } catch (err) {
       console.log(err);
     } finally {
