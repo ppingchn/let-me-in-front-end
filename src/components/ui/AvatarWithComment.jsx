@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useState } from 'react';
 import { BiCheck, BiX } from 'react-icons/bi';
+import { TiThumbsUp } from 'react-icons/ti';
 import { useAuth } from '../../context/authContext';
 import { usePost } from '../../context/postContext';
 import EditComment from '../Comment/EditComment';
@@ -9,13 +10,26 @@ import ReplyPostComment from '../Comment/ReplyPostComment';
 export default function AvatarWithComment({ data }) {
   dayjs.extend(relativeTime);
   const { user } = useAuth();
-  const { editPostComment } = usePost();
+  const { editPostComment, createLikePostComment, deleteLikePostComment } =
+    usePost();
   const [showReply, setShowReply] = useState(false);
   const [titleComment, setTitleComment] = useState(data.title);
   const [titleEdit, setTitleEdit] = useState(false);
+  const isLike = data?.LikeComments.find((like) => like.userId === user.id);
   const handleEditComment = async () => {
     await editPostComment(data.id, { title: titleComment });
     setTitleEdit(false);
+  };
+  const handleLike = async (id) => {
+    try {
+      if (isLike) {
+        await deleteLikePostComment(id);
+      } else {
+        await createLikePostComment({ commentId: id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="flex gap-2">
@@ -81,8 +95,35 @@ export default function AvatarWithComment({ data }) {
           )}
         </div>
         <div className="flex gap-2">
-          <span className="text-xs text-darkgray cursor-pointer">Like</span>
-          <span className="text-xs text-darkgray cursor-default">|</span>
+          {isLike ? (
+            <span
+              className="text-xs text-blue cursor-pointer"
+              onClick={() => {
+                handleLike(data.id);
+              }}
+            >
+              Like
+            </span>
+          ) : (
+            <span
+              className="text-xs text-darkgray cursor-pointer"
+              onClick={() => {
+                handleLike(data.id);
+              }}
+            >
+              Like
+            </span>
+          )}
+          <span className="text-xs text-blue cursor-default">•</span>
+          {data.LikeComments.length > 0 && (
+            <>
+              <span className="text-xs text-darkgray cursor-default">
+                {data.LikeComments.length}
+              </span>
+              <TiThumbsUp className="text-blue" />
+            </>
+          )}
+          <span className="text-xs text-blue cursor-default">|</span>
           <span
             className="text-xs text-darkgray cursor-pointer"
             onClick={() => setShowReply(!showReply)}
