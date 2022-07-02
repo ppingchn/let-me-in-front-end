@@ -114,6 +114,7 @@ export default function UserPage() {
                   lastName={userById?.userDetail?.lastName}
                   province={userById?.province}
                   country={userById?.country}
+                  userId={userById?.id}
                   companyName={userById?.companyDetail?.companyName}
                 />
                 {userById?.role === 'user' ? (

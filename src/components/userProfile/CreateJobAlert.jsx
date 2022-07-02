@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdNotificationsNone, MdCheck } from 'react-icons/md';
-import { createJobAlert } from '../../api/jobApi';
+import { useParams } from 'react-router-dom';
+import { createJobAlert, getJobAlertById } from '../../api/jobApi';
 
 export default function CreateJobAlert({ userId, companyName }) {
   const [jobAlert, setJobAlert] = useState(false);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchJobAlert = async () => {
+      try {
+        const res = await getJobAlertById(userId);
+        if (res.data.jobAlert) {
+          setJobAlert(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchJobAlert();
+  }, [id]);
 
   const handleTogglejobAlert = async () => {
     try {
