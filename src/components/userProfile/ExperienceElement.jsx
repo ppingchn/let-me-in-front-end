@@ -11,7 +11,7 @@ export default function ExperienceElement(props) {
     yearEnd,
   } = props;
   return (
-    <div className="flex w-11/12 gap-3 py-4 border-b-[1px] border-gray mx-5 p-2">
+    <div className="flex gap-3 py-4 border-b-[1px] border-gray p-2 mx-5">
       <CompanyAvatar
         width={10}
         height={10}
@@ -36,7 +36,7 @@ export default function ExperienceElement(props) {
             {/* Apr 2022 - Present · 3 mos */}
             {`${dayjs(yearStart).format('MMM YYYY')} - ${dayjs(yearEnd).format(
               'MMM YYYY',
-            )} · ${dayjs(yearStart).diff(dayjs(yearEnd), 'year')}`}
+            )} · ${dayjs(yearEnd).diff(dayjs(yearStart), 'year')} years`}
           </span>
           {/* address */}
           <span className="text-xs text-darkgray">
