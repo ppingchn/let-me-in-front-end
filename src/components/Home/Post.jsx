@@ -11,6 +11,7 @@ import { IoMdClose } from 'react-icons/io';
 import { useAuth } from '../../context/authContext';
 import EditPostDropdown from '../Post/EditPostDropdown';
 import { usePost } from '../../context/postContext';
+import { Link } from 'react-router-dom';
 
 export default function Post({ data }) {
   const { user } = useAuth();
@@ -56,11 +57,13 @@ export default function Post({ data }) {
         setOpen={setOpenShareListModal}
       />
       <div className="flex justify-between items-center px-4">
-        <AvatarWithNameTimePost
-          username={data.User.username}
-          time={data.createdAt}
-          profilePic={data.User.profilePic}
-        />
+        <Link to={`/user/${data.User.id}`}>
+          <AvatarWithNameTimePost
+            username={data.User.username}
+            time={data.createdAt}
+            profilePic={data.User.profilePic}
+          />
+        </Link>
 
         {user.id === data.User.id && <EditPostDropdown data={data} />}
       </div>

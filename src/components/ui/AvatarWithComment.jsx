@@ -3,6 +3,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { useState } from 'react';
 import { BiCheck, BiX } from 'react-icons/bi';
 import { TiThumbsUp } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 import { usePost } from '../../context/postContext';
 import EditComment from '../Comment/EditComment';
@@ -34,18 +35,24 @@ export default function AvatarWithComment({ data }) {
   return (
     <div className="flex gap-2">
       {/* avatar */}
-      <img
-        className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
-        src={data.User.profilePic}
-        alt=""
-      />
+      <Link to={`/user/${data.User.id}`}>
+        <img
+          className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
+          src={data.User.profilePic}
+          alt=""
+        />
+      </Link>
       {/* comment box */}
       <div className="flex flex-col w-full gap-1 rounded">
         <div className="flex flex-col w-full bg-gray rounded p-2 gap-2">
           {/* name and position */}
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="font-bold py-0">{data.User.username}</span>
+              <Link to={`/user/${data.User.id}`}>
+                <span className="font-bold py-0 hover:text-blue hover:underline">
+                  {data.User.username}
+                </span>
+              </Link>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-darkgray ">
                   {dayjs(data.updatedAt).fromNow()}
