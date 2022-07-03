@@ -1,7 +1,11 @@
 import { AiOutlineSearch } from 'react-icons/ai';
 import MessageListElement from './MessageListElement';
 
-export default function MessageList() {
+export default function MessageList({
+  chatRooms,
+  currentChatRoom,
+  setCurrentChatRoom,
+}) {
   return (
     <div className="h-full bg-white w-full rounded-l-lg">
       <div className="flex justify-between h-13 px-3 py-3 rounded-tl-lg border-b-[1px] border-slate-200">
@@ -18,9 +22,15 @@ export default function MessageList() {
         </div>
       </div>
       <div className="flex flex-col w-full rounded-bl-lg">
-        <MessageListElement active={true} />
-        <MessageListElement />
-        <MessageListElement />
+        {chatRooms &&
+          chatRooms.map((chatRoom) => (
+            <MessageListElement
+              key={chatRoom.id}
+              chatRoom={chatRoom}
+              onClick={() => setCurrentChatRoom(chatRoom)}
+              active={currentChatRoom == chatRoom}
+            />
+          ))}
       </div>
     </div>
   );

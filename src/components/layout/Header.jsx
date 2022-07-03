@@ -29,8 +29,6 @@ export default function Header() {
   const { user, logout } = useAuth();
   const cancelButtonRef = useRef(null);
 
-  console.log(userSuggest, companySuggest);
-
   const fetchAllUserByLetter = async (letter) => {
     try {
       setLoading(true);
