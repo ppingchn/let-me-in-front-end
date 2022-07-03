@@ -1,4 +1,5 @@
 import { FaBookmark } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 
 export default function Profile() {
@@ -10,15 +11,21 @@ export default function Profile() {
         <div className="h-14 w-full rounded-t-lg bg-slate-400"></div>
         <div className="h-14 w-full relative flex justify-center">
           <div className="absolute sm:bottom-4">
-            <img
-              className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
-              src={user.profilePic}
-              alt=""
-            />
+            <Link to={`/user/${user.id}`}>
+              <img
+                className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
+                src={user.profilePic}
+                alt=""
+              />
+            </Link>
           </div>
         </div>
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
-          <span className="text-black font-medium">{user.username}</span>
+          <Link to={`/user/${user.id}`}>
+            <span className="text-black font-medium hover:underline">
+              {user.username}
+            </span>
+          </Link>
           <span className="text-center text-xs text-darkgray">
             {user.detail}
           </span>

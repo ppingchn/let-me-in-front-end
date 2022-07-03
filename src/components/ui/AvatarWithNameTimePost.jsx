@@ -22,7 +22,9 @@ export default function AvatarWithNameTimePost({
         alt=""
       />
       <div className="flex flex-col">
-        <span className="font-bold text-xs">{username}</span>
+        <span className="font-bold text-xs hover:underline hover:text-blue">
+          {username}
+        </span>
         {/* <span className="text-xs text-darkgray">
           Elected Member of Parliament, Thailand
         </span> */}
