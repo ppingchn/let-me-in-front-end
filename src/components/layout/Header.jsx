@@ -27,7 +27,7 @@ export default function Header() {
   const [companySuggest, setCompanySuggest] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
-
+  
   let typingTimer;
 
   const fetchAllUserByLetter = async (letter) => {

@@ -1,7 +1,9 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { Menu, Transition, Listbox } from '@headlessui/react';
 import { BsThreeDots } from 'react-icons/bs';
 import MessageElementWithAvatar from './MessageElementWithAvatar';
+import { listChatMsg, createChatMsg } from '../../api/messageApi';
+
 import {
   EmojiHappyIcon as EmojiHappyIconOutline,
   PaperClipIcon,
@@ -14,6 +16,7 @@ import {
   ThumbUpIcon,
   XIcon,
 } from '@heroicons/react/solid';
+import { io } from 'socket.io-client';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -64,19 +67,47 @@ const moods = [
   },
 ];
 
-export default function MessageContent() {
+export default function MessageContent({ chatRoom }) {
   const [selected, setSelected] = useState(moods[5]);
 
   const attachFileEl = useRef(null);
+
+  // //socket io state
+  const [msg, setMsg] = useState('');
+  const socket = io('http://localhost:9001');
+
+  const [messages, setMessages] = useState([]);
+
+  // make event chat
+  const sendChat = (e) => {
+    e.preventDefault();
+
+    const chat = createChatMsg(chatRoom.id, msg).then(() => setMsg(''));
+  };
+
+  useEffect(() => {
+    if (chatRoom) {
+      socket.on('chat', () => {
+        listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
+      });
+    }
+  }, [chatRoom]);
+
+  useEffect(() => {
+    if (chatRoom) {
+      listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
+    }
+  }, [chatRoom]);
+
+  if (!chatRoom) {
+    return <></>;
+  }
+
   return (
-    <div className="h-full bg-white w-full h-full">
+    <div className="h-full bg-white w-full">
       <div className="flex justify-between h-13 px-3 py-1 rounded-tr-lg border-b-[1px] border-slate-200">
         <div className="flex flex-col">
-          <span>Tarinee Spsdkfjsdklfjldsasdf</span>
-          <div className="flex gap-2 items-center">
-            <div className="w-2 h-2 border-[2px] border-green-500 rounded-full"></div>
-            <span className="text-xs font-thin">Available on mobile</span>
-          </div>
+          <span>{chatRoom.user.username}</span>
         </div>
         <Menu as="div" className="relative inline-block text-left">
           <div>
@@ -154,19 +185,16 @@ export default function MessageContent() {
         </Menu>
       </div>
       <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-auto gap-5">
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
-        <MessageElementWithAvatar />
+        {messages &&
+          messages.map((message) => (
+            <MessageElementWithAvatar message={message} />
+          ))}
       </div>
       {/* post */}
       <div>
         <div className="flex items-start px-4">
           <div className="min-w-0 flex-1">
-            <form action="#">
+            <form action="#" onSubmit={sendChat}>
               <div className="border-t-[1px] border-gray-200 focus-within:border-green-800">
                 <label htmlFor="comment" className="sr-only">
                   Add your comment
@@ -177,7 +205,8 @@ export default function MessageContent() {
                   id="comment"
                   className="block w-full border-0 border-transparent p-0 py-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
                   placeholder="Add your comment..."
-                  defaultValue={''}
+                  value={msg}
+                  onChange={(e) => setMsg(e.target.value)}
                 />
               </div>
               <div className="pt-2 flex justify-between">
@@ -291,7 +320,7 @@ export default function MessageContent() {
                 <div className="flex-shrink-0 py-5">
                   <div className="h-7 px-5 border-[1px] hover:border-[2px] bg-white hover:bg-gray border-darkgray rounded-full transition-all cursor-pointer">
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-sm text-darkgray">Send</span>
+                      <button className="text-sm text-darkgray">Send</button>
                     </div>
                   </div>
                 </div>
