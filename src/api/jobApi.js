@@ -8,6 +8,10 @@ export function getJobAlertById(companyId) {
   return axios.get(`/job/getJobAlertById/${companyId}`);
 }
 
+export function getAllJob() {
+  return axios.get(`/jobList`);
+}
+
 export function createJob(
   position,
   jobDescription,

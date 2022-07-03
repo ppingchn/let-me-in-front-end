@@ -1,7 +1,8 @@
 import { IoClose } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
-function MiddleBottomSideJob() {
+function MiddleBottomSideJob(props) {
+  const { jobs } = props;
   const CompanyArray = [
     {
       position: 'Project management engineer',
@@ -37,14 +38,18 @@ function MiddleBottomSideJob() {
       {/* Body: Job searches */}
       <div className="flex flex-col  mt-3 ">
         {/* Suggest job searches */}
-        {CompanyArray.map((el, idx) => {
+        {jobs?.map((el, idx) => {
           return (
             <div className="py-3">
               <div className="grid grid-cols-8 gap-3 border-b-[1px] border-gray-200 pb-4">
                 {/* Img */}
                 <img
                   width="56"
-                  src="https://media-exp1.licdn.com/dms/image/C4D0BAQHiNSL4Or29cg/company-logo_100_100/0/1519856215226?e=1664409600&amp;v=beta&amp;t=AixSwaKqIgJMn2IGCOShWaFpuXBZ8jro06PcuDikRUo"
+                  src={
+                    el.User.profilePic
+                      ? el.User.profilePic
+                      : `https://media-exp1.licdn.com/dms/image/C4D0BAQHiNSL4Or29cg/company-logo_100_100/0/1519856215226?e=1664409600&amp;v=beta&amp;t=AixSwaKqIgJMn2IGCOShWaFpuXBZ8jro06PcuDikRUo`
+                  }
                   loading="lazy"
                   height="56"
                   alt="google logo"
@@ -53,12 +58,18 @@ function MiddleBottomSideJob() {
                 />
                 {/* middle */}
                 <div className="col-span-6">
-                  <p className="text-lg text-blue font-medium">{el.position}</p>
-                  <p className="text-sm">{el.companyName}</p>
+                  <p className="text-lg text-blue font-medium hover:underline hover:text-blue cursor-pointer">
+                    {el.position}
+                  </p>
+                  <p className="text-sm">
+                    {el.User.CompanyDetails[0].companyName}
+                  </p>
                   <div className="flex gap-2">
-                    <p className="text-sm text-gray-500">{el.location}</p>
                     <p className="text-sm text-gray-500">
-                      ({el.workEnvironment})
+                      {el.User.province} {el.User.country}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {el.workEnvironment}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 mt-2">
@@ -67,11 +78,10 @@ function MiddleBottomSideJob() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      className="mercado-match"
+                      className="mercado-match text-green-700"
                       width="24"
                       height="24"
                       focusable="false"
-                      className="text-green-700"
                     >
                       <path d="M12 20a8 8 0 010-16 7.91 7.91 0 014.9 1.69l-1.43 1.42a6 6 0 101.42 1.42l3.82-3.82a1 1 0 000-1.41A1 1 0 0020 3a1 1 0 00-.7.29l-1 1A10 10 0 1022 12h-2a8 8 0 01-8 8zm5-8a5 5 0 11-5-5 4.93 4.93 0 012.76.82l-2.24 2.24A2.24 2.24 0 0012 10a2 2 0 102 2 2.24 2.24 0 00-.07-.51l2.24-2.24A5 5 0 0117 12z"></path>
                     </svg>
@@ -91,11 +101,10 @@ function MiddleBottomSideJob() {
                       viewBox="0 0 24 24"
                       data-supported-dps="24x24"
                       fill="currentColor"
-                      className="mercado-match"
+                      className="mercado-match text-gray-500 "
                       width="24"
                       height="24"
                       focusable="false"
-                      className="text-gray-500 "
                     >
                       <path d="M19 5a3 3 0 00-3-3H5v20l7-6.29L19 22zm-3-1a1 1 0 011 1v12.51L12 13l-5 4.51V4z"></path>
                     </svg>
