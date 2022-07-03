@@ -5,7 +5,11 @@ import { MdCheck } from 'react-icons/md';
 import { IoMdClose } from 'react-icons/io';
 import { useEffect, useRef, useState } from 'react';
 import { uploadCoverImage } from '../../api/userApi';
-import { createFollow, deleteFollow, getFollowById } from '../../api/followApi';
+import {
+  createFollows,
+  deleteFollows,
+  getFollowById,
+} from '../../api/followApi';
 
 export default function MainProfile({
   role,
@@ -62,11 +66,11 @@ export default function MainProfile({
   const handleToggleFollow = async () => {
     try {
       if (follow) {
-        await deleteFollow(userId);
+        await deleteFollows(userId);
         setFollow(false);
       } else {
         setFollow(true);
-        await createFollow(userId);
+        await createFollows(userId);
       }
     } catch (err) {}
   };
