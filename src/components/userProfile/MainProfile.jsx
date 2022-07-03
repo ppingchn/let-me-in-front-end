@@ -33,21 +33,21 @@ export default function MainProfile({
   const [loading, setLoading] = useState(false);
   const uploadImage = useRef();
 
-  useEffect(() => {
-    const fetchFollow = async () => {
-      try {
-        const res = await getFollowById(userId);
-        if (res.data.follow) {
-          setFollow(true);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    if (!isUser) {
-      fetchFollow();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const fetchFollow = async () => {
+  //     try {
+  //       const res = await getFollowById(userId);
+  //       if (res.data.follow) {
+  //         setFollow(true);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   if (!isUser) {
+  //     fetchFollow();
+  //   }
+  // }, []);
 
   const handleChangeCover = (e) => {
     if (e.target.files[0]) {
@@ -65,13 +65,13 @@ export default function MainProfile({
 
   const handleToggleFollow = async () => {
     try {
-      if (follow) {
-        await deleteFollows(userId);
-        setFollow(false);
-      } else {
-        setFollow(true);
-        await createFollows(userId);
-      }
+      // if (follow) {
+      //   await deleteFollow(userId);
+      //   setFollow(false);
+      // } else {
+      //   setFollow(true);
+      //   await createFollow(userId);
+      // }
     } catch (err) {}
   };
 

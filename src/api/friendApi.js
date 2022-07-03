@@ -1,19 +1,24 @@
 import axios from '../config/axios';
 
-
 export function getAllFriend(input) {
-    // console.log('/friends'+input)
-  return axios.get('/friends'+input);
+  // console.log('/friends/' + input)
+  return axios.get('/friends/' + input);
+}
+export function getAllUserByLetter(input) {
+  console.log(input)
+  console.log('/friends/allUserByLetter?'+input)
+  return axios.get('/friends/allUserByLetter?'+input);
 }
 export function findFriendId(input) {
-  return axios.get('/friends/'+ input);
+  return axios.get('/friends/' , input);
 }
 export function requestFriend(input) {
-  return axios.post('/friends', input);
+  return axios.post('/friends/'+ input);
 }
 export function updateFriend(input) {
-  return axios.patch('/friends/:requestToId', input);
+  return axios.patch('/friends/' + input);
 }
 export function deleteFriend(input) {
-  return axios.delete('/friends/:id', input);
+  console.log('/friends/' + input)
+  return axios.delete('/friends/' + input);
 }

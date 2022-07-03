@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createFollows, deleteFollows } from '../../../../api/followApi';
+import { useAuth } from '../../../../context/authContext';
 
 function PeopleBottomFiltered({
   companyId,
   followerId,
+  userId,
   profilePic,
   companyName,
   firstName,
   lastName,
-  role
+  role,
 }) {
   //bottom state
   const [follow, setFollow] = useState(true);
   // console.log(role)
-
+  // const {user} = useAuth()
+  // console.log(user)
   //bottom
   const handleClickFollow = async () => {
     if (follow) {
@@ -34,7 +38,17 @@ function PeopleBottomFiltered({
 
   return (
     <div className="col-1 bg-white border-slate-200 border-[1px] rounded-lg">
-      <div className=" flex flex-col gap-2 px-3 py-3 rounded-l-lg">
+      <Link
+        to={
+          companyId
+            ? `/user/${companyId}`
+            : userId
+            ? `/user/${userId}`
+            : `/user/${followerId}`
+        }
+        // to="/"
+        className=" flex flex-col gap-2 px-3 py-3 rounded-l-lg"
+      >
         <img
           src={profilePic}
           loading="lazy"
@@ -47,9 +61,9 @@ function PeopleBottomFiltered({
           {companyName}
         </p>
         {/* <p className="text-sm">Automotive</p> */}
-        <p className={`${role === 'user' ?"h-14":"h-24"}`}></p>
-      </div>
-      { role === 'user'?
+        <p className={`${role === 'user' ? 'h-14' : 'h-24'}`}></p>
+      </Link>
+      {role === 'user' ? (
         <div
           className="border-slate-200 border-t-[1px] text-center py-2 hover:bg-hover-light-blue"
           onClick={handleClickFollow}
@@ -88,8 +102,7 @@ function PeopleBottomFiltered({
             </div>
           )}
         </div>
-        : null
-      }
+      ) : null}
     </div>
   );
 }
