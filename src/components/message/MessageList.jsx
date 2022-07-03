@@ -9,7 +9,7 @@ export default function MessageList({
   return (
     <div className="h-full bg-white w-full rounded-l-lg">
       <div className="flex justify-between h-13 px-3 py-3 rounded-tl-lg border-b-[1px] border-slate-200">
-        Massaging
+        Messages
       </div>
       <div className="flex px-3 py-2 items-center w-full">
         <div className="flex items-center bg-gray rounded px-4 w-full">

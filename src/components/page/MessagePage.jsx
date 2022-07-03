@@ -5,10 +5,20 @@ import JobElement from '../job/JobElement';
 import MessageContent from '../message/MessageContent';
 import MessageList from '../message/MessageList';
 import { listChatRooms } from '../../api/messageApi';
+import { io } from 'socket.io-client';
 
 export default function MessagePage() {
   const [currentChatRoom, setCurrentChatRoom] = useState(null);
   const [chatRooms, setChatRooms] = useState([]);
+  const socket = io('http://localhost:9001');
+
+  useEffect(() => {
+    socket.on('chat', () => {
+      listChatRooms().then((chatRooms) => {
+        setChatRooms(chatRooms);
+      });
+    });
+  }, []);
 
   useEffect(() => {
     listChatRooms().then((chatRooms) => {

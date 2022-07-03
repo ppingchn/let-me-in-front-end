@@ -74,8 +74,8 @@ export default function MessageContent({ chatRoom }) {
 
   // //socket io state
   const [msg, setMsg] = useState('');
-  // const socket = io('http://localhost:8000');
-  // const userName = uuidv4();
+  const socket = io('http://localhost:9001');
+
   const [messages, setMessages] = useState([]);
 
   // make event chat
@@ -84,6 +84,14 @@ export default function MessageContent({ chatRoom }) {
 
     const chat = createChatMsg(chatRoom.id, msg).then(() => setMsg(''));
   };
+
+  useEffect(() => {
+    if (chatRoom) {
+      socket.on('chat', () => {
+        listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
+      });
+    }
+  }, [chatRoom]);
 
   useEffect(() => {
     if (chatRoom) {
@@ -197,7 +205,6 @@ export default function MessageContent({ chatRoom }) {
                   id="comment"
                   className="block w-full border-0 border-transparent p-0 py-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
                   placeholder="Add your comment..."
-                  defaultValue={''}
                   value={msg}
                   onChange={(e) => setMsg(e.target.value)}
                 />
