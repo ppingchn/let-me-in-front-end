@@ -6,7 +6,6 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import DatePicker from 'react-datepicker';
 import validator from 'validator';
 import { deleteExperience, editExperience } from '../../api/userApi';
-import { useParams } from 'react-router-dom';
 
 export default function ModalEditExperience({
   open,
