@@ -20,6 +20,7 @@ import JobsPage from '../components/page/JobsPage';
 import MyJobs from '../components/Jobs/Sidebars/MyJobs';
 import ApplicationSetting from '../components/Jobs/Sidebars/ApplicationSetting/ApplicationSetting';
 import EducationEditPage from '../components/page/EducationEditPage';
+import CreateJobPage from '../components/page/CreateJobPage';
 
 export default function Router() {
   const { user } = useAuth();
@@ -54,6 +55,7 @@ export default function Router() {
             {/* Jobs */}
             <Route path="jobs" element={<JobsPage />} />
             <Route path="jobs/myJobs" element={<MyJobs />}></Route>
+            <Route path="jobs/createJob" element={<CreateJobPage />}></Route>
             <Route
               path="jobs/applicationSetting"
               element={<ApplicationSetting />}

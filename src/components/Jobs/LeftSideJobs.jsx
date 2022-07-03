@@ -135,7 +135,7 @@ function LeftSideJobs() {
 
       <div className="grid">
         <Link
-          to="/"
+          to="/jobs/createJob"
           className="mt-3 flex items-center justify-center py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
         >
           <svg
