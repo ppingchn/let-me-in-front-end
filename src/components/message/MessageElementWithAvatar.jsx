@@ -1,10 +1,14 @@
-export default function MessageElementWithAvatar() {
+import moment from 'moment';
+export default function MessageElementWithAvatar({ message }) {
+  // const time = moment(message.created_at).format('hh:mm:ss a');
+  const time = moment(message.createdAt).fromNow();
+
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 ">
       {/* avatar */}
       <img
         className="inline-block h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer"
-        src="https://media-exp1.licdn.com/dms/image/C4D03AQHcpbUcANnETg/profile-displayphoto-shrink_100_100/0/1654666437384?e=1661385600&v=beta&t=EPU0QYVtly7ZvonPgyOsbm4FjOftaxZf6TpEPio-1CE"
+        src={message.Sender.profilePic}
         alt=""
       />
       {/* comment box */}
@@ -13,18 +17,11 @@ export default function MessageElementWithAvatar() {
           {/* name and position */}
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="font-bold py-0">Pita Limjaroenrat</span>
-              <span className="text-xs text-darkgray">19hr</span>
+              <span className="font-bold py-0">{message.Sender.username}</span>
+              <span className="text-xs text-darkgray">{time}</span>
             </div>
-            <span className="text-xs text-darkgray">
-              Elected Member of Parliament, Thailand
-            </span>
           </div>
-          <span className="text-sm">
-            this is comment ...
-            <br />
-            from Pita.
-          </span>
+          <span className="text-sm">{message.message}</span>
         </div>
       </div>
     </div>

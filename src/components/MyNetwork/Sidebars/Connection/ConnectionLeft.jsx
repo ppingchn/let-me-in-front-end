@@ -4,8 +4,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/solid';
 import ProfileConnection from '../Connection/ProfileConnection';
-import { getAllFriend } from '../../../../api/friendApi';
-import { Link } from 'react-router-dom';
+import { getAllFriend, getAllUserByLetter } from '../../../../api/friendApi';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -13,6 +12,8 @@ function classNames(...classes) {
 
 function ConnectionLeft() {
   const [sort, setSort] = useState('Recently added');
+  const [search, setSearch] = useState('');
+  const [fetchByFilter, setFetchByFilter] = useState([]);
 
   const [friends, setFriends] = useState([]);
 
@@ -30,10 +31,62 @@ function ConnectionLeft() {
     fetchUserAccept();
   }, []);
 
+  //search
+
+  let typingTimer;
+
+  useEffect(() => {
+    try {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(async () => {
+        if (sort === 'Recently added') {
+          if (search.length >= 3) {
+            // console.log('1111111');
+            const res = await getAllUserByLetter(
+              `sort=Recently added&letter=${search}`,
+            );
+            setFriends(res.data.users);
+          } else {
+            // console.log('444444');
+            const res = await getAllUserByLetter(`sort=Recently added&letter=`);
+            setFriends(res.data.users);
+          }
+        } else if (sort === 'First name') {
+          if (search.length >= 3) {
+            // console.log('2222222');
+            const res = await getAllUserByLetter(
+              `sort=First name&letter=${search}`,
+            );
+            setFriends(res.data.users);
+          } else {
+            // console.log('55555');
+            const res = await getAllUserByLetter(`sort=First name&letter=`);
+            setFriends(res.data.users);
+          }
+        } else if (sort === 'Last name') {
+          if (search.length >= 3) {
+            const res = await getAllUserByLetter(
+              `sort=Last name&letter=${search}`,
+            );
+            setFriends(res.data.users);
+          } else {
+            const res = await getAllUserByLetter(`sort=Last name&letter=`);
+            setFriends(res.data.users);
+          }
+        }
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [sort, search]);
+
+  // console.log(fetchByFilter);
+  console.log(friends);
+
   return (
     <div>
       <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] rounded-t-lg border-slate-200 px-4 pt-3 pb-3 ">
-        <span>2 Connections</span>
+        <span>{friends?.length} Connections</span>
         <div>
           <span className="text-gray-500">Sort by : </span>
           {/* Dropdown */}
@@ -61,36 +114,36 @@ function ConnectionLeft() {
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <button
+                        type="button"
                         className={classNames(
                           active ? 'bg-gray-200 ' : 'text-gray-500',
-                          'block px-4 py-2 text-sm',
+                          'block w-full text-left px-4 py-2 text-sm',
                         )}
                         onClick={() => setSort('Recently added')}
                       >
                         Recently added
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? 'bg-gray-200 ' : 'text-gray-500',
-                          'block px-4 py-2 text-sm',
-                        )}
-                        onClick={() => setSort('First name')}
-                      >
-                        First name
-                      </a>
+                      </button>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        type="submit"
+                        type="button"
+                        className={classNames(
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block w-full text-left px-4 py-2 text-sm',
+                        )}
+                        onClick={() => setSort('First name')}
+                      >
+                        First name
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        type="button"
                         className={classNames(
                           active ? 'bg-gray-200 ' : 'text-gray-500',
                           'block w-full text-left px-4 py-2 text-sm',
@@ -122,18 +175,22 @@ function ConnectionLeft() {
                  sm:text-sm"
                 placeholder="Search by name"
                 type="search"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+                autoComplete="off"
               />
             </div>
           </div>
         </div>
       </div>
-      {friends.map((el, idx) => (
+      {friends?.map((el, idx) => (
         <ProfileConnection
           key={idx}
           friendId={el.id}
           profilePic={el.profilePic}
-          firstName={el.UserDetails[0].firstName}
-          lastName={el.UserDetails[0].lastName}
+          firstName={el?.UserDetails[0]?.firstName}
+          lastName={el?.UserDetails[0]?.lastName}
+          fetchUserAccept={fetchUserAccept}
         />
       ))}
     </div>

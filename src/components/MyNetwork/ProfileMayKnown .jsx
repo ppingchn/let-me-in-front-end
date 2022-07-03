@@ -1,5 +1,6 @@
 import { FaBookmark } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import { requestFriend } from '../../api/friendApi';
 
 function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
@@ -21,7 +22,7 @@ function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
           </div>
         </div>
         <div className="h-14 w-full relative flex justify-center">
-          <div className="absolute sm:bottom-4">
+          <Link to={`/user/${requestToId}`} className="absolute sm:bottom-4">
             {profilePic ? (
               <img
                 className="inline-block h-14 w-14 sm:h-20 sm:w-20 rounded-full cursor-pointer border-2 border-white"
@@ -35,7 +36,7 @@ function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
                 alt=""
               />
             )}
-          </div>
+          </Link>
         </div>
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
           <span className="text-black font-medium">

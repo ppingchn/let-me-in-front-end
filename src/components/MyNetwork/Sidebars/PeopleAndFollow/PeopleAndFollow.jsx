@@ -126,7 +126,7 @@ function PeopleAndFollow() {
     }
   }, [following, follower, filter]);
 
-  // console.log(bottomRenderArray);
+  console.log(bottomRenderArray);
 
   return (
     <div className="relative top-14 bg-gray w-full sm:w-screen px-5 py-5 h-fit">
@@ -192,6 +192,8 @@ function PeopleAndFollow() {
                         firstName={el.User.UserDetails[0].firstName}
                         lastName={el.User.UserDetails[0].lastName}
                         followerId={el.followerId}
+                        userId={el.userId}
+
                         role={role}
                       />
                     ) : null
@@ -203,6 +205,7 @@ function PeopleAndFollow() {
                     firstName={el.User.UserDetails[0].firstName}
                     lastName={el.User.UserDetails[0].lastName}
                     followerId={el.followerId}
+                    userId={el.userId}
                     role={role}
                   />
                 );

@@ -24,7 +24,6 @@ function PeopleMayKnown() {
     fetchUserUnknown();
   }, []);
 
-  // console.log(friends);
   return (
     <div className="h-fit w-full flex flex-col gap-2 bg-white border-[1px] rounded-lg border-slate-200 p-3">
       <div className="flex justify-between">

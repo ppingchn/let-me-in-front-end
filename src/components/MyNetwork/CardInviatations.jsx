@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { updateFriend, deleteFriend } from '../../api/friendApi';
 
 function CardInviatations({ firstName, lastName, profilePic, requestFromId }) {
@@ -15,11 +16,12 @@ function CardInviatations({ firstName, lastName, profilePic, requestFromId }) {
   useEffect(()=>{
     handleClickRequest()
 },[click])
+console.log(requestFromId)
 
   return (
     <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] border-t-0 rounded-b-lg border-slate-200 px-4 pt-3 pb-3 ">
       <div className="grid grid-cols-6 gap-4">
-        <div>
+        <Link to={`/user/${requestFromId}`}>
           {/* <Avatar width={[24]} height={[24]} /> */}
           <img
             className={`inline-block h-24 w-24 rounded-full`}
@@ -30,7 +32,7 @@ function CardInviatations({ firstName, lastName, profilePic, requestFromId }) {
             }
             alt="profile"
           />
-        </div>
+        </Link >
         <div className="col-span-3 flex flex-col ">
           <span className="text-sm font-semibold">
             {firstName} {lastName}
