@@ -1,9 +1,11 @@
 import Avatar from '../../../ui/Avatar';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/solid';
 import ProfileConnection from '../Connection/ProfileConnection';
+import { getAllFriend } from '../../../../api/friendApi';
+import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -11,6 +13,23 @@ function classNames(...classes) {
 
 function ConnectionLeft() {
   const [sort, setSort] = useState('Recently added');
+
+  const [friends, setFriends] = useState([]);
+
+  const fetchUserAccept = async () => {
+    try {
+      const res = await getAllFriend('');
+      setFriends(res.data.users);
+      console.log(res.data.users);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserAccept();
+  }, []);
+
   return (
     <div>
       <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] rounded-t-lg border-slate-200 px-4 pt-3 pb-3 ">
@@ -38,21 +57,8 @@ function ConnectionLeft() {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="top-5 z-20 absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? 'bg-gray-200 ' : 'text-gray-500 ',
-                          'block px-4 py-2 text-sm',
-                        )}
-                      >
-                        Account settings
-                      </a>
-                    )}
-                  </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
                       <a
@@ -81,20 +87,20 @@ function ConnectionLeft() {
                       </a>
                     )}
                   </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          type="submit"
-                          className={classNames(
-                            active ? 'bg-gray-200 ' : 'text-gray-500',
-                            'block w-full text-left px-4 py-2 text-sm',
-                          )}
-                          onClick={() => setSort('Last name')}
-                        >
-                          Last name
-                        </button>
-                      )}
-                    </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        type="submit"
+                        className={classNames(
+                          active ? 'bg-gray-200 ' : 'text-gray-500',
+                          'block w-full text-left px-4 py-2 text-sm',
+                        )}
+                        onClick={() => setSort('Last name')}
+                      >
+                        Last name
+                      </button>
+                    )}
+                  </Menu.Item>
                 </div>
               </Menu.Items>
             </Transition>
@@ -121,52 +127,15 @@ function ConnectionLeft() {
           </div>
         </div>
       </div>
-      {/* Invitation1 */}
-      <div className="h-fit w-full flex flex-col gap-1 bg-white border-[1px] border-t-0 rounded-b-lg border-slate-200 px-4 pt-3 pb-3 ">
-        <div className="grid grid-cols-5 gap-4">
-          <div>
-            <Avatar width={[24]} height={[24]} />
-          </div>
-          <div className="col-span-2 flex flex-col ">
-            <span className="text-sm font-semibold">Tom holland</span>
-            <span className="text-gray-500">--</span>
-            <div className="flex text-gray-500 mt-1">
-              <span className="text-xs">Connected 17 hours ago</span>
-            </div>
-            {/* <div className="flex items-center mt-2  ">
-              <span className="p-1 text-gray-500 font-medium hover:bg-gray-200 rounded-md">
-                Ignore
-              </span>
-
-              <button
-                type="button"
-                className="ml-3 inline-flex items-center px-4 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-500 "
-              >
-                Accept
-              </button>
-            </div> */}
-          </div>
-          <div className="col-span-1 flex flex-col ">
-            <div className="flex items-center mt-2  ">
-              <button
-                type="button"
-                className=" inline-flex items-center px-4 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-500 "
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-col ">
-            <div className="flex items-center mt-2  ">
-              <span className="p-1 text-gray-500 font-medium hover:bg-gray-200 rounded-md">
-                Remove
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Invitation2 */}
-      <ProfileConnection />
+      {friends.map((el, idx) => (
+        <ProfileConnection
+          key={idx}
+          friendId={el.id}
+          profilePic={el.profilePic}
+          firstName={el.UserDetails[0].firstName}
+          lastName={el.UserDetails[0].lastName}
+        />
+      ))}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import axios from '../config/axios';
 
 export function getAllFriend(input) {
+  console.log('/friends/' + input)
   return axios.get('/friends/' + input);
 }
 export function findFriendId(input) {

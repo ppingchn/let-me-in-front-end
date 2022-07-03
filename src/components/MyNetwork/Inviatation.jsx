@@ -8,7 +8,7 @@ import CardInviatations from './CardInviatations';
 function Inviatation() {
 
   const [friends, setFriends] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const fetchUserPending = async () => {
     try {
@@ -17,7 +17,6 @@ function Inviatation() {
       // console.log(res.data.users);
     } catch (err) {
       console.log(err);
-    } finally {
     }
   };
 

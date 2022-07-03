@@ -10,9 +10,6 @@ function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
   };
   console.log(requestToId)
 
-  //   useEffect(()=>{
-  //     handleClickRequest()
-  // },[click])
 
   return (
     <div className="h-fit w-full sm:w-[200px] lg:w-[230px]  border-[1px] rounded-lg border-slate-200">
