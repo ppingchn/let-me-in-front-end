@@ -3,7 +3,7 @@ import AvatarWithNameTimePost from '../ui/AvatarWithNameTimePost';
 import { TiThumbsUp } from 'react-icons/ti';
 import { BiCommentDetail, BiShare } from 'react-icons/bi';
 import { RiSendPlaneLine } from 'react-icons/ri';
-import { BsEmojiSmile, BsImageFill, BsThreeDots } from 'react-icons/bs';
+import { BsEmojiSmile, BsImageFill } from 'react-icons/bs';
 import ModalLikeList from './ModalLikeList';
 import ModalSharePostList from './ModalSharePostList';
 import { useRef, useState } from 'react';
@@ -14,14 +14,14 @@ import { usePost } from '../../context/postContext';
 
 export default function Post({ data }) {
   const { user } = useAuth();
-  const { createPostComment } = usePost();
+  const { createPostComment, createLikePost, deleteLikePost } = usePost();
   const [openLikeListModal, setOpenLikeListModal] = useState(false);
   const [openShareListModal, setOpenShareListModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
   const [titleComment, setTitleComment] = useState('');
-  const [like, setLike] = useState(false);
   const [image, setImage] = useState(null);
   const uploadImage = useRef(null);
+  const isLike = data?.LikePosts.find((like) => like.userId === user.id);
 
   const handleAddImage = (e) => {
     if (e.target.files[0]) {
@@ -30,8 +30,16 @@ export default function Post({ data }) {
     }
   };
 
-  const handleLike = () => {
-    setLike(!like);
+  const handleLike = async (id) => {
+    try {
+      if (isLike) {
+        await deleteLikePost(id);
+      } else {
+        await createLikePost({ postId: id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const submitComment = async (e) => {
@@ -115,9 +123,9 @@ export default function Post({ data }) {
       <div className="w-full grid grid-cols-4 gap-6 h-12 mb-1 px-4">
         <div
           className="flex hover:bg-gray h-full justify-center items-center rounded gap-1 cursor-pointer"
-          onClick={() => handleLike()}
+          onClick={() => handleLike(data.id)}
         >
-          {like ? (
+          {isLike ? (
             <>
               <TiThumbsUp className="hidden sm:flex text-blue text-2xl" />
               <span className="text-blue">Like</span>
