@@ -116,6 +116,7 @@ export default function UserPage() {
                   country={userById?.country}
                   userId={userById?.id}
                   companyName={userById?.companyDetail?.companyName}
+                  websiteLink={userById?.companyDetail?.websiteLink}
                 />
                 {userById?.role === 'user' ? (
                   // this zone for user component

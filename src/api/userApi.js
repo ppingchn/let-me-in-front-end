@@ -59,6 +59,7 @@ export function addEducation(degree, university, field, yearStart, yearEnd) {
     yearEnd,
   });
 }
+
 export function editEducation(
   degree,
   university,
@@ -73,6 +74,13 @@ export function editEducation(
     field,
     yearStart,
     yearEnd,
+  });
+}
+
+export function editOverviewCompany(overview, websiteLink) {
+  return axios.put(`/users/updateOverview`, {
+    overview,
+    websiteLink,
   });
 }
 

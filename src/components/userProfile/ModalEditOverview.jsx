@@ -9,6 +9,9 @@ import validator from 'validator';
 
 // Import the Slate components and React plugin.
 import RichTextEditor from '../SlateEditor/Draft';
+// import JoditEditor from 'jodit-react';
+import MDEditor from '@uiw/react-md-editor';
+import { editOverviewCompany } from '../../api/userApi';
 // import RichTextExample from '../SlateEditor/TestEditText';
 
 export default function ModalEditOverView({
@@ -19,13 +22,16 @@ export default function ModalEditOverView({
 }) {
   const [error, setError] = useState({});
   const cancelButtonRef = useRef(null);
+  const [value, setValue] = useState('');
+  const [content, setContent] = useState('Start writing');
+  console.log(value);
 
   const [overview, setOverview] = useState({
     detailContent: '',
     website: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let error = {};
 
@@ -40,18 +46,20 @@ export default function ModalEditOverView({
 
     if (Object.keys(error).length === 0) {
       console.log(overview);
+      await editOverviewCompany(overview.detailContent, overview.website);
       setOpen(false);
     }
   };
 
-  const handleChangeDetailContent = (e) => {
+  const handleChangeDetailContent = (value) => {
     const clone = { ...overview };
-    clone[0].detailContent = e.target.value;
+    clone.detailContent = value;
     setOverview(clone);
+    console.log(clone);
   };
   const handleChangeWebsite = (e) => {
     const clone = { ...overview };
-    clone[0].website = e.target.value;
+    clone.website = e.target.value;
     setOverview(clone);
   };
 
@@ -59,6 +67,15 @@ export default function ModalEditOverView({
     console.log(value);
     setOverviewTmp(value);
     // setValue(value);
+  };
+
+  const config = {
+    readonly: false,
+    height: 400,
+  };
+  const handleUpdate = (event) => {
+    const editorContent = event.target.innerHTML;
+    setContent(editorContent);
   };
 
   return (
@@ -114,19 +131,23 @@ export default function ModalEditOverView({
                     </span>
 
                     {/* detailContent Name */}
-                    <div className="w-full flex flex-col gap-1">
+                    <div className="w-full max-w-none flex flex-col gap-1 prose">
                       <label
                         htmlFor="detailContent"
                         className="text-sm text-darkgray"
                       >
                         Overview *
                       </label>
-                      <input
+                      <RichTextEditor
+                        initialValue=""
+                        getValue={handleChangeDetailContent}
+                      />
+                      {/* <input
                         name="detailContent"
                         className="w-full h-18 focus:outline-none border-[1px] border-darkgray px-3 py-1 rounded-lg"
                         placeholder="Ex: Chulalongkorn detailContent"
                         onChange={handleChangeDetailContent}
-                      />
+                      /> */}
                       {error.detailContent && (
                         <span className="flex gap-1 items-center text-redNotification">
                           <RiErrorWarningFill />
@@ -155,48 +176,8 @@ export default function ModalEditOverView({
                         </span>
                       )}
                     </div>
-                    <div className="w-full flex flex-col gap-1">
-                      {/* <Slate editor={editor} value={initialValue}>
-                        <div className="flex">
-                          <button
-                            onClick={(event) => {
-                              event.preventDefault();
-                              // Determine whether any of the currently selected blocks are code blocks.
-
-                              const [match] = Editor.nodes(editor, {
-                                match: (n) => n.type === 'bold',
-                              });
-                              // Toggle the block type depending on whether there's already a match.
-                              Transforms.setNodes(
-                                editor,
-                                { type: match ? 'paragraph' : 'bold' },
-                                { match: (n) => Editor.isBlock(editor, n) },
-                              );
-                            }}
-                          >
-                            B
-                          </button>
-                        </div>
-                        <Editable
-                          renderElement={renderElement}
-                          // onKeyDown={(event) => {
-                          //   if (event.key === '`' && event.ctrlKey) {
-                          //     event.preventDefault();
-                          //     // Determine whether any of the currently selected blocks are code blocks.
-                          //     const [match] = Editor.nodes(editor, {
-                          //       match: (n) => n.type === 'code',
-                          //     });
-                          //     // Toggle the block type depending on whether there's already a match.
-                          //     Transforms.setNodes(
-                          //       editor,
-                          //       { type: match ? 'paragraph' : 'code' },
-                          //       { match: (n) => Editor.isBlock(editor, n) },
-                          //     );
-                          //   }
-                          // }}
-                        />
-                      </Slate> */}
-                      <RichTextEditor initialValue="" getValue={getValue} />
+                    <div className="w-full flex flex-col gap-1 prose">
+                      {/* <td dangerouslySetInnerHTML={{ __html: value }} /> */}
                     </div>
                   </div>
 

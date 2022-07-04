@@ -10,6 +10,8 @@ import {
   deleteFollows,
   getFollowById,
 } from '../../api/followApi';
+import { Link, useNavigate } from 'react-router-dom';
+import { createChatRoom } from '../../api/messageApi';
 
 export default function MainProfile({
   role,
@@ -24,9 +26,10 @@ export default function MainProfile({
   country,
   companyName,
   userId,
+  websiteLink,
 }) {
   // set coverImage and uploadEl
-
+  const navigate = useNavigate();
   const [coverImage, setCoverImage] = useState(null);
   const [follow, setFollow] = useState(false);
   const [comfirmUpload, setComfirmUpload] = useState(false);
@@ -48,6 +51,15 @@ export default function MainProfile({
   //     fetchFollow();
   //   }
   // }, []);
+
+  const handleCreateChatRoom = async () => {
+    try {
+      await createChatRoom(userId);
+      navigate('/messaging');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChangeCover = (e) => {
     if (e.target.files[0]) {
@@ -196,7 +208,10 @@ export default function MainProfile({
                         </button>
                       )}
                   {!isUser && (
-                    <button className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold">
+                    <button
+                      className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
+                      onClick={handleCreateChatRoom}
+                    >
                       Message
                     </button>
                   )}
@@ -222,7 +237,16 @@ export default function MainProfile({
                       <span>Follow</span>
                     </button>
                   )}
-                  <button className="flex items-center gap-2 px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold">
+                  <button
+                    className="flex items-center px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
+                    onClick={handleCreateChatRoom}
+                  >
+                    Message
+                  </button>
+                  <Link
+                    to={websiteLink ? websiteLink : '/'}
+                    className="flex items-center gap-2 px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
+                  >
                     <span>Visit website</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +260,7 @@ export default function MainProfile({
                     >
                       <path d="M15 1v6h-2V4.41L7.41 10 6 8.59 11.59 3H9V1zm-4 10a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h2V3H5a3 3 0 00-3 3v5a3 3 0 003 3h5a3 3 0 003-3V9h-2z"></path>
                     </svg>
-                  </button>
+                  </Link>
                 </>
               )}
             </div>
