@@ -93,8 +93,9 @@ export default function MessageContent({ chatRoom }) {
   };
 
   useEffect(() => {
+    socket.removeListener('chat', updateChat);
     socket.on('chat', updateChat);
-  }, []);
+  }, [chatRoom]);
 
   useEffect(() => {
     updateChat();
@@ -185,7 +186,7 @@ export default function MessageContent({ chatRoom }) {
           </Transition>
         </Menu>
       </div>
-      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-auto gap-5">
+      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-scroll gap-5">
         {messages &&
           messages.map((message) => (
             <MessageElementWithAvatar message={message} key={message.id} />

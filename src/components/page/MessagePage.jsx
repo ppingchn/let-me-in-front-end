@@ -4,7 +4,7 @@ import AddToYourFeed from '../Home/AddToYourFeed';
 import JobElement from '../job/JobElement';
 import MessageContent from '../message/MessageContent';
 import MessageList from '../message/MessageList';
-import { listChatRooms } from '../../api/messageApi';
+import { listChatRooms, listChatMsg } from '../../api/messageApi';
 import { io } from 'socket.io-client';
 
 export default function MessagePage() {
@@ -24,7 +24,8 @@ export default function MessagePage() {
     listChatRooms().then((chatRooms) => {
       setChatRooms(chatRooms);
       if (chatRooms) {
-        setCurrentChatRoom(chatRooms[0]);
+        const curr = chatRooms[0];
+        setCurrentChatRoom(curr);
       }
     });
   }, []);
@@ -42,7 +43,12 @@ export default function MessagePage() {
             />
           </div>
           <div className="flex flex-col w-full">
-            <MessageContent chatRoom={currentChatRoom} />
+            {currentChatRoom && (
+              <MessageContent
+                chatRoom={currentChatRoom}
+                key={currentChatRoom.id}
+              />
+            )}
           </div>
         </div>
 
