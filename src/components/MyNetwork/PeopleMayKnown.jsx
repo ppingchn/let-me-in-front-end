@@ -36,8 +36,8 @@ function PeopleMayKnown() {
             <ProfileMayKnown
               key={idx}
               profilePic={el.profilePic}
-              firstName={el.UserDetails[0].firstName}
-              lastName={el.UserDetails[0].lastName}
+              firstName={el.UserDetails[0]?.firstName}
+              lastName={el.UserDetails[0]?.lastName}
               requestToId={el.id}
             />
           );
