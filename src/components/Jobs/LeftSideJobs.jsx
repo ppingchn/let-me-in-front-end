@@ -1,9 +1,11 @@
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 function LeftSideJobs() {
   const [toggleShow, setToggleShow] = useState(false);
+  const { user } = useAuth();
   return (
     <>
       <div className="h-fit w-full  border-b-[1px]  rounded-lg border-gray bg-white ">
@@ -132,24 +134,26 @@ function LeftSideJobs() {
       </div>
 
       <div className="grid">
-        <Link
-          to="/jobs/createJob"
-          className="mt-3 flex items-center justify-center py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            data-supported-dps="24x24"
-            fill="currentColor"
-            className="mercado-match mr-2"
-            width="24"
-            height="24"
-            focusable="false"
+        {user.role === 'company' && (
+          <Link
+            to="/jobs/createJob"
+            className="mt-3 flex items-center justify-center py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
           >
-            <path d="M19 12h2v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h6v2H6a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1zm4-8a2.91 2.91 0 01-.87 2l-8.94 9L7 17l2-6.14 9-9A3 3 0 0123 4zm-4 2.35L17.64 5l-7.22 7.22 1.35 1.34z"></path>
-          </svg>
-          <p> Post a free job</p>
-        </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              data-supported-dps="24x24"
+              fill="currentColor"
+              className="mercado-match mr-2"
+              width="24"
+              height="24"
+              focusable="false"
+            >
+              <path d="M19 12h2v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h6v2H6a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1zm4-8a2.91 2.91 0 01-.87 2l-8.94 9L7 17l2-6.14 9-9A3 3 0 0123 4zm-4 2.35L17.64 5l-7.22 7.22 1.35 1.34z"></path>
+            </svg>
+            <p> Post a free job</p>
+          </Link>
+        )}
       </div>
     </>
   );

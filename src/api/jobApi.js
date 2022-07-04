@@ -11,6 +11,9 @@ export function getJobAlertById(companyId) {
 export function getAllJob() {
   return axios.get(`/jobList`);
 }
+export function getJobById(jobId) {
+  return axios.get(`/jobList/${jobId}`);
+}
 
 export function createJob(
   position,

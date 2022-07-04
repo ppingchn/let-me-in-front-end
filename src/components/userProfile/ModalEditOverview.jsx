@@ -11,6 +11,7 @@ import validator from 'validator';
 import RichTextEditor from '../SlateEditor/Draft';
 // import JoditEditor from 'jodit-react';
 import MDEditor from '@uiw/react-md-editor';
+import { editOverviewCompany } from '../../api/userApi';
 // import RichTextExample from '../SlateEditor/TestEditText';
 
 export default function ModalEditOverView({
@@ -30,7 +31,7 @@ export default function ModalEditOverView({
     website: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let error = {};
 
@@ -45,6 +46,7 @@ export default function ModalEditOverView({
 
     if (Object.keys(error).length === 0) {
       console.log(overview);
+      await editOverviewCompany(overview.detailContent, overview.website);
       setOpen(false);
     }
   };
@@ -129,7 +131,7 @@ export default function ModalEditOverView({
                     </span>
 
                     {/* detailContent Name */}
-                    <div className="w-full flex flex-col gap-1 prose">
+                    <div className="w-full max-w-none flex flex-col gap-1 prose">
                       <label
                         htmlFor="detailContent"
                         className="text-sm text-darkgray"

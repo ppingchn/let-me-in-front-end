@@ -44,9 +44,9 @@ function UploadProfilePic({
             <div className="mt-1 sm:mt-0 sm:col-span-2">
               <div className="flex items-center">
                 <img
-                  className="rounded-full  "
-                  style={{ width: 60 }}
+                  className="rounded-full h-10 w-10 object-cover"
                   src={URL.createObjectURL(profilePic)}
+                  alt=""
                 >
                   {/* <img
                     className="h-full w-full text-gray-500"

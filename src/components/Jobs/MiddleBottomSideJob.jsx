@@ -1,31 +1,10 @@
 import { IoClose } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MiddleBottomSideJob(props) {
   const { jobs } = props;
-  const CompanyArray = [
-    {
-      position: 'Project management engineer',
-      companyName: 'Google',
-      location: 'Bangkok,Bangkok City, Thailand',
-      workEnvironment: 'Remote',
-      updatedAtPost: '1 week ago',
-    },
-    {
-      position: 'Project management engineer',
-      companyName: 'Google',
-      location: 'Bangkok,Bangkok City, Thailand',
-      workEnvironment: 'Remote',
-      updatedAtPost: '1 week ago',
-    },
-    {
-      position: 'Project management engineer',
-      companyName: 'Google',
-      location: 'Bangkok,Bangkok City, Thailand',
-      workEnvironment: 'Remote',
-      updatedAtPost: '1 week ago',
-    },
-  ];
+  const navigate = useNavigate();
+
   return (
     <div className="h-fit w-full  border-b-[1px]  rounded-lg border-gray bg-white px-4 py-4">
       {/* Header: Suggested job searches */}
@@ -40,14 +19,17 @@ function MiddleBottomSideJob(props) {
         {/* Suggest job searches */}
         {jobs?.map((el, idx) => {
           return (
-            <div className="py-3">
+            <div
+              className="py-3 cursor-pointer"
+              onClick={() => navigate(`/jobs/jobDetails/${el.id}`)}
+            >
               <div className="grid grid-cols-8 gap-3 border-b-[1px] border-gray-200 pb-4">
                 {/* Img */}
                 <img
                   width="56"
                   src={
-                    el.User.profilePic
-                      ? el.User.profilePic
+                    el.User?.profilePic
+                      ? el.User?.profilePic
                       : `https://media-exp1.licdn.com/dms/image/C4D0BAQHiNSL4Or29cg/company-logo_100_100/0/1519856215226?e=1664409600&amp;v=beta&amp;t=AixSwaKqIgJMn2IGCOShWaFpuXBZ8jro06PcuDikRUo`
                   }
                   loading="lazy"
@@ -62,11 +44,11 @@ function MiddleBottomSideJob(props) {
                     {el.position}
                   </p>
                   <p className="text-sm">
-                    {el.User.CompanyDetails[0].companyName}
+                    {el.User?.CompanyDetails[0].companyName}
                   </p>
                   <div className="flex gap-2">
                     <p className="text-sm text-gray-500">
-                      {el.User.province} {el.User.country}
+                      {el.User?.province} {el.User?.country}
                     </p>
                     <p className="text-sm text-gray-500">
                       {el.workEnvironment}

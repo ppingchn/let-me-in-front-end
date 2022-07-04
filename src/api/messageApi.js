@@ -5,9 +5,8 @@ export async function listChatRooms() {
   const listRoom = await axios.get('/chatRoom');
   return listRoom.data;
 }
-export async function createChatRoom(firstUserId, secondUserId) {
-  const rooms = await axios.post('/chatRoom', { firstUserId, secondUserId });
-  return rooms.data.chatRoom;
+export async function createChatRoom(firstUserId) {
+  return axios.post('/chatRoom', { firstUserId });
 }
 
 export async function deleteChatRoom(chatRoomId) {
