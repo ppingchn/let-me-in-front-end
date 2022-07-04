@@ -5,9 +5,10 @@ import AddToYourFeed from '../Home/AddToYourFeed';
 import CreatePost from '../Home/CreatePost';
 import Post from '../Home/Post';
 import { usePost } from '../../context/postContext';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function HomePage() {
-  const { post } = usePost();
+  const { post, fetchAllPost } = usePost();
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
 
   console.log(post);
@@ -28,13 +29,26 @@ export default function HomePage() {
         </div>
 
         {/* middle section */}
-        <div className="flex flex-col flex-auto w-full sm:w-[540px] gap-5">
-          {/* start post */}
-          <CreatePost setOpenCreatePostModal={setOpenCreatePostModal} />
-          {post?.map((el, idx) => (
-            <Post key={idx} data={el} />
-          ))}
-        </div>
+
+        <InfiniteScroll
+          dataLength={post.length}
+          next={fetchAllPost}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          <div className="flex flex-col flex-auto w-full sm:w-[540px] gap-5">
+            {/* start post */}
+            <CreatePost setOpenCreatePostModal={setOpenCreatePostModal} />
+            {post?.map((el, idx) => (
+              <Post key={idx} data={el} />
+            ))}
+          </div>
+        </InfiniteScroll>
 
         {/* right section */}
         <div className="hidden lg:flex lg:flex-auto w-[320px] min-w-[320px] max-w-[320px]">

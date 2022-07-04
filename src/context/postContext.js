@@ -6,7 +6,13 @@ import {
   createLikeComment,
   deleteLikeComment,
 } from '../api/likeApi';
-import { fetchPost, createPost, updatePost, deletePost } from '../api/postApi';
+import {
+  fetchPost,
+  createPost,
+  updatePost,
+  deletePost,
+  fetchPostByPage,
+} from '../api/postApi';
 import { createReply, deleteReply, editReply } from '../api/replyApi';
 import { useAuth } from './authContext';
 
@@ -14,11 +20,14 @@ const PostContext = createContext();
 
 function PostContextProvider({ children }) {
   const { user } = useAuth();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([]);
+  const [page, setPage] = useState(0);
+  const [limit] = useState(2);
   //Post function
-  const fetchAllPost = async () => {
-    const resPost = await fetchPost();
-    setPost(resPost.data.posts);
+  const fetchPostLimit = async () => {
+    const resPost = await fetchPostByPage(page, limit);
+    setPost([...post, ...resPost.data.posts]);
+    setPage(resPost.data.nextPage);
   };
   const createUserPost = async (input) => {
     await createPost(input);
@@ -83,6 +92,7 @@ function PostContextProvider({ children }) {
     <PostContext.Provider
       value={{
         post,
+        fetchAllPost,
         createUserPost,
         editUserPost,
         deletePost,
