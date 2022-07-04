@@ -23,14 +23,20 @@ export default function MessageList({
       </div>
       <div className="flex flex-col w-full rounded-bl-lg">
         {chatRooms &&
-          chatRooms.map((chatRoom) => (
-            <MessageListElement
-              key={chatRoom.id}
-              chatRoom={chatRoom}
-              onClick={() => setCurrentChatRoom(chatRoom)}
-              active={currentChatRoom == chatRoom}
-            />
-          ))}
+          chatRooms
+            .sort(
+              (a, b) =>
+                new Date(b.ChatMessages[0].createdAt) -
+                new Date(a.ChatMessages[0].createdAt),
+            )
+            .map((chatRoom) => (
+              <MessageListElement
+                key={chatRoom.id}
+                chatRoom={chatRoom}
+                onClick={() => setCurrentChatRoom(chatRoom)}
+                active={currentChatRoom.id == chatRoom.id}
+              />
+            ))}
       </div>
     </div>
   );
