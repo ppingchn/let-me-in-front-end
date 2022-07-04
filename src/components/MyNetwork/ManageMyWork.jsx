@@ -63,11 +63,10 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="ml-4 mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
-                  className="ml-4"
                 >
                   <path d="M15 13.25V21H9v-7.75A2.25 2.25 0 0111.25 11h1.5A2.25 2.25 0 0115 13.25zm5-.25h-1a2 2 0 00-2 2v6h5v-6a2 2 0 00-2-2zM12 3a3 3 0 103 3 3 3 0 00-3-3zm7.5 8A2.5 2.5 0 1017 8.5a2.5 2.5 0 002.5 2.5zM5 13H4a2 2 0 00-2 2v6h5v-6a2 2 0 00-2-2zm-.5-7A2.5 2.5 0 107 8.5 2.5 2.5 0 004.5 6z"></path>
                 </svg>
@@ -82,11 +81,10 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="ml-4 mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
-                  className="ml-4"
                 >
                   <path d="M3 3v15a3 3 0 003 3h12a3 3 0 003-3V3zm13 1.75A1.25 1.25 0 1114.75 6 1.25 1.25 0 0116 4.75zm-8 0A1.25 1.25 0 116.75 6 1.25 1.25 0 018 4.75zM19 18a1 1 0 01-1 1H6a1 1 0 01-1-1V9h14zm-5.9-3a1 1 0 00-1-1H12a3.12 3.12 0 00-1 .2l-1-.2v-3h3.9v1H11v1.15a3.7 3.7 0 011.05-.15 1.89 1.89 0 012 1.78V15a1.92 1.92 0 01-1.84 2H12a1.88 1.88 0 01-2-1.75 1 1 0 010-.25h1a.89.89 0 001 1h.1a.94.94 0 001-.88z"></path>
                 </svg>
@@ -101,11 +99,10 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="ml-4 mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
-                  className="ml-4"
                 >
                   <path d="M4 2v20h16V2zm14 18h-4v-2h-4v2H6V4h12zm-7-8H8v-2h3zm0 4H8v-2h3zm5-4h-3v-2h3zm-5-4H8V6h3zm5 0h-3V6h3zm0 8h-3v-2h3z"></path>
                 </svg>
@@ -120,11 +117,10 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="ml-4 mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
-                  className="ml-4"
                 >
                   <path d="M13 13h5v1h-5zm5-5H6v3h12zm-5 8h5v-1h-5zm9-12v13a3 3 0 01-3 3H5a3 3 0 01-3-3V4zm-2 2H4v11a1 1 0 001 1h14a1 1 0 001-1zm-9 7H6v3h5z"></path>
                 </svg>
@@ -139,11 +135,10 @@ function ManageMyWork() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="ml-4 mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
-                  className="ml-4"
                 >
                   <path d="M21 10V8h-4.56L17 3h-2l-.56 5h-4L11 3H9l-.56 5H3v2h5.22l-.44 4H3v2h4.56L7 21h2l.56-5h4L13 21h2l.56-5H21v-2h-5.22l.44-4zm-7.22 4h-4l.44-4h4z"></path>
                 </svg>
