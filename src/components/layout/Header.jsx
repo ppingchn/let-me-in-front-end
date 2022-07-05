@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { AiFillLinkedin } from 'react-icons/ai';
 import {
   FaHome,
@@ -13,7 +13,6 @@ import { RiArrowDownSFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllUserByLetter } from '../../api/userApi';
 import { useAuth } from '../../context/authContext';
-import { Dialog, Transition } from '@headlessui/react';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ export default function Header() {
   const [companySuggest, setCompanySuggest] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
-  
+
   let typingTimer;
 
   const fetchAllUserByLetter = async (letter) => {
