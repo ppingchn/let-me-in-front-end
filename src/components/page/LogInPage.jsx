@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
+// import jwt_decode from "jwt-decode"
+// import { registerGoogleApi } from '../../api/registerApi';
 
 export default function LogInPage() {
-  const { login } = useAuth();
+
+
+  const { login ,registerGoogle } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmitLogin = async (e) => {
@@ -14,8 +19,34 @@ export default function LogInPage() {
       console.log(err);
     }
   };
+
+  const  handleCallbackResponse = async(response) => {
+    try{
+
+      await registerGoogle({token:response.credential})
+      // console.log('JWT ID token: ' + response.credential);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    /*global google */
+
+    google.accounts.id.initialize({
+      client_id:
+        '732724610253-uh51lphhkvujfovqcnad8msjip31mnig.apps.googleusercontent.com',
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById('signInDev'), {
+      theme: 'outline',
+      size: 'large',
+    });
+  }, []);
   return (
     <>
+     
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -102,12 +133,12 @@ export default function LogInPage() {
                 </div>
 
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgotPassword"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -120,6 +151,8 @@ export default function LogInPage() {
                 </button>
               </div>
             </form>
+
+            <div id="signInDev" className='w-full mt-2'></div>
 
             <div className="mt-6">
               <div className="relative">
