@@ -278,8 +278,12 @@ export default function MainProfile({
                   >
                     Message
                   </button>
+                  {/* to={{ pathname: "https://example.zendesk.com/hc/en-us/articles/123456789-Privacy-Policies" }} target="_blank" */}
                   <Link
-                    to={websiteLink ? websiteLink : '/'}
+                    to={{ pathname: websiteLink ? websiteLink : '/' }}
+                    target="_blank"
+                    replace
+                    // to={websiteLink ? websiteLink : '/'}
                     className="flex items-center gap-2 px-4 py-[5px] bg-blue hover:bg-sky-900 transition-all text-white rounded-full font-bold"
                   >
                     <span>Visit website</span>

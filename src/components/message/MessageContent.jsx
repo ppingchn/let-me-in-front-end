@@ -91,14 +91,13 @@ export default function MessageContent({ chatRoom }) {
     if (chatRoom) {
       listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
     }
-
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     socket.removeListener('chat', updateChat);
     socket.on('chat', updateChat);
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatRoom]);
 
   useEffect(() => {
@@ -107,7 +106,7 @@ export default function MessageContent({ chatRoom }) {
     setLoading(false);
     console.dir(messagesEndRef.current);
 
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatRoom]);
 
   if (!chatRoom) {
@@ -209,7 +208,7 @@ export default function MessageContent({ chatRoom }) {
           </div>
         )}
         {messages &&
-          messages.map((message) => (
+          messages?.map((message) => (
             <MessageElementWithAvatar message={message} key={message.id} />
           ))}
         <div ref={messagesEndRef} />

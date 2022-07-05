@@ -1,21 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import Profile from '../informationForm/Profile';
 import PersonalInformation from '../informationForm/PersonalInformation';
-import WorkExperience from '../informationForm/WorkExperience';
 import { useAuth } from '../../context/authContext';
-import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
+
+import validator from 'validator';
 
 export default function SignupCompanyPage() {
   // useAuthContext
   const { register } = useAuth();
   //useState
-
-  //This Page
-  const [count, setCount] = useState(1);
-  const [countArray, setCountArray] = useState([0]);
 
   //Profile
   const [profilePic, setProfilePic] = useState('');
@@ -28,12 +24,6 @@ export default function SignupCompanyPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [detail, setDetail] = useState('');
-
-  const [position, setPositon] = useState('');
-  const [workDescription, setWorkDescription] = useState('');
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
   //Company Detail
   const [companyName, setCompanyName] = useState('');
@@ -70,30 +60,77 @@ export default function SignupCompanyPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
-      setLoading(true);
-      //validate input first
 
-      const companyData = new FormData();
-      companyData.append('role', 'company');
-      companyData.append('username', username);
-      companyData.append('password', password);
-      companyData.append('confirmPassword', confirmPassword);
-      companyData.append('profilePic', profilePic);
-      companyData.append('coverPic', coverPhoto);
-      companyData.append('email', email);
-      companyData.append('detail', detail);
-      companyData.append('phoneNumber', phoneNumber);
-      companyData.append('websiteLink', websiteLink);
-      companyData.append('companyName', companyName);
-      companyData.append('location', location);
-      companyData.append('country', country);
-      companyData.append('houseNumber', houseNumber);
-      companyData.append('subDistrict', subDistrict);
-      companyData.append('district', district);
-      companyData.append('province', province);
-      companyData.append('postCode', postalCode);
-      await register(companyData);
-      navigate('/');
+      let error = {};
+
+      if (validator.isEmpty(username + '')) {
+        error.username = 'Username is required.';
+      }
+      if (validator.isEmpty(password + '')) {
+        error.password = 'Password is required.';
+      }
+      if (validator.isEmpty(confirmPassword + '')) {
+        error.confirmPassword = 'Confirm password is required.';
+      }
+      if (validator.isEmpty(email + '')) {
+        error.email = 'Email is required.';
+      }
+      if (validator.isEmpty(companyName + '')) {
+        error.companyName = 'Company name is required.';
+      }
+      if (validator.isEmpty(location + '')) {
+        error.location = 'Location is required.';
+      }
+      if (validator.isEmpty(country + '')) {
+        error.country = 'Country is required.';
+      }
+      if (validator.isEmpty(houseNumber + '')) {
+        error.houseNumber = 'House number is required.';
+      }
+      if (validator.isEmpty(subDistrict + '')) {
+        error.subDistrict = 'Sub district is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(province + '')) {
+        error.province = 'Province is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(postalCode + '')) {
+        error.postalCode = 'Postal code is required.';
+      }
+
+      setError({ ...error });
+
+      if (Object.keys(error).length === 0) {
+        setLoading(true);
+        //validate input first
+
+        const companyData = new FormData();
+        companyData.append('role', 'company');
+        companyData.append('username', username);
+        companyData.append('password', password);
+        companyData.append('confirmPassword', confirmPassword);
+        companyData.append('profilePic', profilePic);
+        companyData.append('coverPic', coverPhoto);
+        companyData.append('email', email);
+        companyData.append('detail', detail);
+        companyData.append('phoneNumber', phoneNumber);
+        companyData.append('websiteLink', websiteLink);
+        companyData.append('companyName', companyName);
+        companyData.append('location', location);
+        companyData.append('country', country);
+        companyData.append('houseNumber', houseNumber);
+        companyData.append('subDistrict', subDistrict);
+        companyData.append('district', district);
+        companyData.append('province', province);
+        companyData.append('postCode', postalCode);
+        await register(companyData);
+        navigate('/');
+      }
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
@@ -147,6 +184,7 @@ export default function SignupCompanyPage() {
                 setMap={setMap}
                 setLongdo={setLongdo}
                 getLocation={getLocation}
+                error={error}
               />
             </div>
 

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import PersonalInformation from '../informationForm/PersonalInformation';
 import WorkExperience from '../informationForm/WorkExperience';
 import Education from '../informationForm/Education';
 import { useAuth } from '../../context/authContext';
+import validator from 'validator';
 
 export default function SignupPage() {
   // Use Context (custom hook)
@@ -39,6 +40,9 @@ export default function SignupPage() {
 
   // loading
   const [loading, setLoading] = useState(false);
+
+  // handle error
+  const [error, setError] = useState({});
 
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
@@ -151,35 +155,87 @@ export default function SignupPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
-      setLoading(true);
-      //validate input first
 
-      // change raw to formData
-      const registerData = new FormData();
-      registerData.append('role', 'user');
-      registerData.append('username', username);
-      registerData.append('firstName', firstname);
-      registerData.append('lastName', lastname);
-      registerData.append('password', password);
-      registerData.append('confirmPassword', confirmPassword);
-      registerData.append('profilePic', profilePic);
-      registerData.append('coverPic', coverPhoto);
-      registerData.append('email', email);
-      registerData.append('gender', gender);
-      registerData.append('detail', detail);
-      registerData.append('birthDate', birthDate);
-      registerData.append('phoneNumber', phoneNumber);
-      registerData.append('country', country);
-      registerData.append('houseNumber', houseNumber);
-      registerData.append('subDistrict', subDistrict);
-      registerData.append('district', district);
-      registerData.append('province', province);
-      registerData.append('postCode', postalCode);
-      registerData.append('educationArray', JSON.stringify(educationArray));
-      registerData.append('experienceArray', JSON.stringify(companyArray));
-      registerData.append('skillArray', JSON.stringify(companyArray));
-      await register(registerData);
-      navigate('/');
+      let error = {};
+
+      if (validator.isEmpty(username + '')) {
+        error.username = 'Username is required.';
+      }
+      if (validator.isEmpty(password + '')) {
+        error.password = 'Password is required.';
+      }
+      if (validator.isEmpty(firstname + '')) {
+        error.firstname = 'First name is required.';
+      }
+      if (validator.isEmpty(lastname + '')) {
+        error.lastname = 'Last name is required.';
+      }
+      if (validator.isEmpty(gender + '')) {
+        error.gender = 'Gender is required.';
+      }
+      if (validator.isEmpty(confirmPassword + '')) {
+        error.confirmPassword = 'Confirm password is required.';
+      }
+      if (validator.isEmpty(email + '')) {
+        error.email = 'Email is required.';
+      }
+      if (validator.isEmpty(birthDate + '')) {
+        error.birthDate = 'Birth date is required.';
+      }
+      if (validator.isEmpty(country + '')) {
+        error.country = 'Country is required.';
+      }
+      if (validator.isEmpty(houseNumber + '')) {
+        error.houseNumber = 'House number is required.';
+      }
+      if (validator.isEmpty(subDistrict + '')) {
+        error.subDistrict = 'Sub district is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(province + '')) {
+        error.province = 'Province is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(postalCode + '')) {
+        error.postalCode = 'Postal code is required.';
+      }
+
+      setError({ ...error });
+
+      if (Object.keys(error).length === 0) {
+        setLoading(true);
+
+        // change raw to formData
+        const registerData = new FormData();
+        registerData.append('role', 'user');
+        registerData.append('username', username);
+        registerData.append('firstName', firstname);
+        registerData.append('lastName', lastname);
+        registerData.append('password', password);
+        registerData.append('confirmPassword', confirmPassword);
+        registerData.append('profilePic', profilePic);
+        registerData.append('coverPic', coverPhoto);
+        registerData.append('email', email);
+        registerData.append('gender', gender);
+        registerData.append('detail', detail);
+        registerData.append('birthDate', birthDate);
+        registerData.append('phoneNumber', phoneNumber);
+        registerData.append('country', country);
+        registerData.append('houseNumber', houseNumber);
+        registerData.append('subDistrict', subDistrict);
+        registerData.append('district', district);
+        registerData.append('province', province);
+        registerData.append('postCode', postalCode);
+        registerData.append('educationArray', JSON.stringify(educationArray));
+        registerData.append('experienceArray', JSON.stringify(companyArray));
+        registerData.append('skillArray', JSON.stringify(companyArray));
+        await register(registerData);
+        navigate('/');
+      }
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
@@ -229,6 +285,7 @@ export default function SignupPage() {
                 setDistrict={setDistrict}
                 setProvince={setProvince}
                 setPostalCode={setPostalCode}
+                error={error}
               />
 
               <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
