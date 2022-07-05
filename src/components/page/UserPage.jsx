@@ -136,7 +136,10 @@ export default function UserPage() {
                     )}
                     {menuSelect === 'About' && (
                       <>
-                        <Overview />
+                        <Overview
+                          overview={userById?.companyDetail?.overview}
+                          websiteLink={userById?.companyDetail?.websiteLink}
+                        />
                         <Location
                           location={userById?.companyDetail?.location}
                         />
