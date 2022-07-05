@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
 function Logo() {
   return (
     <>
-      <div className="text-blue">Logo</div>
+      {/* <div className="text-blue">Logo</div> */}
       <Outlet />
     </>
   );

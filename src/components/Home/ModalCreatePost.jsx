@@ -17,10 +17,12 @@ export default function ModalCreatePost({ open, setOpen }) {
   const [show, setShow] = useState('main');
   const [detail, setDetail] = useState('');
   const [imageUpload, setImageUpload] = useState('');
+  const [loading, setLoading] = useState('');
   const inputPhotoEl = useRef(null);
 
   const handleCreatePost = async () => {
     try {
+      setLoading(true);
       const postFormData = new FormData();
       postFormData.append('detail', detail);
       for (let img of imageUpload) {
@@ -31,6 +33,8 @@ export default function ModalCreatePost({ open, setOpen }) {
       setOpen(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,6 +78,16 @@ export default function ModalCreatePost({ open, setOpen }) {
               <Dialog.Panel className="relative bg-white rounded-lg pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
                 {show === 'main' && (
                   <div>
+                    {loading && (
+                      <div className="relative">
+                        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+                          <div className="flex w-full h-full justify-center items-center">
+                            {/* loading */}
+                            <div class="lds-dual-ring"></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     <div className="flex px-4 sm:px-6 py-3 justify-between rounded-t-lg items-center border-b-[1px] border-gray">
                       <Dialog.Title as="h3" className="text-xl">
                         Create a post

@@ -4,7 +4,6 @@ import { useAuth } from '../../context/authContext';
 
 export default function Profile() {
   const { user } = useAuth();
-  console.log(user);
   return (
     <div className="h-fit w-full sm:min-w-[230px] sm:max-w-[233px] border-[1px] rounded-lg border-slate-200">
       {/* avatar */}
