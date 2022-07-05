@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerApi, loginApi, getMe } from '../api/registerApi';
+import { registerApi,registerGoogleApi, loginApi, getMe } from '../api/registerApi';
 import {
   getAccessToken,
   removeAccessToken,
@@ -44,6 +44,13 @@ function AuthContextProvider({ children }) {
     setUser(resMe.data.user);
   };
 
+  const registerGoogle = async(input) =>{
+    const res = await registerGoogleApi(input);
+    setAccessToken(res.data.token);
+    const resMe = await axios.get('/users/me');
+    setUser(resMe.data.user);
+  }
+
   const logout = async () => {
     removeAccessToken();
     setUser(null);
@@ -51,7 +58,7 @@ function AuthContextProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, register, login, logout }}>
+    <AuthContext.Provider value={{ user, register,registerGoogle, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
