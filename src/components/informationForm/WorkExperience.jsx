@@ -60,7 +60,7 @@ function WorkExperience({ index, companyArray, setCompanyArray }) {
               name="companyName"
               id="companyName"
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangeCompanyName}
             />
           </div>
@@ -79,7 +79,7 @@ function WorkExperience({ index, companyArray, setCompanyArray }) {
               name="position"
               id="position"
               autoComplete="family-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangePosition}
             />
           </div>
@@ -97,7 +97,7 @@ function WorkExperience({ index, companyArray, setCompanyArray }) {
               name="position"
               id="position"
               autoComplete="family-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangeWorkDescription}
             />
           </div>

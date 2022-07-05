@@ -79,7 +79,7 @@ export default function ModalCreatePost({ open, setOpen }) {
                 {show === 'main' && (
                   <div>
                     {loading && (
-                      <div className="relative">
+                      <div className="relative z-50">
                         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
                           <div className="flex w-full h-full justify-center items-center">
                             {/* loading */}
@@ -120,9 +120,9 @@ export default function ModalCreatePost({ open, setOpen }) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col px-4 sm:px-6 py-4 justify-between rounded-t-lg items-start">
+                    <div className="flex flex-col gap-3 px-4 sm:px-6 py-4 justify-between max-h-[500px] rounded-t-lg items-start">
                       <textarea
-                        className="w-full h-18 border-transparent focus:outline-none resize-none"
+                        className="w-full h-18 border-transparent min-h-[150px] focus:outline-none resize-none"
                         placeholder="What do you want to talk about?"
                         rows="6"
                         onChange={(e) => {
@@ -142,7 +142,7 @@ export default function ModalCreatePost({ open, setOpen }) {
                         onChange={handleChangeCover}
                       />
                       {imageUpload && (
-                        <div className="relative">
+                        <div className="relative overflow-y-auto">
                           {Array.from(imageUpload).map((el, idx) => (
                             <img
                               key={idx}

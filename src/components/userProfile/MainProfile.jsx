@@ -35,7 +35,7 @@ export default function MainProfile({
   const [coverImage, setCoverImage] = useState(null);
   const [follow, setFollow] = useState(false);
   const [comfirmUpload, setComfirmUpload] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingCover, setLoadingCover] = useState(false);
   const [openModalEditIntro, setOpenModalEditIntro] = useState(false);
   const uploadImage = useRef();
 
@@ -72,10 +72,17 @@ export default function MainProfile({
   };
 
   const handleSubmitCoverImage = async () => {
-    const formData = new FormData();
-    formData.append('coverImage', coverImage);
-    await uploadCoverImage(formData);
-    setComfirmUpload(false);
+    try {
+      setLoadingCover(true);
+      const formData = new FormData();
+      formData.append('coverImage', coverImage);
+      await uploadCoverImage(formData);
+      setComfirmUpload(false);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingCover(false);
+    }
   };
 
   const handleToggleFollow = async () => {
@@ -100,6 +107,16 @@ export default function MainProfile({
       <div className="flex flex-col h-fit w-full border-b-[1px] rounded-lg border-gray bg-white">
         {/* cover image */}
         <div>
+          {loadingCover && (
+            <div className="relative z-10">
+              <div className="absolute flex justify-center items-center w-full h-48 bg-black bg-opacity-50">
+                <div className="flex w-full h-full justify-center items-center">
+                  {/* loading */}
+                  <div class="lds-dual-ring"></div>
+                </div>
+              </div>
+            </div>
+          )}
           <img
             className="h-48 w-full rounded-t-lg object-cover bg-center bg-clip-border"
             src={coverImage ? URL.createObjectURL(coverImage) : coverPic}

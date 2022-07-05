@@ -59,7 +59,7 @@ function PersonalInformation({
               id="username"
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -78,7 +78,7 @@ function PersonalInformation({
               id="password"
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ function PersonalInformation({
               id="confirmPassword"
               onChange={(e) => setConfirmPassword(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -116,7 +116,7 @@ function PersonalInformation({
                 id="first-name"
                 autoComplete="given-name"
                 onChange={(e) => setFirstName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
           </div>
@@ -137,7 +137,7 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setLastName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ function PersonalInformation({
                 name="country"
                 autoComplete="country-name"
                 onChange={(e) => setGender(e.target.value)}
-                className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block focus:ring-blue focus:border-blue w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               >
                 <option value="" selected disabled hidden>
                   Select gender
@@ -203,7 +203,7 @@ function PersonalInformation({
               type="email"
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -222,7 +222,7 @@ function PersonalInformation({
               id="phoneNumber"
               autoComplete="family-name"
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -241,7 +241,7 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
           </div>
@@ -261,7 +261,7 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setWebsiteLink(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
           </div>
@@ -279,7 +279,7 @@ function PersonalInformation({
               id="about"
               name="about"
               rows={6}
-              className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-500 rounded-md"
+              className="max-w-lg shadow-sm block w-full focus:ring-blue focus:border-blue sm:text-sm border border-gray-500 rounded-md"
               onChange={(e) => setDetail(e.target.value)}
               defaultValue={''}
             />
@@ -316,7 +316,7 @@ function PersonalInformation({
               id="street-address"
               autoComplete="street-address"
               onChange={(e) => setCountry(e.target.value)}
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -335,7 +335,7 @@ function PersonalInformation({
               id="street-address"
               onChange={(e) => setHouseNumber(e.target.value)}
               autoComplete="street-address"
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -354,7 +354,7 @@ function PersonalInformation({
               id="city"
               onChange={(e) => setSubDistrict(e.target.value)}
               autoComplete="address-level2"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -372,7 +372,7 @@ function PersonalInformation({
               id="city"
               onChange={(e) => setDistrict(e.target.value)}
               autoComplete="address-level2"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -391,7 +391,7 @@ function PersonalInformation({
               id="region"
               autoComplete="address-level1"
               onChange={(e) => setProvince(e.target.value)}
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -410,7 +410,7 @@ function PersonalInformation({
               id="postal-code"
               onChange={(e) => setPostalCode(e.target.value)}
               autoComplete="postal-code"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>

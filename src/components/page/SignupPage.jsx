@@ -37,6 +37,9 @@ export default function SignupPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [detail, setDetail] = useState('');
 
+  // loading
+  const [loading, setLoading] = useState(false);
+
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
     {
@@ -148,6 +151,7 @@ export default function SignupPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
+      setLoading(true);
       //validate input first
 
       // change raw to formData
@@ -179,12 +183,24 @@ export default function SignupPage() {
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
+        {loading && (
+          <div className="relative z-50">
+            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+              <div className="flex w-full h-full justify-center items-center">
+                {/* loading */}
+                <div class="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-8 " onSubmit={handleSubmitSignUp}>
             <div className="space-y-8 divide-y divide-gray-500 sm:space-y-5">
@@ -284,13 +300,13 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => navigate('/')}
-                  className="bg-white py-2 px-4 border border-gray-500 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="bg-white py-2 px-4 border border-gray-500 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
                 >
                   Save
                 </button>
