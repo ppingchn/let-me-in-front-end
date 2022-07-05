@@ -44,7 +44,7 @@ function MiddleBottomSideJob(props) {
                     {el.position}
                   </p>
                   <p className="text-sm">
-                    {el.User?.CompanyDetails[0].companyName}
+                    {el.User?.CompanyDetails[0]?.companyName}
                   </p>
                   <div className="flex gap-2">
                     <p className="text-sm text-gray-500">

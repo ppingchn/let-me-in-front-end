@@ -8,7 +8,6 @@ export default function NotificationPage() {
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     listNotifications().then((notifications) => {
-      console.log(notifications);
       setNotifications(notifications);
     });
   }, []);

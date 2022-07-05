@@ -16,9 +16,14 @@ export default function NotificationElement({ notification }) {
         src={notification.User.profilePic}
         alt=""
       />
+      <span className="text-xs font-bold">
+        {notification.User?.role === 'user'
+          ? notification.User?.UserDetails[0]?.firstname
+          : notification.User?.CompanyDetails[0]?.companyName}
+      </span>
 
       {/* content */}
-      <span className="w-full text-sm">
+      <span className="w-full text-sm ">
         {notification.PostId && notification.Post.detail}
         {notification.CommentId && notification.Comment.title}
         {notification.JobListId && notification.JobList.jobDescription}
