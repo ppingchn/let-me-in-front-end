@@ -18,7 +18,7 @@ export default function NotificationElement({ notification }) {
       />
       <span className="text-xs font-bold">
         {notification.User?.role === 'user'
-          ? notification.User?.UserDetails[0]?.firstname
+          ? notification.User?.UserDetails[0]?.firstName
           : notification.User?.CompanyDetails[0]?.companyName}
       </span>
 

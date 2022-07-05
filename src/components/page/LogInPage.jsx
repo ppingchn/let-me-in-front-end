@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
-// import jwt_decode from "jwt-decode"
-// import { registerGoogleApi } from '../../api/registerApi';
 
 export default function LogInPage() {
 
