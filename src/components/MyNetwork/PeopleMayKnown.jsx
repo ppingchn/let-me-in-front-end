@@ -31,17 +31,21 @@ function PeopleMayKnown() {
         <span className="text-gray-500 font-medium">See all</span>
       </div>
       <div className="grid grid-cols-2 gap-5  md:grid-cols-3  ">
-        {onlyFriends.map((el, idx) => {
-          return (
-            <ProfileMayKnown
-              key={idx}
-              profilePic={el.profilePic}
-              firstName={el.UserDetails[0].firstName}
-              lastName={el.UserDetails[0].lastName}
-              requestToId={el.id}
-            />
-          );
-        })}
+        {onlyFriends.length > 0 ? (
+          onlyFriends.map((el, idx) => {
+            return (
+              <ProfileMayKnown
+                key={idx}
+                profilePic={el.profilePic}
+                firstName={el.UserDetails[0]?.firstName}
+                lastName={el.UserDetails[0]?.lastName}
+                requestToId={el.id}
+              />
+            );
+          })
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
