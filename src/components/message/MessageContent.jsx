@@ -85,18 +85,20 @@ export default function MessageContent({ chatRoom }) {
     const chat = createChatMsg(chatRoom.id, msg).then(() => setMsg(''));
   };
 
-  useEffect(() => {
-    if (chatRoom) {
-      socket.on('chat', () => {
-        listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
-      });
-    }
-  }, [chatRoom]);
-
-  useEffect(() => {
+  const updateChat = () => {
+    console.log(chatRoom);
     if (chatRoom) {
       listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
     }
+  };
+
+  useEffect(() => {
+    socket.removeListener('chat', updateChat);
+    socket.on('chat', updateChat);
+  }, [chatRoom]);
+
+  useEffect(() => {
+    updateChat();
   }, [chatRoom]);
 
   if (!chatRoom) {
@@ -184,10 +186,10 @@ export default function MessageContent({ chatRoom }) {
           </Transition>
         </Menu>
       </div>
-      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-auto gap-5">
+      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-scroll gap-5">
         {messages &&
           messages.map((message) => (
-            <MessageElementWithAvatar message={message} />
+            <MessageElementWithAvatar message={message} key={message.id} />
           ))}
       </div>
       {/* post */}

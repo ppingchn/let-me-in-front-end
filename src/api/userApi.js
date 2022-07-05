@@ -12,6 +12,32 @@ export function deleteExperience(id) {
   return axios.delete(`/experience/${id}`);
 }
 
+export function editIntro(
+  firstName,
+  lastName,
+  email,
+  headline,
+  industry,
+  houseNumber,
+  subDistrict,
+  district,
+  country,
+  city,
+) {
+  return axios.put(`/users/updateIntro`, {
+    firstName,
+    lastName,
+    email,
+    headline,
+    industry,
+    houseNumber,
+    subDistrict,
+    district,
+    country,
+    city,
+  });
+}
+
 export function addExperience(
   companyName,
   position,
@@ -59,6 +85,7 @@ export function addEducation(degree, university, field, yearStart, yearEnd) {
     yearEnd,
   });
 }
+
 export function editEducation(
   degree,
   university,
@@ -73,6 +100,13 @@ export function editEducation(
     field,
     yearStart,
     yearEnd,
+  });
+}
+
+export function editOverviewCompany(overview, websiteLink) {
+  return axios.put(`/users/updateOverview`, {
+    overview,
+    websiteLink,
   });
 }
 

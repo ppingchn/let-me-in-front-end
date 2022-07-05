@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import AddToYourFeed from '../Home/AddToYourFeed';
 
 import ExperienceEdit from '../userProfile/ExperienceEdit';
