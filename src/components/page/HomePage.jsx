@@ -8,7 +8,7 @@ import { usePost } from '../../context/postContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function HomePage() {
-  const { post, fetchAllPost } = usePost();
+  const { post, fetchAllPost, fetchPostLimit, limit } = usePost();
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
 
   console.log(post);
@@ -32,7 +32,7 @@ export default function HomePage() {
 
         <InfiniteScroll
           dataLength={post.length}
-          next={fetchAllPost}
+          next={fetchPostLimit}
           hasMore={true}
           loader={<h4>Loading...</h4>}
           endMessage={

@@ -3,7 +3,7 @@ export function fetchPost() {
   return axios.get(`/post/me`);
 }
 export function fetchPostByPage(page, limit) {
-  return axios.get(`/post/fetchAllPost?page=${page}&limit=${limit}`);
+  return axios.get(`/post/postByPage?page=${page}&limit=${limit}`);
 }
 export function createPost(input) {
   return axios.post('/post', input);

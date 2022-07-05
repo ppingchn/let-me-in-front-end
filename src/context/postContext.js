@@ -29,6 +29,11 @@ function PostContextProvider({ children }) {
     setPost([...post, ...resPost.data.posts]);
     setPage(resPost.data.nextPage);
   };
+
+  const fetchAllPost = async () => {
+    const resPost = await fetchPost();
+    setPost(resPost.data.posts);
+  };
   const createUserPost = async (input) => {
     await createPost(input);
     fetchAllPost();
@@ -86,13 +91,15 @@ function PostContextProvider({ children }) {
     fetchAllPost();
   };
   useEffect(() => {
-    fetchAllPost();
+    fetchPostLimit();
   }, [user]);
   return (
     <PostContext.Provider
       value={{
         post,
+        limit,
         fetchAllPost,
+        fetchPostLimit,
         createUserPost,
         editUserPost,
         deletePost,

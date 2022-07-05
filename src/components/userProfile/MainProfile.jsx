@@ -12,6 +12,8 @@ import {
 } from '../../api/followApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { createChatRoom } from '../../api/messageApi';
+import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
+import ModalEditIntro from './ModalEditIntro';
 
 export default function MainProfile({
   role,
@@ -34,6 +36,7 @@ export default function MainProfile({
   const [follow, setFollow] = useState(false);
   const [comfirmUpload, setComfirmUpload] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openModalEditIntro, setOpenModalEditIntro] = useState(false);
   const uploadImage = useRef();
 
   // useEffect(() => {
@@ -90,6 +93,10 @@ export default function MainProfile({
   return (
     <div className="h-fit w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200">
       {/* avatar */}
+      <ModalEditIntro
+        open={openModalEditIntro}
+        setOpen={setOpenModalEditIntro}
+      />
       <div className="flex flex-col h-fit w-full border-b-[1px] rounded-lg border-gray bg-white">
         {/* cover image */}
         <div>
@@ -154,6 +161,17 @@ export default function MainProfile({
               />
             )}
           </div>
+
+          {isUser && (
+            <div className="absolute right-0 pr-5 pt-3">
+              <div
+                className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
+                onClick={() => setOpenModalEditIntro(true)}
+              >
+                <AiOutlineEdit className="text-2xl" />
+              </div>
+            </div>
+          )}
         </div>
         <div className="flex flex-col sm:flex-row px-3 gap-2 sm:gap-10">
           <div

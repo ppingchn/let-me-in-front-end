@@ -12,6 +12,32 @@ export function deleteExperience(id) {
   return axios.delete(`/experience/${id}`);
 }
 
+export function editIntro(
+  firstName,
+  lastName,
+  email,
+  headline,
+  industry,
+  houseNumber,
+  subDistrict,
+  district,
+  country,
+  city,
+) {
+  return axios.put(`/users/updateIntro`, {
+    firstName,
+    lastName,
+    email,
+    headline,
+    industry,
+    houseNumber,
+    subDistrict,
+    district,
+    country,
+    city,
+  });
+}
+
 export function addExperience(
   companyName,
   position,
