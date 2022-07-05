@@ -1,7 +1,7 @@
-import { useLocation } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useLocation } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import { useState } from 'react';
 
 function Education({ index, educationArray, setEducationArray }) {
   //Education Information
@@ -63,7 +63,7 @@ function Education({ index, educationArray, setEducationArray }) {
               name="degree"
               id="degree"
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangeDegree}
             />
           </div>
@@ -82,7 +82,7 @@ function Education({ index, educationArray, setEducationArray }) {
               name="university"
               id="university"
               autoComplete="family-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangeUniversity}
             />
           </div>
@@ -101,7 +101,7 @@ function Education({ index, educationArray, setEducationArray }) {
               name="field"
               id="field"
               autoComplete="family-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               onChange={handleChangeField}
             />
           </div>
