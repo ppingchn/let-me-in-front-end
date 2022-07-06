@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { forgotPasswordApi } from '../../api/forgotPasswordApi';
+import { changePasswordApi } from '../../api/forgotPasswordApi';
 
 function ChangePasswordPage() {
     const location = useLocation();
-    // console.log(location.pathname)
-    // console.log(location.pathname.split("/")[2])
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -16,7 +14,7 @@ function ChangePasswordPage() {
   const handleSubmitChangePassword = async (e) => {
     try {
       e.preventDefault();
-      //   await forgotPasswordApi({ email });
+        await changePasswordApi({word , password , confirmPassword});
     } catch (err) {
       console.log(err);
     }
@@ -71,13 +69,13 @@ function ChangePasswordPage() {
           </div>
 
           <div>
-            <Link
-              to="/"
+            <button
+              // to="/"
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Change Password
-            </Link>
+            </button>
             <p className="text-gray-500 text-sm mt-3">
               Please check your password before send
             </p>
