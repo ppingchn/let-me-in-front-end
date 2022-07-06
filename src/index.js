@@ -13,9 +13,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        {/* <PostContextProvider> */}
+        <PostContextProvider>
           <App />
-        {/* </PostContextProvider> */}
+        </PostContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
