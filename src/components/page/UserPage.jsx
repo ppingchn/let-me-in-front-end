@@ -130,7 +130,10 @@ export default function UserPage() {
                   <>
                     {menuSelect === 'Home' && (
                       <>
-                        <AboutCompany setMenuSelect={setMenuSelect} />
+                        <AboutCompany
+                          setMenuSelect={setMenuSelect}
+                          overview={userById?.companyDetail?.overview}
+                        />
                         <PagePosts setMenuSelect={setMenuSelect} />
                       </>
                     )}

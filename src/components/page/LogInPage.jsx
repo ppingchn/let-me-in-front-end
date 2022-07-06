@@ -5,11 +5,8 @@ import { useAuth } from '../../context/authContext';
 
 import { AiFillLinkedin } from 'react-icons/ai';
 
-
 export default function LogInPage() {
-
-
-  const { login ,registerGoogle } = useAuth();
+  const { login, registerGoogle } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmitLogin = async (e) => {
@@ -21,19 +18,17 @@ export default function LogInPage() {
     }
   };
 
-  const  handleCallbackResponse = async(response) => {
-    try{
-
-      await registerGoogle({token:response.credential})
+  const handleCallbackResponse = async (response) => {
+    try {
+      await registerGoogle({ token: response.credential });
       // console.log('JWT ID token: ' + response.credential);
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     /*global google */
-
     google.accounts.id.initialize({
       client_id:
         '732724610253-uh51lphhkvujfovqcnad8msjip31mnig.apps.googleusercontent.com',
@@ -47,7 +42,6 @@ export default function LogInPage() {
   }, []);
   return (
     <>
-     
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <AiFillLinkedin className="text-[80px] text-blue mx-auto" />
@@ -146,7 +140,7 @@ export default function LogInPage() {
               </div>
             </form>
 
-            <div id="signInDev" className='w-full mt-2'></div>
+            <div id="signInDev" className="w-full mt-2"></div>
 
             <div className="mt-6">
               <div className="relative">

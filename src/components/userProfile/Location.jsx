@@ -9,10 +9,10 @@ export default function Location(props) {
 
   useEffect(() => {
     if (map && location) {
-      map.location(JSON.parse(location), true);
-      map.Overlays.clear();
+      map?.location(JSON.parse(location), true);
+      map?.Overlays.clear();
       let marker = new longdo.Marker(JSON.parse(location));
-      map.Overlays.add(marker);
+      map?.Overlays.add(marker);
     }
   }, [map, location]);
 
