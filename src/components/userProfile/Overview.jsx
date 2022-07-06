@@ -26,8 +26,8 @@ export default function Overview({ websiteLink, overview, companySize }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-4 px-5 py-3">
-        <td dangerouslySetInnerHTML={{ __html: overview }} />
+      <div className="flex prose flex-col gap-4 px-5 py-3">
+        <span dangerouslySetInnerHTML={{ __html: overview }} />
         <div className="flex flex-col gap-2">
           <span className="font-bold">Website</span>
           <a
