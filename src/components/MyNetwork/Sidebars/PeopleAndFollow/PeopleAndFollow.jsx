@@ -52,6 +52,7 @@ function PeopleAndFollow() {
 
   //middle State
   const [filter, setFilter] = useState('All');
+  // console.log(filter)
 
 
   useEffect(() => {
@@ -61,26 +62,27 @@ function PeopleAndFollow() {
         if (filter === 'All') {
           setBottomRenderArray(followingArr);
         } else if (filter === 'Connections') {
-          followingArr.filter(async (el, idx) => {
+          followingArr?.filter(async (el, idx) => {
             if (el.FollowerUser) {
               const res = await findFriendId(el.followerId);
-              if (res.data.friends.length > 0) {
+              console.log(res.data.friends)
+              if (res.data.friends?.length > 0) {
                 setBottomRenderArray((prev) => [...prev, el]);
               }
             }
           });
         } else if (filter === 'Out-of-Network') {
-          followingArr.filter(async (el, idx) => {
+          followingArr?.filter(async (el, idx) => {
             if (el.FollowerUser) {
               const res = await findFriendId(el.followerId);
-              if (res.data.friends.length > 0) {
+              if (res.data.friends?.length > 0) {
               } else {
                 setBottomRenderArray((prev) => [...prev, el]);
               }
             }
           });
         } else if (filter === 'Companies') {
-          followingArr.filter(async (el, idx) => {
+          followingArr?.filter(async (el, idx) => {
             if (el.Company) {
               setBottomRenderArray((prev) => [...prev, el]);
             }
@@ -90,29 +92,29 @@ function PeopleAndFollow() {
         if (filter === 'All') {
           setBottomRenderArray(followerArr);
         } else if (filter === 'Connections') {
-          followerArr.filter(async (el, idx) => {
+          followerArr?.filter(async (el, idx) => {
             if (el.FollowerUser) {
               // console.log(el.userId);
               const res = await findFriendId(el.userId);
               // console.log(res.data.friends);
-              if (res.data.friends.length > 0) {
+              if (res.data.friends?.length > 0) {
                 // console.log(res.data.friends)
                 setBottomRenderArray((prev) => [...prev, el]);
               }
             }
           });
         } else if (filter === 'Out-of-Network') {
-          followerArr.filter(async (el, idx) => {
+          followerArr?.filter(async (el, idx) => {
             if (el.FollowerUser) {
               const res = await findFriendId(el.userId);
-              if (res.data.friends.length > 0) {
+              if (res.data.friends?.length > 0) {
               } else {
                 setBottomRenderArray((prev) => [...prev, el]);
               }
             }
           });
         } else if (filter === 'Companies') {
-          followingArr.filter(async (el, idx) => {
+          followerArr?.filter(async (el, idx) => {
             if (el.Company) {
               setBottomRenderArray((prev) => [...prev, el]);
             }

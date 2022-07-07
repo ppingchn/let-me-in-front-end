@@ -10,7 +10,7 @@ export function getAllUserByLetter(input) {
   return axios.get('/friends/allUserByLetter?'+input);
 }
 export function findFriendId(input) {
-  return axios.get('/friends/' , input);
+  return axios.get('/friends/'+input);
 }
 export function requestFriend(input) {
   return axios.post('/friends/'+ input);
