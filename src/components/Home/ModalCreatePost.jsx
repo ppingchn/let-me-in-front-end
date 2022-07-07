@@ -108,7 +108,9 @@ export default function ModalCreatePost({ open, setOpen }) {
                         />
                         <div className="flex flex-col">
                           <h1 className="font-bold">
-                            {user.userDetail?.firstName}
+                            {user.userDetail?.firstName
+                              ? user.userDetail?.firstName
+                              : user.companyDetail?.companyName}
                           </h1>
                           <div className="w-28 h-8 px-3 border-[1px] hover:border-[2px] bg-white hover:bg-gray border-darkgray rounded-full transition-all">
                             <div className="w-full h-full flex items-center justify-between">
