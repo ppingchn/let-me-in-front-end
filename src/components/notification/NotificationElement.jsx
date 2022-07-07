@@ -25,13 +25,15 @@ export default function NotificationElement({ notification }) {
 
       {/* content */}
       <span className="w-full text-sm prose">
-        {notification.PostId && notification.Post.detail}
-        {notification.CommentId && notification.Comment.title}
-        <span
-          dangerouslySetInnerHTML={{
-            __html: notification?.JobList?.jobDescription,
-          }}
-        />
+        {notification.PostId && notification.Post.detail + ' ...'}
+        {notification.CommentId && notification.Comment.title + ' ...'}
+        {notification?.JobList && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html: notification?.JobList?.position + ' ...',
+            }}
+          />
+        )}
         {/* {notification.JobListId && notification.JobList.jobDescription} */}
       </span>
       {/* dropdown */}

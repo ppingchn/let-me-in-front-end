@@ -23,6 +23,7 @@ export default function Post({ data }) {
   const [image, setImage] = useState(null);
   const uploadImage = useRef(null);
   const isLike = data?.LikePosts.find((like) => like.userId === user.id);
+  console.log(data);
 
   const handleAddImage = (e) => {
     if (e.target.files[0]) {
@@ -59,7 +60,7 @@ export default function Post({ data }) {
       <div className="flex justify-between items-center px-4">
         <Link to={`/user/${data.User.id}`}>
           <AvatarWithNameTimePost
-            username={data.User.username}
+            username={data.User.UserDetails[0]?.firstName}
             time={data.createdAt}
             profilePic={data.User.profilePic}
           />
