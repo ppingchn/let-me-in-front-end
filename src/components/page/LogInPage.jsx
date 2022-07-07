@@ -147,24 +147,29 @@ export default function LogInPage() {
                 >
                   Log in
                 </button>
-                <button
-                  type="button"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => {
-                    console.log(googleLogEle.current);
-                    googleLogEle.current.click();
-                  }}
-                >
-                  Google login
-                </button>
               </div>
             </form>
 
-            <div
-              id="signInDev"
-              className="w-full mt-2"
-              ref={googleLogEle}
-            ></div>
+            <button
+              type="button"
+              className="w-full relative flex gap-3 items-center justify-center mt-3 py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-blue border-darkgray focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={() => {
+                console.log(googleLogEle.current);
+                googleLogEle.current.click();
+              }}
+            >
+              Google login
+              <img
+                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+                alt=""
+                className="h-6"
+              />
+              <div
+                id="signInDev"
+                className="w-full mt-2 z-10 opacity-[1%] absolute"
+                ref={googleLogEle}
+              ></div>
+            </button>
 
             <div className="mt-6">
               <div className="relative">
