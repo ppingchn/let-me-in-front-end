@@ -39,7 +39,8 @@ function Reply({ data }) {
               <div className="flex gap-2 items-center">
                 <Link to={`/user/${data.User.id}`}>
                   <span className="font-bold py-0 hover:underline hover:text-blue">
-                    {data?.User?.username}
+                    {data.User?.UserDetails[0]?.firstName}
+                    {data.User?.CompanyDetails[0]?.companyName}
                   </span>
                 </Link>
                 <span className=" text-xs text-darkgray">reply</span>

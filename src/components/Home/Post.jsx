@@ -111,7 +111,11 @@ export default function Post({ data }) {
                         alt=""
                         className={`w-full aspect-auto col-span-${
                           data?.PostPictures?.length - 1
-                        } object-center object-cover cursor-pointer h-[200px]`}
+                        } object-center object-cover cursor-pointer ${
+                          data?.PostPictures.length === 1
+                            ? 'h-min-[200px]'
+                            : 'h-[200px]'
+                        }`}
                       />
                     );
                   } else {
