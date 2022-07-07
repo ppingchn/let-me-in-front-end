@@ -23,9 +23,15 @@ export default function Profile() {
         </div>
         <div className="w-full relative flex flex-col items-center px-3 gap-1">
           <Link to={`/user/${user.id}`}>
-            <span className="text-black font-medium hover:underline">
-              {user.userDetail.firstName} {user.userDetail.lastName}
-            </span>
+            {user.role === 'user' ? (
+              <span className="text-black font-medium hover:underline">
+                {user.userDetail.firstName} {user.userDetail.lastName}
+              </span>
+            ) : (
+              <span className="text-black font-medium hover:underline">
+                {user.companyDetail.companyName}
+              </span>
+            )}
           </Link>
           <span className="text-center text-xs text-darkgray">
             {user.detail}

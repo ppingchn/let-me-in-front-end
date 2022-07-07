@@ -3,16 +3,16 @@ import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
 import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
 
 export default function Location(props) {
-  const { location } = props;
+  const { location, isUser } = props;
   const [longdo, setLongdo] = useState(null);
   const [map, setMap] = useState(null);
 
   useEffect(() => {
     if (map && location) {
-      map.location(JSON.parse(location), true);
-      map.Overlays.clear();
+      map?.location(JSON.parse(location), true);
+      map?.Overlays.clear();
       let marker = new longdo.Marker(JSON.parse(location));
-      map.Overlays.add(marker);
+      map?.Overlays.add(marker);
     }
   }, [map, location]);
 
@@ -33,12 +33,14 @@ export default function Location(props) {
       <div className="flex justify-between items-center px-5 py-3">
         <h1 className="font-bold">Location</h1>
         <div className="flex gap-2">
-          <div
-            className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
-            onClick={getLocation}
-          >
-            <AiOutlineEdit className="text-2xl" />
-          </div>
+          {isUser && (
+            <div
+              className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
+              onClick={getLocation}
+            >
+              <AiOutlineEdit className="text-2xl" />
+            </div>
+          )}
         </div>
       </div>
       <div className="h-[500px]">

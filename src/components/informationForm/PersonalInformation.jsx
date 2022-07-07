@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import LongdoMapComponent from '../../longdo-map/LongdoMapComponent';
+import { RiErrorWarningFill } from 'react-icons/ri';
 
 function PersonalInformation({
   birthDate,
@@ -27,6 +28,7 @@ function PersonalInformation({
   setMap,
   setLongdo,
   getLocation,
+  error,
 }) {
   let location = useLocation();
 
@@ -59,9 +61,15 @@ function PersonalInformation({
               id="username"
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.username && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.username}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -78,9 +86,15 @@ function PersonalInformation({
               id="password"
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.password && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.password}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -97,9 +111,15 @@ function PersonalInformation({
               id="confirmPassword"
               onChange={(e) => setConfirmPassword(e.target.value)}
               autoComplete="given-name"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.confirmPassword && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.confirmPassword}
+            </span>
+          )}
         </div>
         {location.pathname === '/signup' && (
           <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -116,9 +136,15 @@ function PersonalInformation({
                 id="first-name"
                 autoComplete="given-name"
                 onChange={(e) => setFirstName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
+            {error.firstname && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.firstname}
+              </span>
+            )}
           </div>
         )}
 
@@ -137,9 +163,15 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setLastName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
+            {error.lastname && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.lastname}
+              </span>
+            )}
           </div>
         )}
 
@@ -158,7 +190,7 @@ function PersonalInformation({
                 name="country"
                 autoComplete="country-name"
                 onChange={(e) => setGender(e.target.value)}
-                className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block focus:ring-blue focus:border-blue w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               >
                 <option value="" selected disabled hidden>
                   Select gender
@@ -167,6 +199,12 @@ function PersonalInformation({
                 <option value="female">Female</option>
               </select>
             </div>
+            {error.gender && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.gender}
+              </span>
+            )}
           </div>
         )}
 
@@ -186,6 +224,12 @@ function PersonalInformation({
                 defaultValue="MM/DD/YYYY"
               />
             </div>
+            {error.birthDate && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.birthDate}
+              </span>
+            )}
           </div>
         )}
 
@@ -203,9 +247,15 @@ function PersonalInformation({
               type="email"
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.email && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.email}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -222,7 +272,7 @@ function PersonalInformation({
               id="phoneNumber"
               autoComplete="family-name"
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
         </div>
@@ -241,9 +291,15 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
+            {error.companyName && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.companyName}
+              </span>
+            )}
           </div>
         )}
         {location.pathname === '/signupCompany' && (
@@ -261,7 +317,7 @@ function PersonalInformation({
                 id="last-name"
                 autoComplete="family-name"
                 onChange={(e) => setWebsiteLink(e.target.value)}
-                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+                className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
               />
             </div>
           </div>
@@ -279,7 +335,7 @@ function PersonalInformation({
               id="about"
               name="about"
               rows={6}
-              className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-500 rounded-md"
+              className="max-w-lg shadow-sm block w-full focus:ring-blue focus:border-blue sm:text-sm border border-gray-500 rounded-md"
               onChange={(e) => setDetail(e.target.value)}
               defaultValue={''}
             />
@@ -316,9 +372,15 @@ function PersonalInformation({
               id="street-address"
               autoComplete="street-address"
               onChange={(e) => setCountry(e.target.value)}
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.country && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.country}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -335,9 +397,15 @@ function PersonalInformation({
               id="street-address"
               onChange={(e) => setHouseNumber(e.target.value)}
               autoComplete="street-address"
-              className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-500 rounded-md"
+              className="block max-w-lg w-full shadow-sm focus:ring-blue focus:border-blue sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.houseNumber && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.houseNumber}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -354,9 +422,15 @@ function PersonalInformation({
               id="city"
               onChange={(e) => setSubDistrict(e.target.value)}
               autoComplete="address-level2"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.subDistrict && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.subDistrict}
+            </span>
+          )}
         </div>
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label
@@ -372,9 +446,15 @@ function PersonalInformation({
               id="city"
               onChange={(e) => setDistrict(e.target.value)}
               autoComplete="address-level2"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.district && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.district}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -391,9 +471,15 @@ function PersonalInformation({
               id="region"
               autoComplete="address-level1"
               onChange={(e) => setProvince(e.target.value)}
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.province && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.province}
+            </span>
+          )}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -410,9 +496,15 @@ function PersonalInformation({
               id="postal-code"
               onChange={(e) => setPostalCode(e.target.value)}
               autoComplete="postal-code"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
+              className="max-w-lg block w-full shadow-sm focus:ring-blue focus:border-blue sm:max-w-xs sm:text-sm border-gray-500 rounded-md"
             />
           </div>
+          {error.postalCode && (
+            <span className="flex gap-1 items-center text-sm text-redNotification">
+              <RiErrorWarningFill />
+              {error.postalCode}
+            </span>
+          )}
         </div>
         {/* LongDo Map at here for only company*/}
         {location.pathname === '/signupCompany' ? (
@@ -430,6 +522,12 @@ function PersonalInformation({
             >
               Select location
             </button>
+            {error.location && (
+              <span className="flex gap-1 items-center text-sm text-redNotification">
+                <RiErrorWarningFill />
+                {error.location}
+              </span>
+            )}
           </div>
         ) : null}
       </div>

@@ -26,8 +26,8 @@ export default function MessageList({
           chatRooms
             .sort(
               (a, b) =>
-                new Date(b.ChatMessages[0].createdAt) -
-                new Date(a.ChatMessages[0].createdAt),
+                new Date(b.ChatMessages[0]?.createdAt) -
+                new Date(a.ChatMessages[0]?.createdAt),
             )
             .map((chatRoom) => (
               <MessageListElement

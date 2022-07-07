@@ -1,16 +1,15 @@
+import { useState } from 'react';
 import { FaBookmark } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { requestFriend } from '../../api/friendApi';
 
 function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
-
+  const [request, setRequest] = useState(false);
   const handleClickRequest = async () => {
-    // console.log("1111")
     await requestFriend(requestToId);
+    setRequest(true);
   };
-  console.log(requestToId)
-
 
   return (
     <div className="h-fit w-full sm:w-[200px] lg:w-[230px]  border-[1px] rounded-lg border-slate-200">
@@ -57,13 +56,22 @@ function ProfileMayKnown({ firstName, lastName, profilePic, requestToId }) {
             <span className="text-xs">CodeCamp Thailand</span> */}
           </div>
 
-          <button
-            type="button"
-            className="inline-flex items-center px-16 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2   focus:text-sky-900 "
-            onClick={() =>handleClickRequest()}
-          >
-            Add Friend
-          </button>
+          {request ? (
+            <button
+              type="button"
+              className="flex justify-center items-center w-full h-8 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm bg-gray focus:text-sky-900"
+            >
+              Requested
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="flex justify-center items-center w-full h-8 py-1.5 border text-blue text-sm leading-4 font-medium rounded-full shadow-sm  bg-white-600 hover:bg-hover-light-blue hover:border-2 focus:text-sky-900"
+              onClick={() => handleClickRequest()}
+            >
+              Add friend
+            </button>
+          )}
         </div>
       </div>
 

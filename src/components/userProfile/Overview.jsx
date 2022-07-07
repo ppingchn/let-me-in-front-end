@@ -3,7 +3,12 @@ import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
 import ModalEditOverView from './ModalEditOverview';
 import JoditEditor from 'jodit-react';
 
-export default function Overview({ websiteLink, overview, companySize }) {
+export default function Overview({
+  websiteLink,
+  overview,
+  companySize,
+  isUser,
+}) {
   const [modalEditOverview, setModalEditOverview] = useState(false);
   const [overviewTmp, setOverviewTmp] = useState('<div>test<div/>');
 
@@ -18,16 +23,18 @@ export default function Overview({ websiteLink, overview, companySize }) {
       <div className="flex justify-between items-center px-5 py-3">
         <h1 className="font-bold">Overview</h1>
         <div className="flex gap-2">
-          <div
-            className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
-            onClick={() => setModalEditOverview(true)}
-          >
-            <AiOutlineEdit className="text-2xl" />
-          </div>
+          {isUser && (
+            <div
+              className="flex justify-center items-center w-10 h-10 rounded-full hover:bg-gray cursor-pointer"
+              onClick={() => setModalEditOverview(true)}
+            >
+              <AiOutlineEdit className="text-2xl" />
+            </div>
+          )}
         </div>
       </div>
-      <div className="flex flex-col gap-4 px-5 py-3">
-        <td dangerouslySetInnerHTML={{ __html: overview }} />
+      <div className="flex prose flex-col gap-4 px-5 py-3">
+        <span dangerouslySetInnerHTML={{ __html: overview }} />
         <div className="flex flex-col gap-2">
           <span className="font-bold">Website</span>
           <a

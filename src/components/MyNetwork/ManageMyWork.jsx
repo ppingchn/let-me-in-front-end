@@ -8,9 +8,9 @@ function ManageMyWork() {
   const [toggleShow, setToggleShow] = useState(false);
   return (
     <>
-      <div className="h-fit w-full  border-b-[1px]  rounded-t-lg border-gray bg-white ">
-        <div className="py-2">
-          <span className="ml-3 ">Manage my work</span>
+      <div className="flex flex-col gap-1 h-fit w-full border-b-[1px] sm:min-w-[200px] sm:max-w-[250px] rounded-t-lg border-gray bg-white ">
+        <div className="px-4 pt-4">
+          <span className="">Manage my work</span>
         </div>
         {/* Connections */}
         <div className="w-full flex flex-col ">
@@ -148,16 +148,16 @@ function ManageMyWork() {
           </>
         ) : null}
         {/* Show less */}
-        <div className="w-full flex flex-col ">
-          <div className=" text-gray-500 pb-2">
+        <div className="w-full flex">
+          <div className="text-gray-500 pb-2 ml-3">
             <div
-              className="flex items-center rounded-sm w-[7.8rem] ml-3 hover:bg-gray-200 px-2 pt-2 pb-1 "
+              className="flex gap-3 items-center rounded-sm w-full hover:bg-gray-200 rounded px-3 py-1 transition-all"
               onClick={() => setToggleShow(!toggleShow)}
             >
-              <span className="font-small ">
+              <span className="font-small">
                 {toggleShow ? 'Show less' : 'Show more'}
               </span>
-              <div className="ml-2 text-[20px]">
+              <div className="text-[20px]">
                 {toggleShow ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
               </div>
             </div>

@@ -45,7 +45,7 @@ export default function JobsDetailPage() {
             <div className="flex flex-col">
               <span className="text-xl font-bold">{job?.position}</span>
               <span className="text-sm">
-                {job?.User.CompanyDetails[0].companyName} {job?.User.province},
+                {job?.User.CompanyDetails[0]?.companyName} {job?.User.province},
                 {job?.User.country} ({job?.WorkEnviroment.workEnviromentType}){' '}
                 {dayjs(job?.createdAt).fromNow()}
               </span>

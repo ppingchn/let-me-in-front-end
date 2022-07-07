@@ -69,7 +69,7 @@ const moods = [
 
 export default function MessageContent({ chatRoom }) {
   const [selected, setSelected] = useState(moods[5]);
-
+  const messagesEndRef = useRef(null);
   const attachFileEl = useRef(null);
 
   // //socket io state
@@ -77,6 +77,7 @@ export default function MessageContent({ chatRoom }) {
   const socket = io('http://localhost:9001');
 
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // make event chat
   const sendChat = (e) => {
@@ -90,24 +91,33 @@ export default function MessageContent({ chatRoom }) {
     if (chatRoom) {
       listChatMsg(chatRoom.id).then((messages) => setMessages(messages));
     }
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     socket.removeListener('chat', updateChat);
     socket.on('chat', updateChat);
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatRoom]);
 
   useEffect(() => {
+    setLoading(true);
     updateChat();
+    setLoading(false);
+    console.dir(messagesEndRef.current);
+
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatRoom]);
 
   if (!chatRoom) {
     return <></>;
   }
 
+  messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <div className="h-full bg-white w-full">
-      <div className="flex justify-between h-13 px-3 py-1 rounded-tr-lg border-b-[1px] border-slate-200">
+      <div className="flex justify-between items-center h-13 px-3 py-1 rounded-tr-lg border-b-[1px] border-slate-200">
         <div className="flex flex-col">
           <span>{chatRoom.user.username}</span>
         </div>
@@ -186,11 +196,22 @@ export default function MessageContent({ chatRoom }) {
           </Transition>
         </Menu>
       </div>
-      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] overflow-y-scroll gap-5">
+      <div className="flex flex-col px-3 py-3 xl:h-[450px] 2xl:h-[600px] 2xl:max-h-[600px] max-h-[450px] overflow-y-scroll gap-5">
+        {loading && (
+          <div className="relative">
+            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+              <div className="flex w-full h-full justify-center items-center">
+                {/* loading */}
+                <div class="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div>
+        )}
         {messages &&
-          messages.map((message) => (
+          messages?.map((message) => (
             <MessageElementWithAvatar message={message} key={message.id} />
           ))}
+        <div ref={messagesEndRef} />
       </div>
       {/* post */}
       <div>

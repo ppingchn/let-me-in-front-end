@@ -340,7 +340,11 @@ export default function Header() {
                           alt=""
                         />
                         <div className="flex flex-col">
-                          <span className="text-md">{user.username}</span>
+                          <span className="text-md">
+                            {user.role === 'user'
+                              ? user.userDetail.firstName
+                              : user.companyDetail.companyName}
+                          </span>
                           <span className="text-xs">actor</span>
                         </div>
                       </div>

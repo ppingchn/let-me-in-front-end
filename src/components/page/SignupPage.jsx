@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import PersonalInformation from '../informationForm/PersonalInformation';
 import WorkExperience from '../informationForm/WorkExperience';
 import Education from '../informationForm/Education';
 import { useAuth } from '../../context/authContext';
+import validator from 'validator';
 
 export default function SignupPage() {
   // Use Context (custom hook)
@@ -36,6 +37,12 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [detail, setDetail] = useState('');
+
+  // loading
+  const [loading, setLoading] = useState(false);
+
+  // handle error
+  const [error, setError] = useState({});
 
   //Work experience Information
   const [companyArray, setCompanyArray] = useState([
@@ -148,43 +155,108 @@ export default function SignupPage() {
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
-      //validate input first
 
-      // change raw to formData
-      const registerData = new FormData();
-      registerData.append('role', 'user');
-      registerData.append('username', username);
-      registerData.append('firstName', firstname);
-      registerData.append('lastName', lastname);
-      registerData.append('password', password);
-      registerData.append('confirmPassword', confirmPassword);
-      registerData.append('profilePic', profilePic);
-      registerData.append('coverPic', coverPhoto);
-      registerData.append('email', email);
-      registerData.append('gender', gender);
-      registerData.append('detail', detail);
-      registerData.append('birthDate', birthDate);
-      registerData.append('phoneNumber', phoneNumber);
-      registerData.append('country', country);
-      registerData.append('houseNumber', houseNumber);
-      registerData.append('subDistrict', subDistrict);
-      registerData.append('district', district);
-      registerData.append('province', province);
-      registerData.append('postCode', postalCode);
-      registerData.append('educationArray', JSON.stringify(educationArray));
-      registerData.append('experienceArray', JSON.stringify(companyArray));
-      registerData.append('skillArray', JSON.stringify(companyArray));
-      await register(registerData);
-      navigate('/');
+      let error = {};
+
+      if (validator.isEmpty(username + '')) {
+        error.username = 'Username is required.';
+      }
+      if (validator.isEmpty(password + '')) {
+        error.password = 'Password is required.';
+      }
+      if (validator.isEmpty(firstname + '')) {
+        error.firstname = 'First name is required.';
+      }
+      if (validator.isEmpty(lastname + '')) {
+        error.lastname = 'Last name is required.';
+      }
+      if (validator.isEmpty(gender + '')) {
+        error.gender = 'Gender is required.';
+      }
+      if (validator.isEmpty(confirmPassword + '')) {
+        error.confirmPassword = 'Confirm password is required.';
+      }
+      if (validator.isEmpty(email + '')) {
+        error.email = 'Email is required.';
+      }
+      if (validator.isEmpty(birthDate + '')) {
+        error.birthDate = 'Birth date is required.';
+      }
+      if (validator.isEmpty(country + '')) {
+        error.country = 'Country is required.';
+      }
+      if (validator.isEmpty(houseNumber + '')) {
+        error.houseNumber = 'House number is required.';
+      }
+      if (validator.isEmpty(subDistrict + '')) {
+        error.subDistrict = 'Sub district is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(province + '')) {
+        error.province = 'Province is required.';
+      }
+      if (validator.isEmpty(district + '')) {
+        error.district = 'District is required.';
+      }
+      if (validator.isEmpty(postalCode + '')) {
+        error.postalCode = 'Postal code is required.';
+      }
+
+      setError({ ...error });
+
+      if (Object.keys(error).length === 0) {
+        setLoading(true);
+
+        // change raw to formData
+        const registerData = new FormData();
+        registerData.append('role', 'user');
+        registerData.append('username', username);
+        registerData.append('firstName', firstname);
+        registerData.append('lastName', lastname);
+        registerData.append('password', password);
+        registerData.append('confirmPassword', confirmPassword);
+        registerData.append('profilePic', profilePic);
+        registerData.append('coverPic', coverPhoto);
+        registerData.append('email', email);
+        registerData.append('gender', gender);
+        registerData.append('detail', detail);
+        registerData.append('birthDate', birthDate);
+        registerData.append('phoneNumber', phoneNumber);
+        registerData.append('country', country);
+        registerData.append('houseNumber', houseNumber);
+        registerData.append('subDistrict', subDistrict);
+        registerData.append('district', district);
+        registerData.append('province', province);
+        registerData.append('postCode', postalCode);
+        registerData.append('educationArray', JSON.stringify(educationArray));
+        registerData.append('experienceArray', JSON.stringify(companyArray));
+        registerData.append('skillArray', JSON.stringify(companyArray));
+        await register(registerData);
+        navigate('/');
+      }
     } catch (err) {
       // setError(err.response.data.message);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
+        {loading && (
+          <div className="relative z-50">
+            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+              <div className="flex w-full h-full justify-center items-center">
+                {/* loading */}
+                <div class="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-8 " onSubmit={handleSubmitSignUp}>
             <div className="space-y-8 divide-y divide-gray-500 sm:space-y-5">
@@ -213,6 +285,7 @@ export default function SignupPage() {
                 setDistrict={setDistrict}
                 setProvince={setProvince}
                 setPostalCode={setPostalCode}
+                error={error}
               />
 
               <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
@@ -284,13 +357,13 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => navigate('/')}
-                  className="bg-white py-2 px-4 border border-gray-500 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="bg-white py-2 px-4 border border-gray-500 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
                 >
                   Save
                 </button>

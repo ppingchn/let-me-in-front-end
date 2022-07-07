@@ -52,7 +52,7 @@ export default function UserPage() {
   return (
     <>
       {loading ? (
-        <div className="relative top-14 bg-gray w-full sm:w-screen px-5 py-5 h-fit">
+        <div className="relative flex justify-center mx-auto top-14 bg-gray w-full sm:w-screen xl:w-[1128px] px-5 py-5 h-fit">
           <div className="h-fit p-10 w-full sm:min-w-[636px] border-[1px] rounded-lg border-slate-200 bg-white">
             <div className="animate-pulse flex space-x-4">
               <div className="rounded-full bg-slate-200 h-10 w-10"></div>
@@ -130,17 +130,22 @@ export default function UserPage() {
                   <>
                     {menuSelect === 'Home' && (
                       <>
-                        <AboutCompany setMenuSelect={setMenuSelect} />
+                        <AboutCompany
+                          setMenuSelect={setMenuSelect}
+                          overview={userById?.companyDetail?.overview}
+                        />
                         <PagePosts setMenuSelect={setMenuSelect} />
                       </>
                     )}
                     {menuSelect === 'About' && (
                       <>
                         <Overview
+                          isUser={isUser}
                           overview={userById?.companyDetail?.overview}
                           websiteLink={userById?.companyDetail?.websiteLink}
                         />
                         <Location
+                          isUser={isUser}
                           location={userById?.companyDetail?.location}
                         />
                       </>

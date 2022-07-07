@@ -9,6 +9,7 @@ function classNames(...classes) {
 
 export default function NotificationElement({ notification }) {
   const time = moment(notification.createdAt).fromNow();
+  console.log(notification.User);
   return (
     <div className="flex w-full gap-3 items-center px-5 py-4 border-b-[1px] border-slate-200 hover:bg-gray">
       <img
@@ -23,10 +24,17 @@ export default function NotificationElement({ notification }) {
       </span>
 
       {/* content */}
-      <span className="w-full text-sm ">
-        {notification.PostId && notification.Post.detail}
-        {notification.CommentId && notification.Comment.title}
-        {notification.JobListId && notification.JobList.jobDescription}
+      <span className="w-full text-sm prose">
+        {notification.PostId && notification.Post.detail + ' ...'}
+        {notification.CommentId && notification.Comment.title + ' ...'}
+        {notification?.JobList && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html: notification?.JobList?.position + ' ...',
+            }}
+          />
+        )}
+        {/* {notification.JobListId && notification.JobList.jobDescription} */}
       </span>
       {/* dropdown */}
       <div className="w-10 flex flex-col items-end">
