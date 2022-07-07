@@ -2,6 +2,7 @@ import moment from 'moment';
 export default function MessageElementWithAvatar({ message }) {
   // const time = moment(message.created_at).format('hh:mm:ss a');
   const time = moment(message?.createdAt).fromNow();
+  console.log(message);
 
   return (
     <div className="flex gap-4 ">
@@ -17,7 +18,11 @@ export default function MessageElementWithAvatar({ message }) {
           {/* name and position */}
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="font-bold py-0">{message?.Sender.username}</span>
+              <span className="font-bold py-0">
+                {message?.Sender.UserDetails[0]?.firstName
+                  ? message?.Sender.UserDetails[0]?.firstName
+                  : message?.Sender.CompanyDetails[0]?.companyName}
+              </span>
               <span className="text-xs text-darkgray">{time}</span>
             </div>
           </div>
