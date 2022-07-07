@@ -32,6 +32,8 @@ export default function AvatarWithComment({ data }) {
       console.log(err);
     }
   };
+
+  console.log(data.User);
   return (
     <div className="flex gap-2">
       {/* avatar */}
@@ -50,7 +52,8 @@ export default function AvatarWithComment({ data }) {
             <div className="flex justify-between items-center">
               <Link to={`/user/${data.User.id}`}>
                 <span className="font-bold py-0 hover:text-blue hover:underline">
-                  {data.User.username}
+                  {data.User?.UserDetails[0]?.firstName}
+                  {data.User?.CompanyDetails[0]?.companyName}
                 </span>
               </Link>
               <div className="flex items-center gap-2">

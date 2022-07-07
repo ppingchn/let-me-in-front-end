@@ -20,9 +20,10 @@ import JobsPage from '../components/page/JobsPage';
 import MyJobs from '../components/Jobs/Sidebars/MyJobs';
 import ApplicationSetting from '../components/Jobs/Sidebars/ApplicationSetting/ApplicationSetting';
 import EducationEditPage from '../components/page/EducationEditPage';
-import ForgotPassordPage from '../components/page/ForgotPassordPage';
+import ForgotPasswordPage from '../components/page/ForgotPasswordPage';
 import CreateJobPage from '../components/page/CreateJobPage';
 import JobsDetailPage from '../components/page/JobsDetailPage';
+import ChangePasswordPage from '../components/page/ChangePassword';
 
 export default function Router() {
   const { user } = useAuth();
@@ -72,7 +73,8 @@ export default function Router() {
             <Route index element={<Navigate to="/login" />} />
             <Route path="login" element={<LogInPage />} />
             <Route path="signup" element={<SignupPage />} />
-            <Route path="forgotPassword" element={<ForgotPassordPage />} />
+            <Route path="forgotPassword" element={<ForgotPasswordPage />} />
+            <Route path="changePassword/:word" element={<ChangePasswordPage />} />
             <Route path="signupCompany" element={<SignupCompanyPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />

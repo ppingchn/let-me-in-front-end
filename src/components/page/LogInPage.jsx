@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
-
 import { AiFillLinkedin } from 'react-icons/ai';
 
 export default function LogInPage() {
   const { login, registerGoogle } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const googleLogEle = useRef(null);
+
   const handleSubmitLogin = async (e) => {
     try {
       e.preventDefault();
@@ -29,6 +31,7 @@ export default function LogInPage() {
 
   useEffect(() => {
     /*global google */
+    
     google.accounts.id.initialize({
       client_id:
         '732724610253-uh51lphhkvujfovqcnad8msjip31mnig.apps.googleusercontent.com',
@@ -36,8 +39,10 @@ export default function LogInPage() {
     });
 
     google.accounts.id.renderButton(document.getElementById('signInDev'), {
+      id: 'test',
       theme: 'outline',
       size: 'large',
+      width: '300',
     });
   }, []);
   return (
@@ -130,7 +135,7 @@ export default function LogInPage() {
                 </div>
               </div>
 
-              <div>
+              <div className="flex flex-col gap-3">
                 <button
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -140,7 +145,27 @@ export default function LogInPage() {
               </div>
             </form>
 
-            <div id="signInDev" className="w-full mt-2"></div>
+            <button
+              type="button"
+              className="w-full relative flex gap-3 items-center justify-center mt-3 py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-blue border-darkgray focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={() => {
+                console.log(googleLogEle.current);
+                googleLogEle.current.click();
+              }}
+            >
+              Google login
+              <img
+                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+                alt=""
+                className="h-6"
+              />
+              <div
+                id="signInDev"
+                className="w-full mt-2 z-10 opacity-[1%] absolute"
+                ref={googleLogEle}
+              ></div>
+            </button>
+            {/* <div id="signInDev" className="w-full mt-2"></div> */}
 
             <div className="mt-6">
               <div className="relative">
