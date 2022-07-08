@@ -38,8 +38,8 @@ function PeopleAndFollow() {
       setBottomRenderArray(res.data.follow);
       if (role === 'company') {
         setBottomRenderArray(res2.data.follow);
-        setFollowing(false)
-        setFollower(true)
+        setFollowing(false);
+        setFollower(true);
       }
     } catch (err) {
       console.log(err);
@@ -54,7 +54,6 @@ function PeopleAndFollow() {
   const [filter, setFilter] = useState('All');
   // console.log(filter)
 
-
   useEffect(() => {
     setBottomRenderArray([]);
     if (role === 'user') {
@@ -65,7 +64,7 @@ function PeopleAndFollow() {
           followingArr?.filter(async (el, idx) => {
             if (el.FollowerUser) {
               const res = await findFriendId(el.followerId);
-              console.log(res.data.friends)
+              console.log(res.data.friends);
               if (res.data.friends?.length > 0) {
                 setBottomRenderArray((prev) => [...prev, el]);
               }
@@ -195,7 +194,6 @@ function PeopleAndFollow() {
                         lastName={el.User.UserDetails[0].lastName}
                         followerId={el.followerId}
                         userId={el.userId}
-
                         role={role}
                       />
                     ) : null

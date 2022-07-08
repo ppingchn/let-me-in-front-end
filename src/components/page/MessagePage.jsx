@@ -6,11 +6,12 @@ import MessageContent from '../message/MessageContent';
 import MessageList from '../message/MessageList';
 import { listChatRooms, listChatMsg } from '../../api/messageApi';
 import { io } from 'socket.io-client';
+import { API_ENDPOINT_URL } from '../../config/env';
 
 export default function MessagePage() {
   const [currentChatRoom, setCurrentChatRoom] = useState(null);
   const [chatRooms, setChatRooms] = useState([]);
-  const socket = io('http://localhost:9001');
+  const socket = io(API_ENDPOINT_URL);
 
   useEffect(() => {
     socket.on('chat', () => {
