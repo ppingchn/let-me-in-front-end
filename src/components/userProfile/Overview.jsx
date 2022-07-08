@@ -45,10 +45,10 @@ export default function Overview({
           </a>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Company size</span>
+          {/* <span className="font-bold">Company size</span>
           <span className="text-sm text-darkgray hover:text-blue hover:underline">
             {`${companySize} employees`}
-          </span>
+          </span> */}
         </div>
       </div>
     </div>

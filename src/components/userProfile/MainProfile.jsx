@@ -208,15 +208,7 @@ export default function MainProfile({
               </span>
               <div className="flex gap-2 text-sm">
                 <span className="text-darkgray">
-                  {`${province}, ${country} • ${
-                    role === 'user' ? (
-                      <span className="text-center text-blue hover:underline cursor-pointer">
-                        Contact info
-                      </span>
-                    ) : (
-                      `${4000} employees`
-                    )
-                  }`}
+                  {`${province}, ${country}`}
                 </span>
               </div>
             </div>
