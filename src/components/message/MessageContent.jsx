@@ -114,12 +114,13 @@ export default function MessageContent({ chatRoom }) {
   }
 
   messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
-
+  console.log(chatRoom);
   return (
     <div className="h-full bg-white w-full">
       <div className="flex justify-between items-center h-13 px-3 py-1 rounded-tr-lg border-b-[1px] border-slate-200">
         <div className="flex flex-col">
-          <span>{chatRoom.user.username}</span>
+          <span>{chatRoom?.user?.UserDetails[0]?.firstName}</span>
+          <span>{chatRoom?.user?.CompanyDetails[0]?.companyName}</span>
         </div>
         <Menu as="div" className="relative inline-block text-left">
           <div>

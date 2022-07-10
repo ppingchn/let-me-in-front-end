@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import { forgotPasswordApi } from '../../api/forgotPasswordApi';
+import ToastSuccess from '../ui/ToastSuccess';
 
 function ForgotPassordPage() {
   const [email, setEmail] = useState('');
+  const [submit, setSubmit] = useState(false);
+  const [toastSuccess, setToastSuccess] = useState(false);
+  const [toastSuccessMessage, setToastSuccessMessage] = useState('');
+  const [toastError, setToastError] = useState(false);
+  const [toastErrorMessage, setToastErrorMessage] = useState('');
 
   const handleSubmitForgotPassword = async (e) => {
     try {
       e.preventDefault();
       await forgotPasswordApi({ email });
+      setSubmit(true);
+      setToastSuccessMessage('Please check you Email');
+      setToastSuccess(true);
+      setTimeout(() => {
+        setToastSuccess(false);
+      }, 5000);
     } catch (err) {
       console.log(err);
     }
   };
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
+      <ToastSuccess
+        successMessage={toastSuccessMessage}
+        show={toastSuccess}
+        setShow={setToastSuccess}
+      />
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form
           className="space-y-6"
@@ -68,12 +85,21 @@ function ForgotPassordPage() {
           </div> */}
 
           <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Reset password
-            </button>
+            {submit ? (
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue hover:bg-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
+              >
+                Submited
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue"
+              >
+                Reset password
+              </button>
+            )}
             <p className="text-gray-500 text-sm mt-3">
               Link reset password will send to your email
             </p>
